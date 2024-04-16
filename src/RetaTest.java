@@ -1,46 +1,18 @@
-import	static	org.junit.jupiter.api.Assertions.*; 
-import	org.junit.jupiter.api.Test; 
 
-public class RetaTest {
+import org.junit.jupiter.api.Test;
 
-    @Test
-    public void testGetP1() {
-        Ponto ponto1 = new Ponto(1, 2);
-        Ponto ponto2 = new Ponto(3, 4);
-        Reta reta = new Reta(ponto1, ponto2);
-        assertEquals(ponto1, reta.getP1());
-    }
+import static org.junit.jupiter.api.Assertions.*;
+
+class RetaTest {
 
     @Test
-    public void testSetP1() {
-        Ponto ponto1 = new Ponto(1, 2);
-        Ponto ponto2 = new Ponto(3, 4);
+    public void testeConstrutorComPontosValidos() {
+        Ponto ponto1 = new Ponto(1, 1);
+        Ponto ponto2 = new Ponto(3, 3);
         Reta reta = new Reta(ponto1, ponto2);
-
-        Ponto novoPonto = new Ponto(5, 6);
-        reta.setP1(novoPonto);
-
-        assertEquals(novoPonto, reta.getP1());
-    }
-
-    @Test
-    public void testGetP2() {
-        Ponto ponto1 = new Ponto(1, 2);
-        Ponto ponto2 = new Ponto(3, 4);
-        Reta reta = new Reta(ponto1, ponto2);
-        assertEquals(ponto2, reta.getP2());
-    }
-
-    @Test
-    public void testSetP2() {
-        Ponto ponto1 = new Ponto(1, 2);
-        Ponto ponto2 = new Ponto(3, 4);
-        Reta reta = new Reta(ponto1, ponto2);
-
-        Ponto novoPonto = new Ponto(5, 6);
-        reta.setP2(novoPonto);
-
-        assertEquals(novoPonto, reta.getP2());
+        assertNotNull(reta);
+        assertEquals(ponto1, reta.getPonto1());
+        assertEquals(ponto2, reta.getPonto2());
     }
 
 }

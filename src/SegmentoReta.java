@@ -1,88 +1,111 @@
 import java.util.Objects;
 
-/**Classe responsável pela criação de um segmento de reta
-  @author João Guerreiro , a81430
-  @version 21/02/2024
-  @inv os pontos recebidos não podem ser iguais
-  */
-
+/**
+ * Classe que representa um segmento de reta definido por dois pontos. Tem como responsabilidades
+ * verificar se os pontos dados definem um segmento de reta válido e verificar se este segmento se cruza
+ * com outro segmento
+ *
+ * @version 1.0 27/02/2024
+ *
+ * @inv os pontos não podem ser iguais
+ */
 public class SegmentoReta {
 
-    private Ponto p1;
-    private Ponto p2;
+    private Ponto ponto1, ponto2;
+    /**
+     * Construtor da classe SegmentoReta.
+     * Verifica se os pontos dados definem um segmento válido e inicializa os pontos.
+     *
+     * @param ponto1 O primeiro ponto que define o segmento de reta.
+     * @param ponto2 O segundo ponto que define o segmento de reta.
+     */
+    public SegmentoReta(Ponto ponto1, Ponto ponto2){
 
-    public SegmentoReta(Ponto p1, Ponto p2)
-    {
-        check(p1,p2);
-        setP1(p1);
-        setP2(p2);
+        if(ponto1.getX() == ponto2.getX() && ponto1.getY() == ponto2.getY()){
+
+            System.out.println("Segmento:vi");
+            System.exit(0);
+        }
+        setPonto1(ponto1);
+        setPonto2(ponto2);
+    }
+    /**
+     * Obtém o primeiro ponto que define o segmento de reta.
+     *
+     * @return O primeiro ponto que define o segmento de reta.
+     */
+    public Ponto getPonto1() {
+        return ponto1;
+    }
+    /**
+     * Define o primeiro ponto que define o segmento de reta.
+     *
+     * @param ponto1 O novo primeiro ponto que define o segmento de reta.
+     */
+    public void setPonto1(Ponto ponto1) {
+        this.ponto1 = ponto1;
+    }
+    /**
+     * Obtém o segundo ponto que define o segmento de reta.
+     *
+     * @return O segundo ponto que define o segmento de reta.
+     */
+    public Ponto getPonto2() {
+        return ponto2;
+    }
+    /**
+     * Define o segundo ponto que define o segmento de reta.
+     *
+     * @param ponto2 O novo segundo ponto que define o segmento de reta.
+     */
+    public void setPonto2(Ponto ponto2) {
+        this.ponto2 = ponto2;
+    }
+    /**
+     * Calcula o produto vetorial entre três pontos.
+     *
+     * @param ponto1 Primeiro ponto.
+     * @param ponto2 Segundo ponto.
+     * @param ponto3 Terceiro ponto.
+     * @return O valor do produto vetorial.
+     */
+    public double produtoVetorial(Ponto ponto1, Ponto ponto2, Ponto ponto3){
+
+        return (ponto2.getX() - ponto1.getX()) * (ponto3.getY() - ponto1.getY()) - (ponto2.getY() - ponto1.getY()) * (ponto3.getX() - ponto1.getX());
     }
 
-     /** Verifica se os dois pontos são iguais e se forem,o programa acaba com uma mensagem
-           @param p1 Primeito ponto usado para a criação da reta
-           @param p2 Segundo ponto usado para a criação da reta
-        */ 
+    /**
+     * Verifica se este segmento de reta se cruza com outro segmento
+     *
+     * @param segmento O outro segmente a ser verificado
+     *
+     * @return Retorna "true" se se cruzarem e "false" caso contrário
+     */
 
-    public void check(Ponto p1,Ponto p2){
- 
-            if(p1.getX() == p2.getX() && p1.getY() == p2.getY())
-            {
-                System.out.println("Segmento:vi");
-                System.exit(0);
-            }
+    public boolean arestasCruzam(SegmentoReta segmento) {
+
+        double produtoVetorial1 = produtoVetorial(this.ponto2, this.ponto1, segmento.ponto1);
+        double produtoVetorial2 = produtoVetorial(this.ponto2, this.ponto1, segmento.ponto2);
+        double produtoVetorial3 = produtoVetorial(segmento.ponto2, segmento.ponto1, this.ponto1);
+        double produtoVetorial4 = produtoVetorial(segmento.ponto2, segmento.ponto1, this.ponto2);
+
+        if (produtoVetorial1 * produtoVetorial2 < 0 && produtoVetorial3 * produtoVetorial4 < 0) {
+            return true;
         }
 
-    public Ponto getP1() {
-        return p1;
+        return false;
     }
-
-    public void setP1(Ponto p1) {
-        this.p1 = p1;
-    }
-
-    public Ponto getP2() {
-        return p2;
-    }
-
-    public void setP2(Ponto p2) {
-        this.p2 = p2;
-    } 
-
-    /** Método responsável pelo calculo do produto vetorial de 3 pontos
-       @param p1 Primeito ponto usado o calculo
-       @param p2 Segundo ponto usado o calculo
-       @param p3 Terceiro ponto usado o calculo
-       @return Resultado do produto vetorial
-    */
-
-    public double produtoVetorial(Ponto p1, Ponto p2,Ponto p3)
-    {
-        return (p2.getX() - p1.getX()) * (p3.getY() - p1.getY()) - (p2.getY() - p1.getY()) * (p3.getX() - p1.getX());
-    }
-
-    /** Método responsável pela verificação de que nenhum par de arestas se cruza. Se se cruzarem acaba o programa com uma mensagem     
-       @param segmentoDeReta Segmento de reta recebido
-    */
-
-    public boolean arestasCruzam(SegmentoReta segmentoDeReta){
-        double abac = produtoVetorial(p2,p1,segmentoDeReta.p1);
-        double abad = produtoVetorial(p2,p1,segmentoDeReta.p2);
-        double cdca = produtoVetorial(segmentoDeReta.p2,segmentoDeReta.p1,p1);
-        double cdcb = produtoVetorial(segmentoDeReta.p2,segmentoDeReta.p1,p2);
-        return abac * abad < 0 && cdca * cdcb < 0;
-    }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SegmentoReta that = (SegmentoReta) o;
-        return p1.equals(that.getP1()) && p2.equals(that.getP2()) || p1.equals(that.getP2()) && p2.equals(that.getP1());
+        return ponto1.equals(that.getPonto1()) && ponto2.equals(that.getPonto2()) || ponto1.equals(that.getPonto2()) && ponto2.equals(that.getPonto1());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(p1, p2);
+        return Objects.hash(ponto1, ponto2);
     }
 }

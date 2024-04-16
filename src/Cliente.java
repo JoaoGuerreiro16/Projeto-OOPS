@@ -3,28 +3,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
-
+public class Cliente {
     public static String capital(String s) {
         if (s == null || s.isEmpty())
             return s;
         return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
     }
-
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
+        List<Poligono> poligonos = new ArrayList<>();
+        List<Poligono> poligonosTr = new ArrayList<>();
         Constructor<?> constructor;
         Class<?> cl;
         Poligono p;
         String s;
         String[] aos;
-        String[] aos1 = new String[2];
-        List<Poligono> poligonos = new ArrayList<>();
+        int x;
+        int y;
         while (sc.hasNextLine()) {
             s = sc.nextLine();
             if (s.isEmpty())
                 break;
             aos = s.split(" ", 2);
+
             try {
                 cl = Class.forName(capital(aos[0]));
                 constructor = cl.getConstructor(String.class);
@@ -35,32 +36,26 @@ public class Main {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            s = sc.nextLine();
-            aos1 = s.split(" ",2);
-        }
+            x = sc.nextInt();
+            y = sc.nextInt();
 
+            for(Poligono poligono : poligonos)
+            {
+                poligonosTr.add(poligono.translacaoCentroide(x,y));
+            }
+        }
         sc.close();
-            if(aos1.length == 1)
-            {
-                Poligono poligonoRodado = poligonos.get(0).poligonRotation(Integer.parseInt(aos1[0]),poligonos.get(0).calcularCentro());
-                if(poligonos.get(0).equals(poligonoRodado))
-                {
-                    System.out.print("Duplicado");
-                    System.exit(0);
-                }
-
-                System.out.println(poligonoRodado.toString());
-            }
-            else
-            {
-                String [] parts = aos1[1].split(" ");
-                Ponto pivot = new Ponto(Double.parseDouble(parts[0]),Double.parseDouble(parts[1]));
-                Poligono poligonoRodado = poligonos.get(0).poligonRotation(Integer.parseInt(aos1[0]),pivot);
-                if(poligonos.get(0).equals(poligonoRodado))
-                {
-                    System.out.print("Duplicado");
+        if(poligonos.size() > 1) {
+            for (int i = 0; i < poligonos.size(); i++) {
+                if (poligonos.get(i).equals(poligonos.get((i + 1) % poligonos.size()))) {
+                    System.out.println("Duplicado");
                     System.exit(0);
                 }
             }
-    }
         }
+        for (Poligono poligono : poligonosTr) {
+            System.out.println(poligono.toString());
+        }
+    }
+
+}

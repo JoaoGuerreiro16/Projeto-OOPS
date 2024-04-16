@@ -1,89 +1,85 @@
-/**Classe responsável pela criação de uma reta
-  @author João Guerreiro , a81430
-  @version 21/02/2024
-  @inv os pontos recebidos não podem ser iguais
+/**
+ * Classe que representa uma reta definida por dois pontos. Tem como responsabilidades verificar se
+ * os pontos dados definem uma resta válida e verifica se um terceiro ponto pertence a esta
+ *
+ * @author Tomás Luz
+ *
+ * @version 1.0 27/02/24
+ *
+ * @inv os pontos não podem ser iguais
  */
-public class Reta{
-
-    private Ponto p1;
-    private Ponto p2;
+public class Reta {
+    private Ponto ponto1, ponto2;
 
     /**
-     * Construtor para criar uma reta com dois pontos.
+     * Construtor da classe Reta.
+     * Verifica se os pontos dados definem uma reta válida e inicializa os pontos.
      *
-     * @param p1 Primeiro ponto usado para a criação da reta
-     * @param p2 Segundo ponto usado para a criação da reta
+     * @param ponto1 O primeiro ponto que define a reta.
+     * @param ponto2 O segundo ponto que define a reta.
      */
-    public Reta(Ponto p1, Ponto p2) {
-        check(p1, p2);
-        setP1(p1);
-        setP2(p2);
-    }
 
-    /**
-     * Verifica se os dois pontos são iguais e se forem, encerra o programa com uma mensagem.
-     *
-     * @param p1 Primeiro ponto usado para a criação da reta
-     * @param p2 Segundo ponto usado para a criação da reta
-     */
-    public void check(Ponto p1, Ponto p2) {
-        if (p1.getX() == p2.getX() && p1.getY() == p2.getY()) {
+    public Reta(Ponto ponto1, Ponto ponto2){
+
+        if(ponto1.getX() == ponto2.getX() && ponto1.getY() == ponto2.getY()){
+
             System.out.println("false");
             System.exit(0);
         }
-    }
+        setPonto1(ponto1);
+        setPonto2(ponto2);
 
+    }
     /**
-     * Verifica se existem 3 pontos consecutivos colineares. Se existirem, encerra o programa com uma mensagem.
+     * Obtém o primeiro ponto que define a reta.
      *
-     * @param p3 Ponto recebido de modo a existirem 3 pontos para a verificação
-     * @return true se os três pontos são colineares, false caso contrário
+     * @return O primeiro ponto que define a reta.
      */
-    public boolean colineares(Ponto p3) {
-        double diferenca_y = p2.getY() - p1.getY();
-        double diferenca_x = p2.getX() - p1.getX();
-        double m = diferenca_y / diferenca_x;
-        double b = p1.getY() - m * p1.getX();
-        if (p3.getY() == p3.getX() * m + b) {
+    public Ponto getPonto1() {
+        return ponto1;
+    }
+    /**
+     * Define o primeiro ponto que define a reta.
+     *
+     * @param ponto1 O novo primeiro ponto que define a reta.
+     */
+    public void setPonto1(Ponto ponto1) {
+        this.ponto1 = ponto1;
+    }
+    /**
+     * Obtém o segundo ponto que define a reta.
+     *
+     * @return O segundo ponto que define a reta.
+     */
+    public Ponto getPonto2() {
+
+        return ponto2;
+    }
+    /**
+     * Define o segundo ponto que define a reta.
+     *
+     * @param ponto2 O novo segundo ponto que define a reta.
+     */
+    public void setPonto2(Ponto ponto2) {
+
+        this.ponto2 = ponto2;
+    }
+    /**
+     * Verifica se um ponto dado está na mesma reta definida por esta classe.
+     *
+     * @param ponto3 O ponto a ser verificado se está na mesma reta.
+     */
+    public boolean colineares(Ponto ponto3){
+
+        double dif_y = ponto2.getY() - ponto1.getY();
+        double dif_x = ponto2.getX() - ponto1.getX();
+        double m = dif_y/dif_x;
+        double b = ponto1.getY() - m*ponto1.getX();
+        if (ponto3.getY() == ponto3.getX()*m + b){
+
             return true;
+
         }
         return false;
     }
-
-    /**
-     * Obtém o primeiro ponto da reta.
-     *
-     * @return Primeiro ponto da reta
-     */
-    public Ponto getP1() {
-        return p1;
-    }
-
-    /**
-     * Define o primeiro ponto da reta.
-     *
-     * @param p1 Novo primeiro ponto da reta
-     */
-    public void setP1(Ponto p1) {
-        this.p1 = p1;
-    }
-
-    /**
-     * Obtém o segundo ponto da reta.
-     *
-     * @return Segundo ponto da reta
-     */
-    public Ponto getP2() {
-        return p2;
-    }
-
-    /**
-     * Define o segundo ponto da reta.
-     *
-     * @param p2 Novo segundo ponto da reta
-     */
-    public void setP2(Ponto p2) {
-        this.p2 = p2;
-    }
-
 }

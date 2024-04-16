@@ -1,50 +1,58 @@
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 
-/** Classe responsável pela criação de um Retangulo
- @author João Guerreiro , a81430
- @version 03/04/2024
- @inv os pontos recebidos têm de ser iguais a 3
+/**
+ * Classe que representa um retângulo como subclasse de um poligono.
+ *
+ * @author Tomás Luz
+ *
+ * @version 1.0 01/04/2024
+ *
+ * @inv o retangulo tem de ter 4 pontos e os seus angulos internos tem 90 graus
  */
-
 public class Retangulo extends Poligono {
-    /**
-     * Construtor para criar um retângulo a partir de uma string contendo as coordenadas dos pontos.
-     *
-     * @param input String contendo as coordenadas dos pontos
-     */
-    public Retangulo(String input) {
-        this(toInt(input));
-    }
 
     /**
-     * Construtor para criar um retângulo a partir de uma lista de pontos.
+     * Construtor da classe Retangulo. Verifica se a lista de pontos forma um retângulo válido.
      *
-     * @param pontos Lista de pontos que define os vértices do retângulo
+     * @param pontos Lista de pontos que define o retângulo.
      */
-    public Retangulo(ArrayList<Ponto> pontos) {
+    public Retangulo(ArrayList<Ponto> pontos){
+
         super(pontos);
-        if (pontos.size() != 4) {
+        if(pontos.size() != 4){
             System.out.println("Retangulo:vi");
             System.exit(0);
         }
 
-        for (int i = 0; i < pontos.size(); i++) {
+        for(int i = 0; i < pontos.size(); i++){
+
             Ponto a = pontos.get(i);
-            Ponto b = pontos.get((i + 1) % pontos.size());
-            Ponto c = pontos.get((i + 2) % pontos.size());
-            if (calcularAngulo(a, b, c) != 90) {
+            Ponto b = pontos.get((i+1) % pontos.size());
+            Ponto c = pontos.get((i+2) % pontos.size());
+            if(calcularAngulo(a,b,c) != 90){
+
                 System.out.println("Retangulo:vi");
                 System.exit(0);
             }
+
         }
     }
 
     /**
-     * Retorna uma representação em string do retângulo.
+     * Construtor da classe Retangulo a partir de uma string de entrada. Transforma a string em uma lista de pontos.
      *
-     * @return String representando o retângulo
+     * @param input String de entrada contendo as coordenadas dos pontos.
+     */
+    public Retangulo(String input)
+    {
+        this(toInt(input));
+    }
+
+
+    /**
+     * Retorna uma representação em forma de string do retângulo.
+     *
+     * @return String representando o retângulo.
      */
     @Override
     public String toString() {
@@ -52,30 +60,31 @@ public class Retangulo extends Poligono {
     }
 
     /**
-     * Converte uma string contendo coordenadas de pontos para uma lista de pontos.
+     *  Converte uma string de entrada em uma lista de pontos.
      *
-     * @param input String contendo coordenadas dos pontos
-     * @return Lista de pontos
+     * @param input String de entrada contendo as coordenadas dos pontos.
+     * @return Lista de pontos extraída da string de entrada.
      */
-    private static ArrayList<Ponto> toInt(String input) {
-        String[] parts = input.split(" ");
-        if ((parts.length - 1) % 2 == 0)
+    private static ArrayList<Ponto> toInt (String input) {
+        String [] parts = input.split(" ");
+
+        if(parts.length-1 % 2 == 0)
             System.exit(0);
 
         ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 0; i < parts.length; i += 2) {
-            pontos.add(new Ponto(Integer.parseInt(parts[i]), Integer.parseInt(parts[i + 1])));
+        for(int i = 0; i < parts.length; i+=2){
+            pontos.add(new Ponto(Integer.parseInt(parts[i]),Integer.parseInt(parts[i+1])));
         }
         return pontos;
     }
 
     /**
-     * Calcula o ângulo entre três pontos.
+     * Método para calcular o ângulo entre três pontos.
      *
-     * @param a Primeiro ponto
-     * @param b Segundo ponto
-     * @param c Terceiro ponto
-     * @return Ângulo em graus
+     * @param a Primeiro ponto.
+     * @param b Segundo ponto.
+     * @param c Terceiro ponto.
+     * @return O ângulo em graus formado pelos pontos a, b e c.
      */
     private double calcularAngulo(Ponto a, Ponto b, Ponto c) {
         double lado1x = b.getX() - a.getX();
@@ -88,45 +97,64 @@ public class Retangulo extends Poligono {
         double normaLado1 = Math.sqrt((lado1x * lado1x) + (lado1y * lado1y));
         double normaLado2 = Math.sqrt((lado2x * lado2x) + (lado2y * lado2y));
 
+
         double cosenoAngulo = produtoEscalar / (normaLado1 * normaLado2);
 
         double angulo = Math.acos(cosenoAngulo) * (180 / Math.PI);
 
         return angulo;
     }
-
     /**
-     * Método para realizar a translação do retângulo.
+     * Realiza a rotação do retângulo em torno de um ponto (centroide) dado um ângulo.
+     * Para cada ponto do retângulo, aplica-se a rotação utilizando a função de rotação definida na classe Ponto.
      *
-     * @param x Valor a ser somado à coordenada x de cada ponto do retângulo
-     * @param y Valor a ser somado à coordenada y de cada ponto do retângulo
-     * @return Novo retângulo após a translação
+     * @param angulo Ângulo de rotação em graus.
+     * @param centroide Ponto em torno do qual o retângulo será rotacionado.
+     * @return Novo retângulo resultante da rotação.
      */
     @Override
-    public Retangulo poligonTranslation(int x, int y)
+    public Retangulo rotacao(int angulo, Ponto centroide) {
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        for (Ponto ponto : pontos) {
+            newPontos.add(ponto.rotacaoPonto(angulo, centroide));
+        }
+        return new Retangulo(newPontos);
+    }
+
+    /**
+     * Realiza a translação do retângulo movendo todos os seus pontos por uma quantidade específica nas direções x e y.
+     * Para cada ponto do retângulo, aplica-se a translação utilizando a função de translação definida na classe Ponto.
+     *
+     * @param x Quantidade a ser transladada na direção x.
+     * @param y Quantidade a ser transladada na direção y.
+     * @return Novo retângulo resultante da translação.
+     */
+    @Override
+    public Retangulo translacao(int x, int y)
     {
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 0; i < this.getPontos().size(); i++) {
-            pontos.add(getPontos().get(i).pointTranslation(x,y));
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        for (Ponto ponto : pontos) {
+            newPontos.add(ponto.translacaoPonto(x, y));
         }
 
-        return new Retangulo(pontos);
+        return new Retangulo(newPontos);
     }
-
     /**
-     * Realiza a rotação do retângulo em torno de um ponto de referência (centroide) por um determinado ângulo.
+     * Realiza a translação do retângulo de modo que seu centroide seja movido para uma nova posição especificada.
      *
-     * @param angulo    Ângulo de rotação em graus
-     * @param centroide Ponto de referência (centroide) para a rotação
-     * @return Novo retângulo após a rotação
+     * @param novoCentroideX Nova coordenada x para o centroide do retângulo.
+     * @param novoCentroideY Nova coordenada y para o centroide do retângulo.
+     * @return Novo retângulo resultante da translação do centroide para a nova posição.
      */
     @Override
-    public Retangulo poligonRotation(int angulo, Ponto centroide) {
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 0; i < this.getPontos().size(); i++) {
-            pontos.add(getPontos().get(i).pointRotation(angulo, centroide));
-        }
-        return new Retangulo(pontos);
-    }
+    public Retangulo translacaoCentroide(int novoCentroideX, int novoCentroideY){
 
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        Ponto centroidePoligono = calcularCentroInt();
+        int deslocamentoX = novoCentroideX - centroidePoligono.getX();
+        int deslocamentoY = novoCentroideY - centroidePoligono.getY();
+
+        return translacao(deslocamentoX, deslocamentoY);
+
+    }
 }

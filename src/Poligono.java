@@ -1,172 +1,210 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**Classe responsável pela criação de um Poligono
-  @author João Guerreiro , a81430
-  @version 23/02/2024
+/**
+ * Classe que representa um polígono definido por uma lista de pontos. Tem como responsabilidades calcular
+ * o perímetro do polígono, fazer verificações das características que formam um polígono
+ *
+ *
+ * @author Tomás Luz
+ *
+ * @version 1.2 27/02/2024
+ *
+ * @inv o polígono tem de ter pelo menos 3 pontos
+ *
  */
 
 public class Poligono {
 
-    private final ArrayList<Ponto> pontos;
-    private final List<SegmentoReta> list_sReta = new ArrayList<>();
+    protected final ArrayList<Ponto> pontos;
+    protected final List<SegmentoReta> lista_segmentos = new ArrayList<>();
+
 
     /**
-     * Construtor para criar um polígono a partir de uma lista de pontos.
+     * Construtor da classe Poligono. Verifica se a lista de pontos forma um polígono válido e inicializa os pontos
+     * do polígono.
      *
-     * @param pontos Lista de pontos que define os vértices do polígono
+     * @param pontos Lista de pontos que define o polígono.
      */
     public Poligono(ArrayList<Ponto> pontos) {
+
         if (pontos.size() < 3) {
+
             System.out.println("Poligono:vi");
-            System.exit(0);
+            throw new IllegalArgumentException();
         }
-
-        for (int i = 0; i < pontos.size(); i++) {
-            Reta reta = new Reta(pontos.get(i), pontos.get((i + 1) % pontos.size()));
-            if (reta.colineares(pontos.get((i + 2) % pontos.size()))) {
-                System.out.println("Poligono:vi");
-                System.exit(0);
-            }
-            list_sReta.add(new SegmentoReta(pontos.get(i), pontos.get((i + 1) % pontos.size())));
-        }
-
-        for (int i = 0; i < list_sReta.size(); i++) {
-            if (list_sReta.get(i).arestasCruzam(list_sReta.get((i + 2) % list_sReta.size()))) {
-                System.out.println("Poligono:vi");
-                System.exit(0);
-            }
-        }
-
+        retas(pontos);
+        segmentos(pontos);
         this.pontos = pontos;
+
     }
 
-    /**
-     * Construtor para criar um polígono a partir de uma string contendo as coordenadas dos pontos.
-     *
-     * @param input String contendo as coordenadas dos pontos
-     */
-    public Poligono(String input) {
+    public Poligono(String input)
+    {
         this(toInt(input));
     }
 
     /**
-     * Obtém a lista de pontos que define os vértices do polígono.
+     * Obtém a lista de pontos que define o polígono.
      *
-     * @return Lista de pontos do polígono
+     * @return Lista de pontos do polígono.
      */
     public ArrayList<Ponto> getPontos() {
         return pontos;
     }
 
     /**
-     * Obtém a lista de segmentos de reta que compõem o polígono.
+     * Obtém a lista de segmentos que define o polígono.
      *
-     * @return Lista de segmentos de reta do polígono
+     * @return Lista de segmentos do polígono
      */
-    public List<SegmentoReta> getList_sReta() {
-        return list_sReta;
+    public List<SegmentoReta> getLista_segmentos() {
+        return lista_segmentos;
+    }
+
+    /**
+     * Cria as retas que conectam os pontos do polígono e verifica se eles são colineares.
+     *
+     * @param pontos Lista de pontos que define o polígono.
+     */
+    public void retas(List<Ponto> pontos) {
+
+        for (int i = 0; i < pontos.size(); i++) {
+
+            Reta reta = new Reta(pontos.get(i), pontos.get((i + 1) % pontos.size()));
+            if (reta.colineares(pontos.get((i + 2) % pontos.size()))) {
+
+                System.out.println("Poligono:vi");
+                System.exit(0);
+            }
+        }
+    }
+
+    /**
+     * Cria os segmentos de reta a partir dos pontos do polígono e verifica se eles se cruzam.
+     *
+     * @param pontos Lista de pontos que define o polígono.
+     */
+    public void segmentos(List<Ponto> pontos) {
+
+        for (int i = 0; i < pontos.size(); i++) {
+            lista_segmentos.add(new SegmentoReta(pontos.get(i), pontos.get((i + 1) % pontos.size())));
+        }
+        for (int i = 0; i < lista_segmentos.size(); i++) {
+            if (lista_segmentos.get(i).arestasCruzam(lista_segmentos.get((i + 2) % lista_segmentos.size()))) {
+                System.out.println("Poligono:vi");
+                System.exit(0);
+            }
+
+        }
+
     }
 
     /**
      * Calcula o perímetro do polígono.
      *
-     * @return Perímetro do polígono
+     * @param pontos Lista de pontos que define o polígono.
+     * @return perímetro do polígono.
      */
-    public int perimetro() {
-        double perimetro = 0;
+
+    public int perimetro(List<Ponto> pontos) {
+
+        double result = 0;
         for (int i = 0; i < pontos.size(); i++) {
-            perimetro += pontos.get(i).dist(pontos.get((i + 1) % pontos.size()));
+
+            result += pontos.get(i).dist(pontos.get((i + 1) % pontos.size()));
         }
-        return (int) perimetro;
+
+        return (int) result;
     }
 
     /**
-     * Retorna uma representação em string do polígono.
+     * Verifica se este polígono é igual a outro objeto.
      *
-     * @return String representando o polígono
+     * @param o Objeto a ser comparado.
+     * @return true se o objeto passado é um polígono e tem os mesmos segmentos de reta, false caso contrário.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        Poligono poligono = (Poligono) o;
+        if (lista_segmentos.size() != poligono.getLista_segmentos().size()) {
+            return false;
+        }
+
+        List<SegmentoReta> segmentocopy = new ArrayList<>(poligono.getLista_segmentos());
+        for(int i = 0; i < lista_segmentos.size(); i++){
+            for(int j = 0; j < segmentocopy.size(); j++){
+                if(lista_segmentos.get(i).equals(segmentocopy.get(j))){
+                    segmentocopy.remove(j % poligono.getLista_segmentos().size());
+                    break;
+                }
+            }
+        }
+        return segmentocopy.isEmpty();
+    }
+    /**
+     * Retorna um código hash baseado nos segmentos de reta e pontos do polígono.
+     *
+     * @return Código hash do polígono.
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(lista_segmentos,pontos);
+    }
+    /**
+     *  Converte uma string de entrada em uma lista de pontos.
+     *
+     * @param input String de entrada contendo as coordenadas dos pontos.
+     * @return Lista de pontos extraída da string de entrada.
+     */
+    private static ArrayList<Ponto> toInt (String input) {
+        String [] parts = input.split(" ");
+
+        if(parts.length == 0)
+            System.exit(0);
+
+        ArrayList<Ponto> pontos = new ArrayList<>();
+        for(int i = 1, count = 0; count < Integer.parseInt(parts[0]); i+=2, count++){
+            pontos.add(new Ponto(Integer.parseInt(parts[i]),Integer.parseInt(parts[i+1])));
+        }
+        return pontos;
+    }
+    /**
+     * Retorna uma representação em forma de string do polígono.
+     *
+     * @return String representando o polígono.
      */
     @Override
     public String toString() {
         return "Poligono de " + getPontos().size() + " vertices: " + getPontos().toString();
     }
-
     /**
-     * Verifica se dois polígonos são iguais.
+     * Calcula o centro geométrico do polígono considerando coordenadas inteiras.
      *
-     * @param o Objeto a ser comparado
-     * @return true se os polígonos são iguais, false caso contrário
+     * @return Ponto representando o centro do polígono com coordenadas inteiras.
      */
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null) return false;
-        Poligono poligono = (Poligono) object;
-        if (list_sReta.size() != poligono.getList_sReta().size()){
-            return false;
+    public Ponto calcularCentroInt() {
+        int centroX = 0;
+        int centroY = 0;
+
+        for (Ponto ponto : pontos) {
+            centroX += ponto.getX();
+            centroY += ponto.getY();
         }
-        List<SegmentoReta> segmentoCopy = new ArrayList<>(poligono.getList_sReta());
-        for (int i = 0;i< list_sReta.size();i++){
-            for (int j = 0; j < poligono.getList_sReta().size(); j++) {
-                if (list_sReta.get(i).equals(segmentoCopy.get(j))){
-                    segmentoCopy.remove(j % poligono.getList_sReta().size());
-                    break;
-                }
-            }
-        }
-        return segmentoCopy.isEmpty();
+
+        centroX /= pontos.size();
+        centroY /= pontos.size();
+        return new Ponto(centroX, centroY);
     }
-
     /**
-     * Retorna o código hash do polígono.
+     * Calcula o centro geométrico do polígono considerando coordenadas em double.
      *
-     * @return Código hash do polígono
+     * @return Ponto representando o centro do polígono com coordenadas em double.
      */
-    @Override
-    public int hashCode() {
-        return Objects.hash(pontos, list_sReta);
-    }
-
-    /**
-     * Converte uma string contendo coordenadas de pontos para uma lista de pontos.
-     *
-     * @param input String contendo coordenadas dos pontos
-     * @return Lista de pontos
-     */
-    private static ArrayList<Ponto> toInt(String input) {
-        String[] parts = input.split(" ");
-        if (parts.length == 0)
-            System.exit(0);
-
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 1, count = 0; count < Integer.parseInt(parts[0]); i += 2, count++) {
-            pontos.add(new Ponto(Integer.parseInt(parts[i]), Integer.parseInt(parts[i + 1])));
-        }
-        return pontos;
-    }
-
-    /**
-     * Realiza a translação do polígono.
-     *
-     * @param x Valor a ser somado à coordenada x de cada ponto do polígono
-     * @param y Valor a ser somado à coordenada y de cada ponto do polígono
-     * @return Novo polígono após a translação
-     */
-    public Poligono poligonTranslation(int x, int y) {
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 0; i < this.getPontos().size(); i++) {
-            pontos.add(getPontos().get(i).pointTranslation(x, y));
-        }
-        return new Poligono(pontos);
-    }
-
-    /**
-     * Calcula o centroide (centro de massa) do polígono.
-     *
-     * @return Ponto representando o centroide do polígono
-     */
-    public Ponto calcularCentro() {
+    public Ponto calcularCentroDouble(){
         double centroX = 0;
         double centroY = 0;
 
@@ -178,22 +216,56 @@ public class Poligono {
         centroX /= pontos.size();
         centroY /= pontos.size();
         return new Ponto(centroX, centroY);
+
+    }
+    /**
+     * Realiza a rotação do polígono em torno de um ponto (centroide) dado um ângulo.
+     * Para cada ponto do polígono, aplica-se a rotação utilizando a fórmula de rotação em torno de um ponto.
+     *
+     * @param angulo Ângulo de rotação em graus.
+     * @param centroide Ponto em torno do qual o polígono será rotacionado.
+     * @return Novo polígono resultante da rotação.
+     */
+    public Poligono rotacao(int angulo, Ponto centroide) {
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        for (Ponto ponto : pontos) {
+            newPontos.add(ponto.rotacaoPonto(angulo, centroide));
+        }
+        return new Poligono(newPontos);
     }
 
     /**
-     * Realiza a rotação do polígono em torno de um ponto de referência (centroide) por um determinado ângulo.
+     * Realiza a translação do polígono movendo todos os seus pontos por uma quantidade específica nas direções x e y.
+     * Para cada ponto do polígono, aplica-se a translação utilizando a função de translação definida na classe Ponto.
      *
-     * @param angulo    Ângulo de rotação em graus
-     * @param centroide Ponto de referência (centroide) para a rotação
-     * @return Novo polígono após a rotação
+     * @param x Quantidade a ser transladada na direção x.
+     * @param y Quantidade a ser transladada na direção y.
+     * @return Novo polígono resultante da translação.
      */
-    public Poligono poligonRotation(int angulo, Ponto centroide) {
-        ArrayList<Ponto> pontoscopy = new ArrayList<>();
-        for (int i = 0; i < pontos.size(); i++) {
-            pontoscopy.add(pontos.get(i).pointRotation(angulo, centroide));
+    public Poligono translacao(int x, int y)
+    {
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        for (Ponto ponto : pontos) {
+            newPontos.add(ponto.translacaoPonto(x, y));
         }
-        return new Poligono(pontoscopy);
+
+        return new Poligono(newPontos);
     }
+    /**
+     * Realiza a translação do polígono de modo que seu centroide seja movido para uma nova posição especificada.
+     *
+     * @param novoCentroideX Nova coordenada x para o centroide do polígono.
+     * @param novoCentroideY Nova coordenada y para o centroide do polígono.
+     * @return Novo polígono resultante da translação do centroide para a nova posição.
+     */
+    public Poligono translacaoCentroide(int novoCentroideX, int novoCentroideY){
 
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        Ponto centroidePoligono = calcularCentroInt();
+        int deslocamentoX = novoCentroideX - centroidePoligono.getX();
+        int deslocamentoY = novoCentroideY - centroidePoligono.getY();
 
+        return translacao(deslocamentoX, deslocamentoY);
+
+    }
 }

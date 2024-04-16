@@ -1,42 +1,41 @@
 import java.util.ArrayList;
-
-/**Classe responsável pela criação de um Quadrado
- @author João Guerreiro , a81430
- @version 03/04/2024
+/**
+ * Classe que representa um quadrado como subclasse do retangulo e do poligono.
+ *
+ *
+ * @author Tomás Luz
+ *
+ * @version 1.0 01/04/2024
+ *
+ * @inv o quadrado tem de ter 4 pontos
+ *
  */
-
-public class Quadrado extends Retangulo {
+public class Quadrado extends Retangulo
+{
     /**
-     * Construtor para criar um quadrado a partir de uma string contendo as coordenadas dos pontos.
+     * Construtor da classe Quadrado a partir de uma string de entrada. Transforma a string em uma lista de pontos.
      *
-     * @param input String contendo as coordenadas dos pontos
+     * @param input String de entrada contendo as coordenadas dos pontos.
      */
-    public Quadrado(String input) {
-        this(toInt(input));
-    }
+    public Quadrado(String input){this(toInt(input)); }
 
     /**
-     * Construtor para criar um quadrado a partir de uma lista de pontos.
+     * Construtor da classe Quadrado. Verifica se a lista de pontos forma um quadrado válido.
      *
-     * @param pontos Lista de pontos que define os vértices do quadrado
+     * @param pontos Lista de pontos que define o quadrado.
      */
     public Quadrado(ArrayList<Ponto> pontos) {
         super(pontos);
-
-        double comprimentoLado = pontos.get(0).dist(pontos.get(1));
-        for (int i = 1; i < pontos.size(); i++) {
-            double lado = pontos.get(i).dist(pontos.get((i + 1) % pontos.size()));
-            if (lado != comprimentoLado) {
-                System.out.println("Quadrado:vi");
-                System.exit(0);
-            }
+        if (pontos.size() != 4) {
+            System.out.println("Quadrado:vi");
+            System.exit(0);
         }
     }
 
     /**
-     * Retorna uma representação em string do quadrado.
+     * Retorna uma representação em forma de string do quadrado.
      *
-     * @return String representando o quadrado
+     * @return String representando o quadrado.
      */
     @Override
     public String toString() {
@@ -44,57 +43,71 @@ public class Quadrado extends Retangulo {
     }
 
     /**
-     * Converte uma string contendo coordenadas de pontos para uma lista de pontos.
+     *Converte uma string de entrada em uma lista de pontos.
      *
-     * @param input String contendo coordenadas dos pontos
-     * @return Lista de pontos
+     * @param input String de entrada contendo as coordenadas dos pontos.
+     * @return Lista de pontos extraída da string de entrada.
      */
-    private static ArrayList<Ponto> toInt(String input) {
-        String[] parts = input.split(" ");
-        if ((parts.length - 1) % 2 == 0)
-            System.exit(0);
+    private static ArrayList<Ponto> toInt (String input) {
+        String [] parts = input.split(" ");
 
+        if(parts.length-1 % 2 == 0)
+            System.exit(0);
         ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 0; i < parts.length; i += 2) {
-            pontos.add(new Ponto(Integer.parseInt(parts[i]), Integer.parseInt(parts[i + 1])));
+        for(int i = 0; i < parts.length; i+=2){
+            pontos.add(new Ponto(Integer.parseInt(parts[i]),Integer.parseInt(parts[i+1])));
         }
         return pontos;
     }
-
     /**
-     * Realiza a translação do quadrado.
+     * Realiza a rotação do quadrado em torno de um ponto (centroide) dado um ângulo.
+     * Para cada ponto do quadrado, aplica-se a rotação utilizando a função de rotação definida na classe Ponto.
      *
-     * @param x Valor a ser somado à coordenada x de cada ponto do quadrado
-     * @param y Valor a ser somado à coordenada y de cada ponto do quadrado
-     * @return Novo quadrado após a translação
+     * @param angulo Ângulo de rotação em graus.
+     * @param centroide Ponto em torno do qual o quadrado será rotacionado.
+     * @return Novo quadrado resultante da rotação.
      */
-
     @Override
-    public Quadrado poligonTranslation(int x, int y)
+    public Quadrado rotacao(int angulo, Ponto centroide) {
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        for (Ponto ponto : pontos) {
+            newPontos.add(ponto.rotacaoPonto(angulo, centroide));
+        }
+        return new Quadrado(newPontos);
+    }
+    /**
+     * Realiza a translação do quadrado movendo todos os seus pontos por uma quantidade específica nas direções x e y.
+     * Para cada ponto do quadrado, aplica-se a translação utilizando a função de translação definida na classe Ponto.
+     *
+     * @param x Quantidade a ser transladada na direção x.
+     * @param y Quantidade a ser transladada na direção y.
+     * @return Novo quadrado resultante da translação.
+     */
+    @Override
+    public Quadrado translacao(int x, int y)
     {
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 0; i < this.getPontos().size(); i++) {
-            pontos.add(getPontos().get(i).pointTranslation(x,y));
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        for (Ponto ponto : pontos) {
+            newPontos.add(ponto.translacaoPonto(x, y));
         }
-
-        return new Quadrado(pontos);
+        return new Quadrado(newPontos);
     }
-
     /**
-     * Realiza a rotação do quadrado em torno de um ponto de referência (centroide) por um determinado ângulo.
+     * Realiza a translação do quadrado de modo que seu centroide seja movido para uma nova posição especificada.
      *
-     * @param angulo    Ângulo de rotação em graus
-     * @param centroide Ponto de referência (centroide) para a rotação
-     * @return Novo quadrado após a rotação
+     * @param novoCentroideX Nova coordenada x para o centroide do quadrado.
+     * @param novoCentroideY Nova coordenada y para o centroide do quadrado.
+     * @return Novo quadrado resultante da translação do centroide para a nova posição.
      */
     @Override
-    public Quadrado poligonRotation(int angulo, Ponto centroide) {
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        for (int i = 0; i < this.getPontos().size(); i++) {
-            pontos.add(getPontos().get(i).pointRotation(angulo, centroide));
-        }
-        return new Quadrado(pontos);
+    public Quadrado translacaoCentroide(int novoCentroideX, int novoCentroideY){
+
+        ArrayList<Ponto> newPontos = new ArrayList<>();
+        Ponto centroidePoligono = calcularCentroInt();
+        int deslocamentoX = novoCentroideX - centroidePoligono.getX();
+        int deslocamentoY = novoCentroideY - centroidePoligono.getY();
+
+        return translacao(deslocamentoX, deslocamentoY);
+
     }
-
 }
-

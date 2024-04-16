@@ -1,57 +1,46 @@
-import	static	org.junit.jupiter.api.Assertions.*; 
-import	org.junit.jupiter.api.Test; 
 
-public class segmentoRetaTest {
+import org.junit.jupiter.api.Test;
 
-    @Test
-    public void testSegmentoRetaComPontosDiferentes() {
-        Ponto ponto1 = new Ponto(0, 0);
-        Ponto ponto2 = new Ponto(2, 2);
+import static org.junit.jupiter.api.Assertions.*;
 
-        assertDoesNotThrow(() -> new SegmentoReta(ponto1, ponto2));
-    }
+class SegmentoRetaTest {
 
     @Test
-    public void testSegmentoRetaComPontosIguais() {
+    public void testeConstrutorComPontosValidos() {
         Ponto ponto1 = new Ponto(1, 1);
-
-        assertThrows(IllegalArgumentException.class, () -> new SegmentoReta(ponto1, ponto1));
+        Ponto ponto2 = new Ponto(3, 3);
+        SegmentoReta segmento = new SegmentoReta(ponto1, ponto2);
+        assertNotNull(segmento);
+        assertEquals(ponto1, segmento.getPonto1());
+        assertEquals(ponto2, segmento.getPonto2());
     }
 
     @Test
-    public void testProdutoVetorial() {
+    public void testeSegmentosIntersetam() {
+        // Criar dois segmentos de reta que se cruzam
         Ponto ponto1 = new Ponto(1, 1);
-        Ponto ponto2 = new Ponto(2, 2);
-        Ponto ponto3 = new Ponto(3, 3);
+        Ponto ponto2 = new Ponto(5, 1);
+        Ponto ponto3 = new Ponto(3, 0);
+        Ponto ponto4 = new Ponto(3, 3);
+        SegmentoReta segmento1 = new SegmentoReta(ponto1, ponto2);
+        SegmentoReta segmento2 = new SegmentoReta(ponto3, ponto4);
 
-        SegmentoReta segmentoReta = new SegmentoReta(ponto1, ponto2);
-
-        assertEquals(0.0, segmentoReta.produtoVetorial(ponto1, ponto2, ponto3));
+        // Verificar se os segmentos se cruzam
+        assertTrue(segmento1.arestasCruzam(segmento2));
     }
 
     @Test
-    public void testArestasNaoCruzam() {
-        Ponto ponto1 = new Ponto(0, 0);
-        Ponto ponto2 = new Ponto(2, 2);
-        Ponto ponto3 = new Ponto(1, 0);
-        Ponto ponto4 = new Ponto(3, 2);
+    public void testeSegmentosNaoIntersetam() {
+        // Criar dois segmentos de reta que não se cruzam
+        Ponto ponto1 = new Ponto(1, 1);
+        Ponto ponto2 = new Ponto(3, 4);
+        Ponto ponto3 = new Ponto(6, 4);
+        Ponto ponto4 = new Ponto(6, 1);
+        SegmentoReta segmento1 = new SegmentoReta(ponto1, ponto2);
+        SegmentoReta segmento2 = new SegmentoReta(ponto3, ponto4);
 
-        SegmentoReta segmentoReta1 = new SegmentoReta(ponto1, ponto2);
-        SegmentoReta segmentoReta2 = new SegmentoReta(ponto3, ponto4);
-
-        assertFalse(segmentoReta1.arestasCruzam(segmentoReta2));
+        // Verificar se os segmentos não se cruzam
+        assertFalse(segmento1.arestasCruzam(segmento2));
     }
 
-    @Test
-    public void testArestasCruzam() {
-        Ponto ponto1 = new Ponto(0, 0);
-        Ponto ponto2 = new Ponto(1, 1);
-        Ponto ponto3 = new Ponto(1, 0);
-        Ponto ponto4 = new Ponto(0, 1);
-
-        SegmentoReta segmentoReta1 = new SegmentoReta(ponto1, ponto2);
-        SegmentoReta segmentoReta2 = new SegmentoReta(ponto3, ponto4);
-
-        assertTrue(segmentoReta1.arestasCruzam(segmentoReta2));
-}
 }
