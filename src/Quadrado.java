@@ -19,15 +19,18 @@ public class Quadrado extends Retangulo
      */
     public Quadrado(String input){this(toInt(input)); }
 
-    /**
-     * Construtor da classe Quadrado. Verifica se a lista de pontos forma um quadrado válido.
-     *
-     * @param pontos Lista de pontos que define o quadrado.
-     */
     public Quadrado(ArrayList<Ponto> pontos) {
         super(pontos);
-       
+        double comprimentoLado = pontos.get(0).dist(pontos.get(1));
+        for (int i = 1; i < pontos.size(); i++) {
+            double lado = pontos.get(i).dist(pontos.get((i + 1) % pontos.size()));
+            if (lado != comprimentoLado) {
+                System.out.println("Quadrado:vi");
+                System.exit(0);
+            }
+        }
     }
+
 
     /**
      * Retorna uma representação em forma de string do quadrado.
@@ -108,3 +111,4 @@ public class Quadrado extends Retangulo
 
     }
 }
+
