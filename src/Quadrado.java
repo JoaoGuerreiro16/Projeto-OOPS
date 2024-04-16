@@ -26,10 +26,7 @@ public class Quadrado extends Retangulo
      */
     public Quadrado(ArrayList<Ponto> pontos) {
         super(pontos);
-        if (pontos.size() != 4) {
-            System.out.println("Quadrado:vi");
-            System.exit(0);
-        }
+       
     }
 
     /**
