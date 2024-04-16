@@ -61,8 +61,6 @@ public class Main {
                     System.out.print("Duplicado");
                     System.exit(0);
                 }
-
-                System.out.println(poligonoRodado.toString());
             }
     }
         }
