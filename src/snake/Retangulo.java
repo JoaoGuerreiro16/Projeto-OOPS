@@ -1,4 +1,8 @@
+package snake;
+
 import java.util.ArrayList;
+
+
 
 /**
  * Classe que representa um retângulo como subclasse de um poligono.

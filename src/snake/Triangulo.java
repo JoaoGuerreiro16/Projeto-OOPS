@@ -1,3 +1,5 @@
+
+package snake;
 import java.util.ArrayList;
 /**
  * Classe que representa um triangulo como subclasse de um poligono.

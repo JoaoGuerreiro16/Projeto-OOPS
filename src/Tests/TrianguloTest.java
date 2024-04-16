@@ -1,5 +1,9 @@
+package Tests;
+
 import	static	org.junit.jupiter.api.Assertions.*;
 import	org.junit.jupiter.api.Test;
+import snake.Ponto;
+import snake.Triangulo;
 
 import java.util.ArrayList;
 

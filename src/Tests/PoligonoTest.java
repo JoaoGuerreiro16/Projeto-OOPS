@@ -1,13 +1,17 @@
+package Tests;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import snake.Poligono;
+import snake.Ponto;
+import snake.Quadrado;
+import snake.Triangulo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 class PoligonoTest {
 
     @Test

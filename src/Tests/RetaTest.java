@@ -1,5 +1,8 @@
+package Tests;
 
 import org.junit.jupiter.api.Test;
+import snake.Ponto;
+import snake.Reta;
 
 import static org.junit.jupiter.api.Assertions.*;
 
