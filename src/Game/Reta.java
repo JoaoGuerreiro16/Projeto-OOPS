@@ -1,5 +1,5 @@
 
-package snake;
+package Game;
 /**
  * Classe que representa uma reta definida por dois pontos. Tem como responsabilidades verificar se
  * os pontos dados definem uma resta válida e verifica se um terceiro ponto pertence a esta

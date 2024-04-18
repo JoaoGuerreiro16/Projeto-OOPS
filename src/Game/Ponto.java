@@ -1,5 +1,5 @@
 
-package snake;
+package Game;
 import java.util.Objects;
 
 /**

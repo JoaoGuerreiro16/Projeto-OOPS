@@ -1,5 +1,5 @@
 
-package snake;
+package Game;
 import java.util.ArrayList;
 /**
  * Classe que representa um quadrado como subclasse do retangulo e do poligono.

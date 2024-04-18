@@ -2,8 +2,8 @@ package Tests;
 
 import	static	org.junit.jupiter.api.Assertions.*;
 import	org.junit.jupiter.api.Test;
-import snake.Ponto;
-import snake.Triangulo;
+import Game.Ponto;
+import Game.Triangulo;
 
 import java.util.ArrayList;
 

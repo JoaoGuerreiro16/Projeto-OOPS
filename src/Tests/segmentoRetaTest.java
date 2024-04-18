@@ -1,7 +1,7 @@
 package Tests;
 import org.junit.jupiter.api.Test;
-import snake.Ponto;
-import snake.SegmentoReta;
+import Game.Ponto;
+import Game.SegmentoReta;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-package snake;
+package Game;
 
 import java.util.ArrayList;
 
