@@ -1,20 +1,20 @@
 package Game;
 
 public class Circulo {
-    private int raio;
+    private double raio;
     private Ponto centro;
 
-    public Circulo(int raio, Ponto centro) {
+    public Circulo(double raio, Ponto centro) {
 
         setRaio(raio);
         this.centro = centro;
     }
 
-    public int getRaio() {
+    public double getRaio() {
         return raio;
     }
 
-    public void setRaio(int raio) {
+    public void setRaio(double raio) {
         if (raio <= 0) {
             System.out.println("Circulo:vi");
         }
@@ -27,10 +27,6 @@ public class Circulo {
 
     public void setCentro(Ponto centro) {
         this.centro = centro;
-    }
-
-    public int calcularArea() {
-        return (int) Math.PI * raio * raio;
     }
 
     @Override
@@ -51,6 +47,13 @@ public class Circulo {
         Ponto centro = new Ponto(centroX, centroY);
 
         return new Circulo(raio, centro);
+    }
+
+    public Circulo translacaoCentroide(int x, int y)
+    {
+        Ponto novoCentro = new Ponto(x,y);
+
+        return new Circulo(raio,novoCentro);
     }
 
 }
