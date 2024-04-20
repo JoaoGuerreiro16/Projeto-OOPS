@@ -59,18 +59,27 @@ class PoligonoTest {
     public void testCentroide() {
         String input1 = "4 5 5 8 6 8 7 5 7";
         Poligono poligono1 = new Poligono(input1);
-        assertEquals(6.5, poligono1.calcularCentroInt().getX_db());
-        assertEquals(6.25, poligono1.calcularCentroInt().getY_db());
+        assertEquals(6.5, poligono1.calcularCentro().getX_db());
+        assertEquals(6.25, poligono1.calcularCentro().getY_db());
 
         String input2 = "3 9 3 7 1 9 1";
         Poligono poligono2 = new Poligono(input2);
-        assertEquals(8.333333333333334, poligono2.calcularCentroInt().getX_db());
-        assertEquals(1.6666666666666667, poligono2.calcularCentroInt().getY_db());
+        assertEquals(8.333333333333334, poligono2.calcularCentro().getX_db());
+        assertEquals(1.6666666666666667, poligono2.calcularCentro().getY_db());
 
         String input3 = "4 1 2 5 6 8 7 12 14";
         Poligono poligono3 = new Poligono(input3);
-        assertEquals(6.5, poligono3.calcularCentroInt().getX_db());
-        assertEquals(7.25, poligono3.calcularCentroInt().getY_db());
+        assertEquals(6.5, poligono3.calcularCentro().getX_db());
+        assertEquals(7.25, poligono3.calcularCentro().getY_db());
+    }
+
+    @Test
+    public void testRotation()
+    {
+        String input = "4 1 1 3 1 3 5 1 5";
+        Poligono p = new Poligono(input);
+
+        assertEquals("Poligono de 4 vertices: [(4,2), (4,4), (0,4), (0,2)]",p.rotacao(90,p.calcularCentro()).toString());
     }
 
     @Test
@@ -88,6 +97,8 @@ class PoligonoTest {
         String input2 = "3 2 2 4 4 4 2";
         assertEquals("Poligono de 3 vertices: [(2,4), (4,6), (4,4)]", new Poligono(input2).translacaoCentroide(4,5).toString());
     }
+
+
 
 
 

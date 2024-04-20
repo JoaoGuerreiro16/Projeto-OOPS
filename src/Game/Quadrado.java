@@ -106,7 +106,7 @@ public class Quadrado extends Retangulo
     public Quadrado translacaoCentroide(int novoCentroideX, int novoCentroideY){
 
         ArrayList<Ponto> newPontos = new ArrayList<>();
-        Ponto centroidePoligono = calcularCentroInt();
+        Ponto centroidePoligono = calcularCentro();
         int deslocamentoX = novoCentroideX - centroidePoligono.getX();
         int deslocamentoY = novoCentroideY - centroidePoligono.getY();
 

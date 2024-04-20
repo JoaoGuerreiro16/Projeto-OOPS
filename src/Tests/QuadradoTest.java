@@ -36,6 +36,14 @@ public class QuadradoTest {
     }
 
     @Test
+    public void testRotation() {
+        String input = "1 1 3 1 3 3 1 3";
+        Quadrado q = new Quadrado(input);
+
+        assertEquals("Quadrado: [(3,1), (3,3), (1,3), (1,1)]", q.rotacao(90, q.calcularCentro()).toString());
+    }
+
+    @Test
     public void testTranslate() {
         String input1 = "0 0 2 0 2 2 0 2";
         assertEquals("Quadrado: [(2,0), (4,0), (4,2), (2,2)]", new Poligono(input1).translacao(2,0).toString());
@@ -50,4 +58,5 @@ public class QuadradoTest {
         String input2 = "1 1 3 1 3 3 1 3";
         assertEquals("Quadrado: [(6,1), (8,1), (8,3), (6,3)]", new Quadrado(input2).translacaoCentroide(7,2).toString());
     }
+
 }

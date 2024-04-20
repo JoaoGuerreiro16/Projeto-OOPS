@@ -97,9 +97,7 @@ public class Poligono {
                 System.out.println("Poligono:vi");
                 System.exit(0);
             }
-
         }
-
     }
 
     /**
@@ -186,7 +184,7 @@ public class Poligono {
      *
      * @return Ponto representando o centro do polígono com coordenadas inteiras.
      */
-    public Ponto calcularCentroInt() {
+    public Ponto calcularCentro() {
         int centroX = 0;
         int centroY = 0;
 
@@ -199,25 +197,7 @@ public class Poligono {
         centroY /= pontos.size();
         return new Ponto(centroX, centroY);
     }
-    /**
-     * Calcula o centro geométrico do polígono considerando coordenadas em double.
-     *
-     * @return Ponto representando o centro do polígono com coordenadas em double.
-     */
-    public Ponto calcularCentroDouble(){
-        double centroX = 0;
-        double centroY = 0;
 
-        for (Ponto ponto : pontos) {
-            centroX += ponto.getX();
-            centroY += ponto.getY();
-        }
-
-        centroX /= pontos.size();
-        centroY /= pontos.size();
-        return new Ponto(centroX, centroY);
-
-    }
     /**
      * Realiza a rotação do polígono em torno de um ponto (centroide) dado um ângulo.
      * Para cada ponto do polígono, aplica-se a rotação utilizando a fórmula de rotação em torno de um ponto.
@@ -261,7 +241,7 @@ public class Poligono {
     public Poligono translacaoCentroide(int novoCentroideX, int novoCentroideY){
 
         ArrayList<Ponto> newPontos = new ArrayList<>();
-        Ponto centroidePoligono = calcularCentroInt();
+        Ponto centroidePoligono = calcularCentro();
         int deslocamentoX = novoCentroideX - centroidePoligono.getX();
         int deslocamentoY = novoCentroideY - centroidePoligono.getY();
 

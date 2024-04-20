@@ -33,6 +33,15 @@ public class RetanguloTest {
         Retangulo r = new Retangulo(pontos);
         assertEquals("Retangulo: [(0,0), (3,0), (3,3), (0,2)]",r.toString());
     }
+
+    @Test
+    public void testRotation()
+    {
+        String input = "1 1 3 1 3 5 1 5";
+        Retangulo r = new Retangulo(input);
+
+        assertEquals("Retangulo: [(4,2), (4,4), (0,4), (0,2)]",r.rotacao(90,r.calcularCentro()).toString());
+    }
     @Test
     public void testTranslate() {
         String input1 = "1 1 3 1 3 5 1 5";
@@ -48,4 +57,5 @@ public class RetanguloTest {
         String input2 = "1 1 3 1 3 5 1 5";
         assertEquals("Retangulo: [(6,0), (8,0), (8,4), (6,4)]", new Retangulo(input2).translacaoCentroide(7,2).toString());
     }
+
 }
