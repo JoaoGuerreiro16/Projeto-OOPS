@@ -110,4 +110,9 @@ public class SegmentoReta {
     public int hashCode() {
         return Objects.hash(ponto1, ponto2);
     }
+
+    public double lenght()
+    {
+        return ponto1.dist(ponto2);
+    }
 }
