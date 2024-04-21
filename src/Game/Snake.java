@@ -38,4 +38,13 @@ public class Snake {
     public String toString() {
         return "Snake: " + getQuadrados().toString();
     }
+
+    public Snake translacao(int x, int y) {
+        ArrayList<Quadrado> newQuadrados = new ArrayList<>();
+
+        for (Quadrado quadrado : quadrados) {
+            newQuadrados.add(quadrado.translacao(x, y));
+        }
+        return new Snake(newQuadrados);
+    }
 }

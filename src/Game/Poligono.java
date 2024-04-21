@@ -184,6 +184,20 @@ public class Poligono {
      *
      * @return Ponto representando o centro do polígono com coordenadas inteiras.
      */
+
+    public boolean interceta_poligono(Poligono p) {
+        for (int i = 0; i < getLista_segmentos().size(); i++)
+        {
+            for (int j = 0; j < p.getLista_segmentos().size(); j++)
+            {
+                if (getLista_segmentos().get(i).arestasCruzam(p.getLista_segmentos().get(j)))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
     public Ponto calcularCentro() {
         int centroX = 0;
         int centroY = 0;
