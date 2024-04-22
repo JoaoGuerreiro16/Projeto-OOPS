@@ -7,4 +7,9 @@ public class ComidaCirculo extends Comida{
     {
         this.circulo = new Circulo(raio,centro);
     }
+
+    public Circulo getCirculo() {
+        return circulo;
+    }
+
 }
