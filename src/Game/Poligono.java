@@ -185,7 +185,7 @@ public class Poligono {
      * @return Ponto representando o centro do polígono com coordenadas inteiras.
      */
 
-    public boolean interceta_poligono(Poligono p) {
+    public boolean intercetaPoligono(Poligono p) {
         for (int i = 0; i < getLista_segmentos().size(); i++)
         {
             for (int j = 0; j < p.getLista_segmentos().size(); j++)
@@ -199,8 +199,8 @@ public class Poligono {
         return false;
     }
     public Ponto calcularCentro() {
-        int centroX = 0;
-        int centroY = 0;
+        double centroX = 0;
+        double centroY = 0;
 
         for (Ponto ponto : pontos) {
             centroX += ponto.getX();
