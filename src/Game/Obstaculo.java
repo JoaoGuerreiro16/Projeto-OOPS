@@ -15,6 +15,6 @@ public class Obstaculo{
     public Poligono getPoligono() {
         return poligono;
     }
-    
+
 
 }
