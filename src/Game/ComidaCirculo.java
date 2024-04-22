@@ -1,9 +1,10 @@
 package Game;
 
-public class ComidaCirculo extends Circulo{
+public class ComidaCirculo extends Comida{
+    private Circulo circulo;
 
-    ComidaCirculo(int raio, Ponto centro)
+    public ComidaCirculo(int raio, Ponto centro)
     {
-        super(raio,centro);
+        this.circulo = new Circulo(raio,centro);
     }
 }

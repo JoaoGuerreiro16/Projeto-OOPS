@@ -2,10 +2,11 @@ package Game;
 
 import java.util.ArrayList;
 
-public class ComidaQuadrado extends Quadrado{
+public class ComidaQuadrado extends Comida{
+    Quadrado quadrado;
 
-    ComidaQuadrado(ArrayList<Ponto> pontos)
+    public ComidaQuadrado(ArrayList<Ponto> pontos)
     {
-        super(pontos);
+        this.quadrado = new Quadrado(pontos);
     }
 }
