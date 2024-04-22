@@ -3,9 +3,10 @@ package Game;
 public class ComidaCirculo extends Comida{
     private Circulo circulo;
 
-    public ComidaCirculo(int raio, Ponto centro)
+    public ComidaCirculo(Circulo circulo)
     {
-        this.circulo = new Circulo(raio,centro);
+        super(circulo.getCentro().getX(), circulo.getCentro().getY());
+        this.circulo = circulo;
     }
 
     public Circulo getCirculo() {
