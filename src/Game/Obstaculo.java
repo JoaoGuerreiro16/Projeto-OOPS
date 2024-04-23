@@ -17,4 +17,9 @@ public class Obstaculo{
     }
 
 
+    public void rotacao(int i) {
+    }
+
+    public void rotacaoCentroide(int i, Ponto ponto) {
+    }
 }
