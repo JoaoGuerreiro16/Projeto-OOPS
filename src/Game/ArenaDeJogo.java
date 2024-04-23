@@ -7,7 +7,9 @@ public class ArenaDeJogo {
 
     private Snake snake;
 
-    private Comida[] comidas;
+    private Comida comidaAtual;
+
+    private Obstaculo[] obstaculos;
 
     private String tipoComida;
 
@@ -22,33 +24,67 @@ public class ArenaDeJogo {
         }
     }
 
+    public Comida getComidaAtual() {
+        return comidaAtual;
+    }
+
+    public void setComidaAtual(Comida comidaAtual) {
+        this.comidaAtual = comidaAtual;
+    }
+
+    public Obstaculo[] getObstaculos() {
+        return obstaculos;
+    }
+
+    public void setObstaculos(Obstaculo[] obstaculos) {
+        this.obstaculos = obstaculos;
+    }
+
+    public Snake getSnake() {
+        return snake;
+    }
+
+    public void setSnake(Snake snake) {
+        this.snake = snake;
+    }
+
+    public void addSnake(Snake snake) // TO DO
+    {
+
+    }
     public void addComida() // TO DO
     {
 
     }
 
-    public void removeComida() // TO DO
+    public void addObstaculos() // TO DO
     {
 
     }
 
-    public void intercetaComida() // TO DO
+    public void addObstaculo(Obstaculo obstaculo) // TO DO
     {
 
     }
-
-    public void intercetaObstaculo() // TO DO
+    public boolean intercetaComida() // TO DO
     {
+        return false;
 
     }
 
-    public void intercetaParede() // TO DO
+    public boolean intercetaObstaculo() // TO DO
     {
+       return false;
+    }
 
+    public boolean intercetaParede() // TO DO
+    {
+       return false;
     }
 
     public void interceta() // TO DO
     {
 
     }
+
 }
