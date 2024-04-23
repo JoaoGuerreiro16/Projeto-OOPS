@@ -8,6 +8,7 @@ public class Celula {
     public Celula(int linha, int coluna) {
         this.linha = linha;
         this.coluna = coluna;
+        this.estado = EstadoCelula.EMPTY;
 
     }
 

@@ -47,4 +47,19 @@ public class Snake {
         }
         return new Snake(newQuadrados);
     }
+
+    public Snake movimentoSnake(int x,int y) //TO DO
+    {
+        return null;
+    };
+
+     public Snake cresceSnake() //TO DO
+     {
+         return null;
+     }
+
+     public Boolean intercetaSnake() //TO DO
+     {
+         return null;
+     }
 }

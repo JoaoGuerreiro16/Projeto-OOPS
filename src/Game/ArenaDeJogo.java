@@ -21,4 +21,34 @@ public class ArenaDeJogo {
             }
         }
     }
+
+    public void addComida() // TO DO
+    {
+
+    }
+
+    public void removeComida() // TO DO
+    {
+
+    }
+
+    public void intercetaComida() // TO DO
+    {
+
+    }
+
+    public void intercetaObstaculo() // TO DO
+    {
+
+    }
+
+    public void intercetaParede() // TO DO
+    {
+
+    }
+
+    public void interceta() // TO DO
+    {
+
+    }
 }
