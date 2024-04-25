@@ -7,7 +7,7 @@ public class ComidaQuadrado extends Comida{
 
     public ComidaQuadrado(Quadrado quadrado)
     {
-        super(quadrado.calcularCentro().getX(), quadrado.calcularCentro().getY());
+        super(quadrado.calcularCentro());
         this.quadrado = quadrado;
 
     }

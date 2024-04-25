@@ -5,7 +5,7 @@ public class ComidaCirculo extends Comida{
 
     public ComidaCirculo(Circulo circulo)
     {
-        super(circulo.getCentro().getX(), circulo.getCentro().getY());
+        super(circulo.getCentro());
         this.circulo = circulo;
     }
 

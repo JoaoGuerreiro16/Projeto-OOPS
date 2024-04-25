@@ -2,13 +2,11 @@ package Game;
 
 public abstract class Comida {
 
-    protected int xCentro;
-    protected int yCentro;
+    private Ponto ponto;
 
-    public Comida(int x, int y){
+    public Comida(Ponto ponto){
 
-        this.xCentro = x;
-        this.yCentro = y;
+        this.ponto = ponto;
     }
 
 }
