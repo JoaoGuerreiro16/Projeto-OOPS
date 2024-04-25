@@ -46,12 +46,6 @@ public class ArenaDeJogoTest {
     }
 
     @Test
-    public void comeComida() // TO DO
-    {
-
-    }
-
-    @Test
     public void intercetaObstaculoTrueTest()
     {
 
