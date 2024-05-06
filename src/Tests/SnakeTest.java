@@ -6,6 +6,7 @@ import Game.Quadrado;
 import Game.Snake;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class SnakeTest {
 
@@ -95,7 +96,7 @@ public class SnakeTest {
     @Test
     public void cresceSnakeTest()
     {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
+        ArrayList<Quadrado> Quadrados = new LinkedList<>();
         Quadrados.add(new Quadrado("3 2 4 2 4 3 3 3"));
         Snake s = new Snake(Quadrados);
 

@@ -1,43 +1,23 @@
 package Game;
 
+import java.util.List;
+
 public class ArenaDeJogo {
-    private int nLinhas;
-    private int nColunas;
-    private Celula[][] celulas;
+    private int comprimento;
+    private int largura;
 
     private Snake snake;
 
-    private Comida comidaAtual;
+    private List<Comida> comida;
 
-    private Obstaculo[] obstaculos;
+    private List<Obstaculo> obstaculos;
 
-    private String tipoComida;
 
-    public ArenaDeJogo(int nLinhas, int nColunas,String tipoComida) {
-        this.nLinhas = nLinhas;
-        this.nColunas = nColunas;
-        this.celulas = new Celula[nLinhas][nColunas];
-        for (int i = 0; i < nLinhas; i++) {
-            for (int j = 0; j < nColunas; j++) {
-                celulas[i][j] = new Celula(i, j);
-            }
-        }
-    }
+    public ArenaDeJogo(int comprimento, int largura) {
 
-    public Comida getComidaAtual() {
-        return comidaAtual;
-    }
+        this.comprimento = comprimento;
+        this.largura = largura;
 
-    public void setComidaAtual(Comida comidaAtual) {
-        this.comidaAtual = comidaAtual;
-    }
-
-    public Obstaculo[] getObstaculos() {
-        return obstaculos;
-    }
-
-    public void setObstaculos(Obstaculo[] obstaculos) {
-        this.obstaculos = obstaculos;
     }
 
     public Snake getSnake() {
@@ -46,6 +26,22 @@ public class ArenaDeJogo {
 
     public void setSnake(Snake snake) {
         this.snake = snake;
+    }
+
+    public List<Comida> getComida() {
+        return comida;
+    }
+
+    public void setComida(List<Comida> comida) {
+        this.comida = comida;
+    }
+
+    public List<Obstaculo> getObstaculos() {
+        return obstaculos;
+    }
+
+    public void setObstaculos(List<Obstaculo> obstaculos) {
+        this.obstaculos = obstaculos;
     }
 
     public void addSnake(Snake snake) // TO DO

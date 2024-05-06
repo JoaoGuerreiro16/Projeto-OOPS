@@ -92,7 +92,7 @@ public class Triangulo extends Poligono
      * @return Novo triângulo resultante da translação.
      */
     @Override
-    public Triangulo translacao(int x, int y)
+    public Triangulo translacao(double x, double y)
     {
         ArrayList<Ponto> newPontos = new ArrayList<>();
         for (Ponto ponto : pontos) {
@@ -108,12 +108,12 @@ public class Triangulo extends Poligono
      * @param novoCentroideY Nova coordenada y para o centroide do triângulo.
      * @return Novo triângulo resultante da translação do centroide para a nova posição.
      */    @Override
-    public Triangulo translacaoCentroide(int novoCentroideX, int novoCentroideY){
+    public Triangulo translacaoCentroide(double novoCentroideX, double novoCentroideY){
 
         ArrayList<Ponto> newPontos = new ArrayList<>();
         Ponto centroidePoligono = calcularCentro();
-        int deslocamentoX = novoCentroideX - centroidePoligono.getX();
-        int deslocamentoY = novoCentroideY - centroidePoligono.getY();
+        double deslocamentoX = novoCentroideX - centroidePoligono.getX();
+        double deslocamentoY = novoCentroideY - centroidePoligono.getY();
 
         return translacao(deslocamentoX, deslocamentoY);
 

@@ -1,65 +1,89 @@
 package Game;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Snake {
 
-     private ArrayList<Quadrado> quadrados;
+     private LinkedList<Quadrado> snake;
+     private Direcao direcaoAtual;
 
-     public Snake(ArrayList<Quadrado> quadrados)
+     public Snake(Quadrado cabeca)
      {
-         setQuadrados(quadrados);
+         this.snake = new LinkedList<>();
+         this.snake.add(cabeca);
+         this.direcaoAtual = Direcao.RIGHT;
+
      }
 
-    public ArrayList<Quadrado> getQuadrados() {
-        return quadrados;
-    }
-
-    public void setQuadrados(ArrayList<Quadrado> quadrados) {
-
-        boolean ladosIguais = true;
-        if (quadrados.size() > 1) {
-            double lado = quadrados.get(0).getLista_segmentos().get(0).lenght();
-            for (int i = 1; i < quadrados.size(); i++) {
-                if (quadrados.get(i).getLista_segmentos().get(0).lenght() != lado) {
-                    ladosIguais = false;
-                    break;
-                }
-            }
-        }
-        if (ladosIguais) {
-            this.quadrados = quadrados;
-        } else {
-            System.out.println("Snake:vi");
-        }
+    public LinkedList<Quadrado> getSnake() {
+        return snake;
     }
 
     @Override
     public String toString() {
-        return "Snake: " + getQuadrados().toString();
+        return "Snake: " + getSnake().toString();
     }
 
-    public Snake translacao(int x, int y) {
-        ArrayList<Quadrado> newQuadrados = new ArrayList<>();
 
-        for (Quadrado quadrado : quadrados) {
-            newQuadrados.add(quadrado.translacao(x, y));
-        }
-        return new Snake(newQuadrados);
-    }
-
-    public Snake movimentoSnake(int x,int y) //TO DO
+    public void movimentoSnake(int x, int y)
     {
-        return null;
-    };
 
-     public Snake cresceSnake() //TO DO
+        Quadrado cabecaAtual = snake.getFirst();
+
+        double dx = 0, dy = 0;
+        switch (direcaoAtual) {
+            case UP:    dy = -cabecaAtual.getLado();
+            break;
+            case DOWN:  dy = cabecaAtual.getLado();
+            break;
+            case LEFT:  dx = -cabecaAtual.getLado();
+            break;
+            case RIGHT: dx = cabecaAtual.getLado();
+            break;
+        }
+
+        Quadrado novaCabeca = cabecaAtual.translacao(dx,dy);
+        snake.addFirst(novaCabeca);
+        snake.removeLast();
+    }
+
+     public void cresceSnake()
      {
-         return null;
+         Quadrado caudaAtual = snake.getLast();
+
+         double dx = 0, dy = 0;
+         switch (direcaoAtual) {
+             case UP:    dy = caudaAtual.getLado();
+             break;
+             case DOWN:  dy = -caudaAtual.getLado();
+             break;
+             case LEFT:  dx = caudaAtual.getLado();
+             break;
+             case RIGHT: dx = -caudaAtual.getLado();
+             break;
+         }
+
+
+         Quadrado novaCauda = caudaAtual.translacao(dx, dy);
+         snake.addLast(novaCauda);
      }
 
-     public Boolean intercetaSnake() //TO DO
+     /** nao sei se é na board ou na snake
+     public Boolean intercetaParede()
      {
-         return null;
+         Quadrado cabeca = snake.getFirst();
+         Ponto centro = cabeca.calcularCentro();
+         double metadeLado = cabeca.getLado() / 2;
+         if(centro.getX() - metadeLado < 0 || centro.getX() + metadeLado)
      }
+**/
+
+    public void evitarMudarDirecao180(Direcao novaDirecao) {
+
+        if (Math.abs(novaDirecao.ordinal() - direcaoAtual.ordinal()) % 2 == 1) {
+            this.direcaoAtual = novaDirecao;
+        }
+    }
+
 }

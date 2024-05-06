@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class Quadrado extends Retangulo
 {
+    private double lado;
     /**
      * Construtor da classe Quadrado a partir de uma string de entrada. Transforma a string em uma lista de pontos.
      *
@@ -24,16 +25,18 @@ public class Quadrado extends Retangulo
     public Quadrado(ArrayList<Ponto> pontos) {
         super(pontos);
 
-        double comprimentoLado = pontos.get(0).dist(pontos.get(1));
+        this.lado =pontos.get(0).dist(pontos.get(1));
         for (int i = 1; i < pontos.size(); i++) {
-            double lado = pontos.get(i).dist(pontos.get((i + 1) % pontos.size()));
-            if (lado != comprimentoLado) {
-                System.out.println("Quadrado:vi");
-                System.exit(0);
+            double dist = pontos.get(i).dist(pontos.get((i + 1) % pontos.size()));
+            if (dist != lado) {
+                throw new IllegalArgumentException("Todos os lados do quadrado devem ter o mesmo comprimento");
             }
         }
     }
 
+    public double getLado() {
+        return lado;
+    }
 
     /**
      * Retorna uma representação em forma de string do quadrado.
@@ -87,7 +90,7 @@ public class Quadrado extends Retangulo
      * @return Novo quadrado resultante da translação.
      */
     @Override
-    public Quadrado translacao(int x, int y)
+    public Quadrado translacao(double x, double y)
     {
         ArrayList<Ponto> newPontos = new ArrayList<>();
         for (Ponto ponto : pontos) {
@@ -103,12 +106,12 @@ public class Quadrado extends Retangulo
      * @return Novo quadrado resultante da translação do centroide para a nova posição.
      */
     @Override
-    public Quadrado translacaoCentroide(int novoCentroideX, int novoCentroideY){
+    public Quadrado translacaoCentroide(double novoCentroideX, double novoCentroideY){
 
         ArrayList<Ponto> newPontos = new ArrayList<>();
         Ponto centroidePoligono = calcularCentro();
-        int deslocamentoX = novoCentroideX - centroidePoligono.getX();
-        int deslocamentoY = novoCentroideY - centroidePoligono.getY();
+        double deslocamentoX = novoCentroideX - centroidePoligono.getX();
+        double deslocamentoY = novoCentroideY - centroidePoligono.getY();
 
         return translacao(deslocamentoX, deslocamentoY);
 

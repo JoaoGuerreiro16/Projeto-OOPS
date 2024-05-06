@@ -83,8 +83,7 @@ public class Ponto {
      */
     public void setX(int x) {
         if(x < 0){
-            System.out.println("Ponto:vi");
-            System.exit(0);
+            throw new IllegalArgumentException("A coordenada X nao pode ser negativa");
         }
         this.x = x;
     }
@@ -103,8 +102,7 @@ public class Ponto {
      */
     public void setY(int y) {
         if(y < 0){
-            System.out.println("Ponto:vi");
-            System.exit(0);
+            throw new IllegalArgumentException("A coordenada Y nao pode ser negativa");
         }
         this.y = y;
     }
@@ -194,10 +192,10 @@ public class Ponto {
      * @param y Quantidade a ser transladada na direção y.
      * @return Novo ponto resultante da translação.
      */
-    public Ponto translacaoPonto(int x, int y){
+    public Ponto translacaoPonto(double x, double y){
 
-        int newX = getX() + x;
-        int newY = getY() + y;
+        double newX = getX() + x;
+        double newY = getY() + y;
         return new Ponto(newX, newY);
     }
 }

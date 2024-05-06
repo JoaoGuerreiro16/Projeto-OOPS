@@ -2,7 +2,7 @@ package Game;
 
 public enum Direcao {
     UP,
+    RIGHT,
     DOWN,
-    LEFT,
-    RIGHT
+    LEFT
 }

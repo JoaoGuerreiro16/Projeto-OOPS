@@ -2,11 +2,22 @@ package Game;
 
 public abstract class Comida {
 
-    private Ponto ponto;
+    protected Ponto pontoCentro;
+    protected int pontuacao;
 
-    public Comida(Ponto ponto){
+    public Comida(Ponto ponto, int pontuacao){
 
-        this.ponto = ponto;
+        this.pontoCentro = ponto;
+        this.pontuacao = pontuacao;
     }
 
+    public Ponto getPontoCentro() {
+        return pontoCentro;
+    }
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public abstract boolean isConsumed(Snake snake);
 }
