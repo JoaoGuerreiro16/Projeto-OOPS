@@ -5,58 +5,49 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Cliente {
-    public static String capital(String s) {
-        if (s == null || s.isEmpty())
-            return s;
-        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
-    }
-    public static void main(String[] args) throws Exception {
-        Scanner sc = new Scanner(System.in);
-        List<Poligono> poligonos = new ArrayList<>();
-        List<Poligono> poligonosTr = new ArrayList<>();
-        Constructor<?> constructor;
-        Class<?> cl;
-        Poligono p;
-        String s;
-        String[] aos;
-        int x;
-        int y;
-        while (sc.hasNextLine()) {
-            s = sc.nextLine();
-            if (s.isEmpty())
-                break;
-            aos = s.split(" ", 2);
+        public static Configuracoes obterConfiguracoes() {
+            Scanner scanner = new Scanner(System.in);
 
-            try {
-                cl = Class.forName(capital(aos[0]));
-                constructor = cl.getConstructor(String.class);
-                p = (Poligono) constructor.newInstance(aos[1]);
-                poligonos.add(p);
-            } catch (ClassNotFoundException cnfe) {
-                System.out.println("Não foi encontrada a classe: " + cnfe.getMessage());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            x = sc.nextInt();
-            y = sc.nextInt();
 
-            for(Poligono poligono : poligonos)
-            {
-                poligonosTr.add(poligono.translacaoCentroide(x,y));
-            }
-        }
-        sc.close();
-        if(poligonos.size() > 1) {
-            for (int i = 0; i < poligonos.size(); i++) {
-                if (poligonos.get(i).equals(poligonos.get((i + 1) % poligonos.size()))) {
-                    System.out.println("Duplicado");
-                    System.exit(0);
+                System.out.println("Digite a largura da arena:");
+                int largura = scanner.nextInt();
+
+                System.out.println("Digite a altura da arena:");
+                int altura = scanner.nextInt();
+
+                System.out.println("Digite o tamanho do lado da cabeça da snake:");
+                int tamanhoCabeca = scanner.nextInt();
+
+                System.out.println("Digite o tipo de comida ('quadrado' ou 'circulo'):");
+                String tipoComida = scanner.next();
+
+                System.out.println("Digite a dimensão da comida (menor que a dimensão da cabeça):");
+                double tamanhoComida = scanner.nextDouble();
+                assert(tamanhoComida >= tamanhoCabeca) : "A comida tem de ser menor que a cabeça";
+
+                System.out.println("Digite a pontuação por comida:");
+                int pontuacaoComida = scanner.nextInt();
+
+                System.out.println("Digite o número de obstáculos(1 a 5):");
+                int numeroObstaculos = scanner.nextInt();
+                assert (numeroObstaculos >= 1 && numeroObstaculos <= 5) : "Número de obstáculos fora do intervalo permitido (1 a 5).";
+
+                System.out.println("Os obstáculos são dinâmicos? (sim/não):");
+                boolean obstaculosDinamicos = scanner.next().equalsIgnoreCase("sim");
+
+                int anguloRotacao = 0;
+                if (obstaculosDinamicos) {
+                    System.out.println("Digite o ângulo de rotação para obstáculos dinâmicos:");
+                    anguloRotacao = scanner.nextInt();
                 }
+            scanner.close();
+
+                return new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao);
             }
-        }
-        for (Poligono poligono : poligonosTr) {
-            System.out.println(poligono.toString());
-        }
+
+    public static void main(String[] args) {
+        Configuracoes config = obterConfiguracoes();
+        System.out.println("Configurações do jogo coletadas com sucesso!");
     }
 
 }

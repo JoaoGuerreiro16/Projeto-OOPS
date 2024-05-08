@@ -16,9 +16,6 @@ public class Obstaculo{
 
             throw new IllegalArgumentException("O poligono tem de ser válido");
         }
-        if (angulo == 0 && dinamico) {
-            throw new IllegalArgumentException("Obstáculo não pode ser dinâmico com um ângulo de rotação 0.");
-        }
 
         this.poligono = poligono;
         this.dinamico = dinamico;
@@ -59,23 +56,25 @@ public class Obstaculo{
         return poligono;
     }
 
+    public int validarEConverterAngulo(int angulo) {
+        angulo = angulo % 360;
 
+        if (angulo < 0) {
+            angulo += 360;
+        }
 
-    public void rotacao(int i) {
+        return angulo;
+    }
+
+    public void rotacao(int anguloRotacao, Ponto centro) {
 
         if(dinamico){
             Ponto pontoDeRotacaoEfetivo = pontoRotacao != null ? pontoRotacao : poligono.calcularCentro();
-            poligono = poligono.rotacao(anguloRotacao, pontoDeRotacaoEfetivo);
+            int anguloCorrigido = validarEConverterAngulo(anguloRotacao);
+            poligono = poligono.rotacao(anguloCorrigido, pontoDeRotacaoEfetivo);
         }
     }
 
-    public void rotacaoCentroide(int angulo, Ponto centro) {
-        if (poligono == null) {
-            throw new IllegalStateException("Polígono não definido.");
-        }
-        poligono = poligono.rotacao(angulo, centro);
-
-    }
     @Override
     public String toString() {
         return "Obstaculo{" +

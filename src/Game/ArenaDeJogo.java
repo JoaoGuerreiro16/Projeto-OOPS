@@ -19,7 +19,7 @@ public class ArenaDeJogo {
     private Random rand = new Random();
 
 
-    public ArenaDeJogo(int altura, int largura, Snake snake, Comida comida, List<Obstaculo> obstaculos, int pontuacaoComida, double tamanhoComida) {
+    public ArenaDeJogo(int altura, int largura, Snake snake, Comida comida, List<Obstaculo> obstaculos, int pontuacaoComida, double tamanhoComida, String tipoComida) {
 
         this.altura = altura;
         this.largura = largura;
@@ -30,6 +30,7 @@ public class ArenaDeJogo {
         this.jogoAtivo = true;
         this.pontuacaoComida = pontuacaoComida;
         this.tamanhoComida = tamanhoComida;
+        this.tipoComida = tipoComida;
     }
 
     public Snake getSnake() {
@@ -66,6 +67,7 @@ public class ArenaDeJogo {
             return;
         }
         snake.movimentoSnake();
+        atualizarObstaculos();
         colisoes();
         if(!jogoAtivo){
             return;
@@ -158,6 +160,13 @@ public class ArenaDeJogo {
 
         return false;
 
+    }
+    public void atualizarObstaculos() {
+        for (Obstaculo obstaculo : obstaculos) {
+            if (obstaculo.isDinamico()) {
+                obstaculo.rotacao(obstaculo.getAnguloRotacao(), obstaculo.getPontoRotacao());
+            }
+        }
     }
 
     public void ganhouJogo(){

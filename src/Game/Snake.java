@@ -2,17 +2,20 @@ package Game;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Random;
 
 public class Snake {
 
      private LinkedList<Quadrado> snake;
      private Direcao direcaoAtual;
 
+     private Random rand = new Random();
+
      public Snake(Quadrado cabeca)
      {
          this.snake = new LinkedList<>();
          this.snake.add(cabeca);
-         this.direcaoAtual = Direcao.RIGHT;
+         this.direcaoAtual = Direcao.values()[rand.nextInt(Direcao.values().length)];
 
      }
 
@@ -35,6 +38,16 @@ public class Snake {
     @Override
     public String toString() {
         return "Snake: " + getSnake().toString();
+    }
+
+    public void mudaDirecao(Direcao novaDirecao) {
+
+        if (this.direcaoAtual == Direcao.UP && novaDirecao == Direcao.DOWN) return;
+        if (this.direcaoAtual == Direcao.DOWN && novaDirecao == Direcao.UP) return;
+        if (this.direcaoAtual == Direcao.LEFT && novaDirecao == Direcao.RIGHT) return;
+        if (this.direcaoAtual == Direcao.RIGHT && novaDirecao == Direcao.LEFT) return;
+
+        this.direcaoAtual = novaDirecao;
     }
 
 
