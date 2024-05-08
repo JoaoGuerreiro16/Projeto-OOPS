@@ -108,6 +108,12 @@ public class ArenaDeJogo {
         colisaoParede();
         }
 
+
+        public void consumoDeComida()
+        {
+            
+        }
+
     public void addSnake(Snake snake) // TO DO
     {
 
