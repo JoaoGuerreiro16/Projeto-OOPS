@@ -9,27 +9,51 @@ public class ArenaDeJogo {
     private int largura;
     private Pontuacao pontuacao;
     private Snake snake;
-    private List<Comida> comida;
+    private Comida comida;
     private int pontuacaoComida;
     private String tipoComida;
-    private int tamanhoComida;
+    private double tamanhoComida;
     private List<Obstaculo> obstaculos;
     private boolean jogoAtivo;
     private Random rand = new Random();
 
 
-    public ArenaDeJogo(int altura, int largura, Snake snake, List<Comida> comidas, List<Obstaculo> obstaculos, int pontuacaoComida, int tamanhoComida) {
+    public ArenaDeJogo(int altura, int largura, Snake snake, Comida comida, List<Obstaculo> obstaculos, int pontuacaoComida, double tamanhoComida) {
 
         this.altura = altura;
         this.largura = largura;
         this.pontuacao = new Pontuacao();
         this.snake = snake;
-        this.comida = comidas;
+        this.comida = comida;
         this.obstaculos = obstaculos;
         this.jogoAtivo = true;
         this.pontuacaoComida = pontuacaoComida;
         this.tamanhoComida = tamanhoComida;
+    }
 
+    public Snake getSnake() {
+        return snake;
+    }
+
+
+    public void setSnake(Snake snake) {
+        this.snake = snake;
+    }
+
+    public Comida getComida() {
+        return comida;
+    }
+
+    public void setComida(Comida comida) {
+        this.comida = comida;
+    }
+
+    public List<Obstaculo> getObstaculos() {
+        return obstaculos;
+    }
+
+    public void setObstaculos(List<Obstaculo> obstaculos) {
+        this.obstaculos = obstaculos;
     }
 
     public boolean isJogoAtivo() {
@@ -123,17 +147,19 @@ public class ArenaDeJogo {
                 if(isPosicaoValida(novaPosicao)){
                     if(tipoComida.equals("quadrado")){
 
-                        comida.add(new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida));
+                      comida = new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida);
 
                     } else{
 
-                        comida.add(new ComidaCirculo(new Circulo(novaPosicao,(tamanhoComida / 2.0)), pontuacaoComida));
+                       comida = new ComidaCirculo(new Circulo(novaPosicao,(tamanhoComida / 2.0)), pontuacaoComida);
                     }
                     return true;
                 }
             }
             return false;
         }
+
+        
 
     public void addSnake(Snake snake) // TO DO
     {
@@ -173,31 +199,5 @@ public class ArenaDeJogo {
     {
 
     }
-
-    public Snake getSnake() {
-        return snake;
-    }
-
-    public void setSnake(Snake snake) {
-        this.snake = snake;
-    }
-
-    public List<Comida> getComida() {
-        return comida;
-    }
-
-    public void setComida(List<Comida> comida) {
-        this.comida = comida;
-    }
-
-    public List<Obstaculo> getObstaculos() {
-        return obstaculos;
-    }
-
-    public void setObstaculos(List<Obstaculo> obstaculos) {
-        this.obstaculos = obstaculos;
-    }
-
-
 
 }
