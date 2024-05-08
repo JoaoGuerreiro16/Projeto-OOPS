@@ -2,23 +2,23 @@ package Game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ArenaDeJogo {
     private int altura;
     private int largura;
-
     private Pontuacao pontuacao;
-
     private Snake snake;
-
     private List<Comida> comida;
-
+    private int pontuacaoComida;
+    private String tipoComida;
+    private int tamanhoComida;
     private List<Obstaculo> obstaculos;
-
     private boolean jogoAtivo;
+    private Random rand = new Random();
 
 
-    public ArenaDeJogo(int altura, int largura, Snake snake, List<Comida> comidas, List<Obstaculo> obstaculos) {
+    public ArenaDeJogo(int altura, int largura, Snake snake, List<Comida> comidas, List<Obstaculo> obstaculos, int pontuacaoComida, int tamanhoComida) {
 
         this.altura = altura;
         this.largura = largura;
@@ -27,7 +27,8 @@ public class ArenaDeJogo {
         this.comida = comidas;
         this.obstaculos = obstaculos;
         this.jogoAtivo = true;
-
+        this.pontuacaoComida = pontuacaoComida;
+        this.tamanhoComida = tamanhoComida;
 
     }
 
@@ -47,6 +48,7 @@ public class ArenaDeJogo {
 
         if(!jogoAtivo){
             System.out.println("GAME OVER! A sua pontuação foi" + pontuacao.getPontuacao());
+            System.exit(0);
         }
     }
     public void colisaoObstaculo(){
@@ -56,7 +58,7 @@ public class ArenaDeJogo {
                 if(cabeca.intercetaPoligono(obstaculo.getPoligono())){
                     jogoAtivo = false;
                     System.out.println("GAME OVER!! Colisão com obstáculo");
-                    break;
+                    System.exit(0);
                 }
             }
         }
@@ -66,6 +68,7 @@ public class ArenaDeJogo {
         if(snake.intercetaSnake()){
             jogoAtivo = false;
             System.out.println("GAME OVER!! Colisão consigo mesma");
+            System.exit(0);
         }
      }
 
@@ -77,6 +80,7 @@ public class ArenaDeJogo {
                 centro.getY() - metadeLado < 0 || centro.getY() + metadeLado > altura){
             jogoAtivo = false;
             System.out.println("GAME OVER!! Colisão com parede");
+            System.exit(0);
         }
 
         }
@@ -84,6 +88,51 @@ public class ArenaDeJogo {
         colisaoConsigoMesma();
         colisaoObstaculo();
         colisaoParede();
+        }
+
+        /** provavelmente tem bug**/
+        public boolean isPosicaoValida(Ponto ponto){
+
+            if(ponto.getX() < 0 || ponto.getX() > largura || ponto.getY() < 0 || ponto.getY() > altura){
+                return false;
+            }
+
+            for(Quadrado parteCorpo: snake.getSnake()){
+                if(parteCorpo.containsPonto(ponto)){
+                    return false;
+                }
+            }
+
+            for(Obstaculo obstaculo: obstaculos){
+                if(obstaculo.getPoligono().containsPonto(ponto)){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public boolean gerarComidaAleatoria(){
+
+            int tentativasMaximas = 100;
+            for(int tentativas = 0; tentativas < tentativasMaximas; tentativas++){
+                int x = rand.nextInt(largura);
+                int y = rand.nextInt(altura);
+                Ponto novaPosicao = new Ponto(x, y);
+
+
+                if(isPosicaoValida(novaPosicao)){
+                    if(tipoComida.equals("quadrado")){
+
+                        comida.add(new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida));
+
+                    } else{
+
+                        comida.add(new ComidaCirculo(new Circulo(novaPosicao,(tamanhoComida / 2.0)), pontuacaoComida));
+                    }
+                    return true;
+                }
+            }
+            return false;
         }
 
     public void addSnake(Snake snake) // TO DO

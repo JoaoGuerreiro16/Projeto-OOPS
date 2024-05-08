@@ -4,7 +4,7 @@ public class Circulo {
     private double raio;
     private Ponto centro;
 
-    public Circulo(double raio, Ponto centro) {
+    public Circulo(Ponto centro, double raio) {
 
         setRaio(raio);
         this.centro = centro;
@@ -46,14 +46,20 @@ public class Circulo {
         int centroY = Integer.parseInt(parts[2]);
         Ponto centro = new Ponto(centroX, centroY);
 
-        return new Circulo(raio, centro);
+        return new Circulo(centro, raio);
     }
 
     public Circulo translacaoCentroide(int x, int y)
     {
         Ponto novoCentro = new Ponto(x,y);
 
-        return new Circulo(raio,novoCentro);
+        return new Circulo(novoCentro,raio);
+    }
+
+    public void interceta(Poligono poligono){
+
+        Ponto centro = poligono.calcularCentro();
+
     }
 
 }
