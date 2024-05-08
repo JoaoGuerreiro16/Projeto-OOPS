@@ -67,15 +67,16 @@ public class ArenaDeJogo {
         }
         snake.movimentoSnake();
         colisoes();
+        if(!jogoAtivo){
+            return;
+        }
         if (comida.isConsumed(snake)) {
             pontuacao.incrementaPontuacao(comida.getPontuacao());
             snake.cresceSnake();
-            adicionarComida();
-
-        }
-
-        if(!jogoAtivo){
-
+            boolean haEspaco = adicionarComida();
+            if(!haEspaco){
+                ganhouJogo();
+            }
 
         }
 
@@ -134,7 +135,10 @@ public class ArenaDeJogo {
             return true;
         }
 
-    public Ponto gerarPontoRandom(){
+
+
+    public boolean adicionarComida() {
+
         int tentativasMaximas = 100;
         for (int tentativas = 0; tentativas < tentativasMaximas; tentativas++) {
             int x = rand.nextInt(largura);
@@ -142,30 +146,23 @@ public class ArenaDeJogo {
             Ponto novaPosicao = new Ponto(x, y);
 
             if (isPosicaoValida(novaPosicao)) {
-                return novaPosicao;
+                if (tipoComida.equals("quadrado")) {
+                    comida = new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida);
+                    return true;
+                } else {
+                    comida = new ComidaCirculo(new Circulo(novaPosicao, tamanhoComida / 2.0), pontuacaoComida);
+                    return true;
+                }
             }
         }
-        return null;
-    }
 
-    public void adicionarComida() {
-        Ponto posicaoValida = gerarPontoRandom();
-        if (posicaoValida == null) {
-            pontuacao.pontuacaoMaxima();
-            ganhouJogo();
-        } else {
-            if (tipoComida.equals("quadrado")) {
-                comida = new ComidaQuadrado(new Quadrado(posicaoValida, tamanhoComida), pontuacaoComida);
-            } else {
-                comida = new ComidaCirculo(new Circulo(posicaoValida, tamanhoComida / 2.0), pontuacaoComida);
-            }
+        return false;
 
-        }
     }
 
     public void ganhouJogo(){
             jogoAtivo = false;
-        System.out.println("Parabéns, ganhou o jogo! \nA sua pontuação foi" + pontuacao.getPontuacao());
+        System.out.println("Parabéns, ganhou o jogo! \nA sua pontuação foi máxima:" + pontuacao.getPontuacao());
     }
 
     public void perdeuJogo(String mensagem){
