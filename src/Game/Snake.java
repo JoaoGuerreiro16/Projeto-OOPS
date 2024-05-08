@@ -20,13 +20,25 @@ public class Snake {
         return snake;
     }
 
+    public void setSnake(LinkedList<Quadrado> snake) {
+        this.snake = snake;
+    }
+
+    public Direcao getDirecaoAtual() {
+        return direcaoAtual;
+    }
+
+    public void setDirecaoAtual(Direcao direcaoAtual) {
+        this.direcaoAtual = direcaoAtual;
+    }
+
     @Override
     public String toString() {
         return "Snake: " + getSnake().toString();
     }
 
 
-    public void movimentoSnake(int x, int y)
+    public void movimentoSnake()
     {
 
         Quadrado cabecaAtual = snake.getFirst();
@@ -68,22 +80,36 @@ public class Snake {
          Quadrado novaCauda = caudaAtual.translacao(dx, dy);
          snake.addLast(novaCauda);
      }
+     public boolean intercetaSnake(){
 
-     /** nao sei se é na board ou na snake
-     public Boolean intercetaParede()
-     {
-         Quadrado cabeca = snake.getFirst();
-         Ponto centro = cabeca.calcularCentro();
-         double metadeLado = cabeca.getLado() / 2;
-         if(centro.getX() - metadeLado < 0 || centro.getX() + metadeLado)
-     }
-**/
-
-    public void evitarMudarDirecao180(Direcao novaDirecao) {
+             Quadrado cabeca = snake.getFirst();
+             for (int i = 1; i < snake.size(); i++) {
+                 if (cabeca.intercetaPoligono(snake.get(i))) {
+                     return true;
+                 }
+             }
+             return false;
+         }
+     
+    public void mudarDirecaoSeValido(Direcao novaDirecao) {
 
         if (Math.abs(novaDirecao.ordinal() - direcaoAtual.ordinal()) % 2 == 1) {
             this.direcaoAtual = novaDirecao;
         }
+    }
+
+    public boolean containsQuadrado(ComidaQuadrado comida){
+
+         Quadrado cabeca = snake.getFirst();
+
+        return cabeca.containsQuadrado(comida.getQuadrado());
+    }
+
+    public boolean containsCirculo(ComidaCirculo comida){
+
+         Quadrado cabeca = snake.getFirst();
+
+        return cabeca.containsCircle(comida.getCirculo());
     }
 
 }

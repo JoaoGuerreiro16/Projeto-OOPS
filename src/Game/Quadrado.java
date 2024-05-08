@@ -24,7 +24,6 @@ public class Quadrado extends Retangulo
 
     public Quadrado(ArrayList<Ponto> pontos) {
         super(pontos);
-
         this.lado =pontos.get(0).dist(pontos.get(1));
         for (int i = 1; i < pontos.size(); i++) {
             double dist = pontos.get(i).dist(pontos.get((i + 1) % pontos.size()));
@@ -75,6 +74,7 @@ public class Quadrado extends Retangulo
      */
     @Override
     public Quadrado rotacao(int angulo, Ponto centroide) {
+
         ArrayList<Ponto> newPontos = new ArrayList<>();
         for (Ponto ponto : pontos) {
             newPontos.add(ponto.rotacaoPonto(angulo, centroide));
@@ -116,5 +116,34 @@ public class Quadrado extends Retangulo
         return translacao(deslocamentoX, deslocamentoY);
 
     }
+@Override
+    public boolean containsPonto(Ponto ponto) {
+        double minX = pontos.get(0).getX();
+        double maxX = pontos.get(0).getX() + lado;
+        double minY = pontos.get(0).getY();
+        double maxY = pontos.get(0).getY() + lado;
+        return (ponto.getX() >= minX && ponto.getX() <= maxX) &&
+                (ponto.getY() >= minY && ponto.getY() <= maxY);
+    }
+
+    public boolean containsQuadrado(Quadrado quadrado) {
+        for (Ponto ponto : quadrado.getPontos()) {
+            if (!this.containsPonto(ponto)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean containsCircle(Circulo circulo) {
+        double minX = pontos.get(0).getX();
+        double maxX = pontos.get(0).getX() + lado;
+        double minY = pontos.get(0).getY();
+        double maxY = pontos.get(0).getY() + lado;
+
+        return (circulo.getCentro().getX() - circulo.getRaio() >= minX) && (circulo.getCentro().getX() + circulo.getRaio() <= maxX) &&
+                (circulo.getCentro().getY() - circulo.getRaio() >= minY) && (circulo.getCentro().getY() + circulo.getRaio() <= maxY);
+    }
+
 }
 

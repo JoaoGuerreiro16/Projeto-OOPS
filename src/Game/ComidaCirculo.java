@@ -13,9 +13,13 @@ public class ComidaCirculo extends Comida{
         return circulo;
     }
 
+    public void setCirculo(Circulo circulo) {
+        this.circulo = circulo;
+    }
+
     @Override
     public boolean isConsumed(Snake snake) {
-        return false;
+        return snake.containsCirculo(this);
     }
 
 }

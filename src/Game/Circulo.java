@@ -16,7 +16,7 @@ public class Circulo {
 
     public void setRaio(double raio) {
         if (raio <= 0) {
-            System.out.println("Circulo:vi");
+           throw new IllegalArgumentException("O raio tem de ser maior que 0");
         }
         this.raio = raio;
     }

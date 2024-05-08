@@ -221,6 +221,7 @@ public class Poligono {
      * @return Novo polígono resultante da rotação.
      */
     public Poligono rotacao(int angulo, Ponto centroide) {
+
         ArrayList<Ponto> newPontos = new ArrayList<>();
         for (Ponto ponto : pontos) {
             newPontos.add(ponto.rotacaoPonto(angulo, centroide));
@@ -262,4 +263,17 @@ public class Poligono {
         return translacao(deslocamentoX, deslocamentoY);
 
     }
+
+    public boolean containsPonto(Ponto p) {
+        boolean result = false;
+        int n = pontos.size();
+        for (int i = 0, j = n - 1; i < n; j = i++) {
+            if ((pontos.get(i).getY() > p.getY()) != (pontos.get(j).getY() > p.getY()) &&
+                    (p.getX() < (pontos.get(j).getX() - pontos.get(i).getX()) * (p.getY() - pontos.get(i).getY()) / (pontos.get(j).getY()-pontos.get(i).getY()) + pontos.get(i).getX())) {
+                result = !result;
+            }
+        }
+        return result;
+    }
+
 }

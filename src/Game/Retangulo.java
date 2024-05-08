@@ -118,6 +118,7 @@ public class Retangulo extends Poligono {
      */
     @Override
     public Retangulo rotacao(int angulo, Ponto centroide) {
+
         ArrayList<Ponto> newPontos = new ArrayList<>();
         for (Ponto ponto : pontos) {
             newPontos.add(ponto.rotacaoPonto(angulo, centroide));
@@ -160,5 +161,20 @@ public class Retangulo extends Poligono {
 
         return translacao(deslocamentoX, deslocamentoY);
 
+    }
+
+    @Override
+    public boolean containsPonto(Ponto p) {
+        double minX = Double.MAX_VALUE, maxX = Double.MIN_VALUE;
+        double minY = Double.MAX_VALUE, maxY = Double.MIN_VALUE;
+
+        for (Ponto vertice : pontos) {
+            if (vertice.getX() < minX) minX = vertice.getX();
+            if (vertice.getX() > maxX) maxX = vertice.getX();
+            if (vertice.getY() < minY) minY = vertice.getY();
+            if (vertice.getY() > maxY) maxY = vertice.getY();
+        }
+
+        return (p.getX() >= minX && p.getX() <= maxX) && (p.getY() >= minY && p.getY() <= maxY);
     }
 }

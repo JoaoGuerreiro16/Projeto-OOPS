@@ -77,6 +77,7 @@ public class Triangulo extends Poligono
      */
     @Override
     public Triangulo rotacao(int angulo, Ponto centroide) {
+
         ArrayList<Ponto> newPontos = new ArrayList<>();
         for (Ponto ponto : pontos) {
             newPontos.add(ponto.rotacaoPonto(angulo, centroide));
@@ -107,7 +108,8 @@ public class Triangulo extends Poligono
      * @param novoCentroideX Nova coordenada x para o centroide do triângulo.
      * @param novoCentroideY Nova coordenada y para o centroide do triângulo.
      * @return Novo triângulo resultante da translação do centroide para a nova posição.
-     */    @Override
+     */
+    @Override
     public Triangulo translacaoCentroide(double novoCentroideX, double novoCentroideY){
 
         ArrayList<Ponto> newPontos = new ArrayList<>();
@@ -118,5 +120,23 @@ public class Triangulo extends Poligono
         return translacao(deslocamentoX, deslocamentoY);
 
     }
+    @Override
+    public boolean containsPonto(Ponto p) {
+        Ponto p0 = pontos.get(0);
+        Ponto p1 = pontos.get(1);
+        Ponto p2 = pontos.get(2);
+
+        double areaOrig = Math.abs((p0.getX() * (p1.getY() - p2.getY()) + p1.getX() * (p2.getY() - p0.getY()) + p2.getX() * (p0.getY() - p1.getY())) / 2.0);
+
+        double area1 = Math.abs((p.getX() * (p0.getY() - p1.getY()) + p0.getX() * (p1.getY() - p.getY()) + p1.getX() * (p.getY() - p0.getY())) / 2.0);
+        double area2 = Math.abs((p.getX() * (p1.getY() - p2.getY()) + p1.getX() * (p2.getY() - p.getY()) + p2.getX() * (p.getY() - p1.getY())) / 2.0);
+        double area3 = Math.abs((p.getX() * (p2.getY() - p0.getY()) + p2.getX() * (p0.getY() - p.getY()) + p0.getX() * (p.getY() - p2.getY())) / 2.0);
+
+        return (area1 + area2 + area3 == areaOrig);
+    }
+
+
+
+
 
 }

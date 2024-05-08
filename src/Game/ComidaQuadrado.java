@@ -16,8 +16,13 @@ public class ComidaQuadrado extends Comida{
         return quadrado;
     }
 
+    public void setQuadrado(Quadrado quadrado) {
+        this.quadrado = quadrado;
+    }
+
     @Override
     public boolean isConsumed(Snake snake) {
-        return false;
+
+        return snake.containsQuadrado(this);
     }
 }

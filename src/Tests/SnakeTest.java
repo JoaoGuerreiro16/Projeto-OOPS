@@ -1,6 +1,8 @@
 package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import Game.Direcao;
 import org.junit.jupiter.api.Test;
 import Game.Quadrado;
 import Game.Snake;
@@ -13,125 +15,140 @@ public class SnakeTest {
     @Test
     public void constructorTest()
     {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
+        Quadrado cabeca = new Quadrado("2 2 3 2 3 3 2 3");
+        Snake s = new Snake(cabeca);
+        String expected = "Snake: [" + cabeca + "]";
+        assertEquals(expected, s.toString());
 
-        assertEquals("Snake: [Quadrado: [(2,2), (3,2), (3,3), (2,3)], Quadrado: [(1,2), (2,2), (2,3), (1,3)]]",s.toString());
+    }
+
+
+    @Test
+    public void movimentoSnakeRightCabecaTest()
+    {
+        Quadrado quadrado = new Quadrado("2 2 3 2 3 3 2 3");
+        Snake s = new Snake(quadrado);
+        s.setDirecaoAtual(Direcao.RIGHT);
+        s.movimentoSnake();
+        Quadrado novaCabeca = s.getSnake().getFirst();
+        Quadrado quadradoEsperado = new Quadrado("3 2 4 2 4 3 3 3");
+        assertEquals(quadradoEsperado.toString(), novaCabeca.toString());
 
     }
 
     @Test
-    public void translacaoxTest()
+    public void movimentoSnakeLeftCabecaTest()
     {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
+        Quadrado cabeca = new Quadrado("3 3 4 3 4 4 3 4");
+        Snake snake = new Snake(cabeca);
+        snake.setDirecaoAtual(Direcao.LEFT);
+        snake.movimentoSnake();
+        Quadrado novaCabeca = snake.getSnake().getFirst();
+        Quadrado cabecaEsperada = new Quadrado("2 3 3 3 3 4 2 4");
+        assertEquals(cabecaEsperada.toString(), novaCabeca.toString());
+    }
 
-        assertEquals("Snake: [Quadrado: [(3,2), (4,2), (4,3), (3,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]",s.translacao(1,0).toString());
+
+        @Test
+        public void movimentoSnakeUpCabecaTest() {
+
+            Quadrado cabeca = new Quadrado("3 3 4 3 4 4 3 4");
+            Snake snake = new Snake(cabeca);
+            snake.setDirecaoAtual(Direcao.UP);
+            snake.movimentoSnake();
+            Quadrado novaCabeca = snake.getSnake().getFirst();
+            Quadrado cabecaEsperada = new Quadrado("3 2 4 2 4 3 3 3");
+            assertEquals(cabecaEsperada.toString(), novaCabeca.toString());
+        }
+
+        @Test
+        public void movimentoSnakeDownCabecaTest() {
+
+            Quadrado cabeca = new Quadrado("3 3 4 3 4 4 3 4");
+            Snake snake = new Snake(cabeca);
+            snake.setDirecaoAtual(Direcao.DOWN);
+            snake.movimentoSnake();
+            Quadrado novaCabeca = snake.getSnake().getFirst();
+            Quadrado cabecaEsperada = new Quadrado("3 4 4 4 4 5 3 5");
+            assertEquals(cabecaEsperada.toString(), novaCabeca.toString());
+        }
+
+    @Test
+    public void movimentoSnakeRightTest() {
+        Quadrado cabeca = new Quadrado("2 2 3 2 3 3 2 3");
+        Quadrado segundoSegmento = new Quadrado("1 2 2 2 2 3 1 3");
+        Snake s = new Snake(cabeca);
+        s.getSnake().add(segundoSegmento);
+        s.setDirecaoAtual(Direcao.RIGHT);
+        s.movimentoSnake();
+        assertEquals("Snake: [Quadrado: [(3,2), (4,2), (4,3), (3,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]", s.toString());
     }
 
     @Test
-    public void translacaoyTest()
-    {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
-
-        assertEquals("Snake: [Quadrado: [(2,3), (3,3), (3,4), (2,4)], Quadrado: [(1,3), (2,3), (2,4), (1,4)]]",s.translacao(0,1).toString());
+    public void movimentoSnakeLeftTest() {
+        Quadrado cabeca = new Quadrado("2 2 3 2 3 3 2 3");
+        Quadrado segundoSegmento = new Quadrado("3 2 4 2 4 3 3 3");
+        Snake s = new Snake(cabeca);
+        s.getSnake().add(segundoSegmento);
+        s.setDirecaoAtual(Direcao.LEFT);
+        s.movimentoSnake();
+        assertEquals("Snake: [Quadrado: [(1,2), (2,2), (2,3), (1,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]", s.toString());
     }
 
     @Test
-    public void movimentoSnakeRightTest()
-    {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
-
-        assertEquals("Snake: [Quadrado: [(3,2), (4,2), (4,3), (3,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]",s.movimentoSnake(1,0).toString());
-
+    public void movimentoSnakeUpTest() {
+        Quadrado cabeca = new Quadrado("2 2 3 2 3 3 2 3");
+        Quadrado segundoSegmento = new Quadrado("2 3 3 3 3 4 2 4");
+        Snake s = new Snake(cabeca);
+        s.getSnake().add(segundoSegmento);
+        s.setDirecaoAtual(Direcao.UP);
+        s.movimentoSnake();
+        assertEquals("Snake: [Quadrado: [(2,1), (3,1), (3,2), (2,2)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]", s.toString());
     }
 
     @Test
-    public void movimentoSnakeLeftTest()
-    {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("3 2 4 2 4 3 3 3"));
-
-        Snake s = new Snake(Quadrados);
-
-        assertEquals("Snake: [Quadrado: [(1,2), (2,2), (2,3), (1,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]",s.movimentoSnake(-1,0).toString());
+    public void movimentoSnakeDownTest() {
+        Quadrado cabeca = new Quadrado("2 2 3 2 3 3 2 3");
+        Quadrado segundoSegmento = new Quadrado("2 1 3 1 3 2 2 2");
+        Snake s = new Snake(cabeca);
+        s.getSnake().add(segundoSegmento);
+        s.setDirecaoAtual(Direcao.DOWN);
+        s.movimentoSnake();
+        assertEquals("Snake: [Quadrado: [(2,3), (3,3), (3,4), (2,4)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]", s.toString());
+    }
+    @Test
+    public void cresceSnakeTest() {
+        Quadrado cabeca = new Quadrado("3 2 4 2 4 3 3 3");
+        Snake s = new Snake(cabeca);
+        s.setDirecaoAtual(Direcao.RIGHT);
+        s.cresceSnake();
+        assertEquals("Snake: [Quadrado: [(3,2), (4,2), (4,3), (3,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]", s.toString());
     }
 
     @Test
-    public void movimentoSnakeUpTest()
-    {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("3 2 4 2 4 3 3 3"));
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
-
-        assertEquals("Snake: [Quadrado: [(3,3), (4,3), (4,4), (3,4)], Quadrado: [(3,2), (4,2), (4,3), (3,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]",s.movimentoSnake(0,1).toString());
-    }
-
-    @Test
-    public void movimentoSnakeDownTest()
-    {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("3 2 4 2 4 3 3 3"));
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
-
-        assertEquals("Snake: [Quadrado: [(3,1), (4,1), (4,2), (3,2)], Quadrado: [(3,2), (4,2), (4,3), (3,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]",s.movimentoSnake(0,-1).toString());
-    }
-
-    @Test
-    public void cresceSnakeTest()
-    {
-        ArrayList<Quadrado> Quadrados = new LinkedList<>();
-        Quadrados.add(new Quadrado("3 2 4 2 4 3 3 3"));
-        Snake s = new Snake(Quadrados);
-
-        assertEquals("Snake: [Quadrado: [(3,2), (4,2), (4,3), (3,3)], Quadrado: [(2,2), (3,2), (3,3), (2,3)]]",s.cresceSnake().toString());
-
-    }
-
-    @Test
-    public void intercetaSnakeFalseTest()
-    {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("4 2 5 2 5 3 4 3"));
-        Quadrados.add(new Quadrado("3 2 4 2 4 3 3 3"));
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
-
+    public void intercetaSnakeFalseTest() {
+        Quadrado cabeca = new Quadrado("3 2 4 2 4 3 3 3");
+        Quadrado segundoSegmento = new Quadrado("1 2 2 2 2 3 1 3");
+        Snake s = new Snake(cabeca);
+        s.getSnake().add(segundoSegmento);
+        s.setDirecaoAtual(Direcao.RIGHT);
+        s.movimentoSnake();
         assertFalse(s.intercetaSnake());
     }
 
     @Test
-    public void intercetaSnakeTrueTest()
-    {
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("4 2 5 2 5 3 4 3"));
-        Quadrados.add(new Quadrado("3 2 4 2 4 3 3 3"));
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
-
-        s.movimentoSnake(0,1);
-        s.movimentoSnake(-1,0);
-        s.movimentoSnake(0,-1);
-
-
+    public void intercetaSnakeTrueTest() {
+        Quadrado cabeca = new Quadrado("3 2 4 2 4 3 3 3");
+        Quadrado segundoSegmento = new Quadrado("1 2 2 2 2 3 1 3");
+        Snake s = new Snake(cabeca);
+        s.getSnake().add(segundoSegmento);
+        s.setDirecaoAtual(Direcao.RIGHT);
+        s.cresceSnake();
+        s.setDirecaoAtual(Direcao.LEFT);
+        s.movimentoSnake();
+        s.movimentoSnake();
         assertTrue(s.intercetaSnake());
     }
+
+
 }
