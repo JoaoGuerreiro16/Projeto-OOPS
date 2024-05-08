@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ArenaDeJogo {
+
     private int altura;
     private int largura;
     private Pontuacao pontuacao;
@@ -61,140 +62,115 @@ public class ArenaDeJogo {
     }
 
     public void atualizarJogo(){
-
         if(!jogoAtivo){
-
             return;
         }
         snake.movimentoSnake();
         colisoes();
+        if (comida.isConsumed(snake)) {
+            pontuacao.incrementaPontuacao(comida.getPontuacao());
+            snake.cresceSnake();
+            adicionarComida();
 
+        }
 
         if(!jogoAtivo){
-            System.out.println("GAME OVER! A sua pontuação foi" + pontuacao.getPontuacao());
-            System.exit(0);
+
+
         }
 
-        // Verifica se a comida foi consumida pela snake.
-        if (comida.isConsumed(snake)) {
-            pontuacao.incrementaPontuacao(comida.getPontuacao()); // Aumenta a pontuação baseada na comida consumida.
-            snake.cresceSnake(); // Faz a snake crescer.
-            adicionarComida();
-        }
-
-        // Se após o processamento de colisões o jogo não estiver mais ativo, encerra o jogo.
-        if (!jogoAtivo) {
-            System.out.println("GAME OVER! A sua pontuação foi " + pontuacao.getPontuacao());
-            System.exit(0);
-        }
     }
     public void colisaoObstaculo(){
 
         Quadrado cabeca = snake.getSnake().getFirst();
         for(Obstaculo obstaculo: obstaculos){
-                if(cabeca.intercetaPoligono(obstaculo.getPoligono())){
-                    jogoAtivo = false;
-                    System.out.println("GAME OVER!! Colisão com obstáculo");
-                    System.exit(0);
-                }
+            if(cabeca.intercetaPoligono(obstaculo.getPoligono())){
+                perdeuJogo("A snake colidiu com um obstáculo");
             }
         }
+    }
 
-     public void colisaoConsigoMesma(){
+    public void colisaoConsigoMesma(){
 
         if(snake.intercetaSnake()){
-            jogoAtivo = false;
-            System.out.println("GAME OVER!! Colisão consigo mesma");
-            System.exit(0);
+            perdeuJogo("A snake colidiu consigo mesma");
         }
-     }
+    }
 
-        public void colisaoParede(){
+    public void colisaoParede(){
         Quadrado cabeca = snake.getSnake().getFirst();
         Ponto centro = cabeca.calcularCentro();
         double metadeLado = cabeca.getLado() / 2;
         if(centro.getX() - metadeLado < 0 || centro.getX() + metadeLado > largura ||
                 centro.getY() - metadeLado < 0 || centro.getY() + metadeLado > altura){
-            jogoAtivo = false;
-            System.out.println("GAME OVER!! Colisão com parede");
-            System.exit(0);
+            perdeuJogo("A snake colidiu com a parede");
         }
 
-        }
-        public void colisoes(){
+    }
+    public void colisoes(){
         colisaoConsigoMesma();
         colisaoObstaculo();
         colisaoParede();
+    }
+
+    /** provavelmente tem bug**/
+    public boolean isPosicaoValida(Ponto ponto){
+
+        if(ponto.getX() < 0 || ponto.getX() > largura || ponto.getY() < 0 || ponto.getY() > altura){
+            return false;
         }
 
-
-        /** provavelmente tem bug**/
-        public boolean isPosicaoValida(Ponto ponto){
-
-            if(ponto.getX() < 0 || ponto.getX() > largura || ponto.getY() < 0 || ponto.getY() > altura){
+        for(Quadrado parteCorpo: snake.getSnake()){
+            if(parteCorpo.containsPonto(ponto)){
                 return false;
             }
-
-            for(Quadrado parteCorpo: snake.getSnake()){
-                if(parteCorpo.containsPonto(ponto)){
-                    return false;
-                }
-            }
-
-            for(Obstaculo obstaculo: obstaculos){
-                if(obstaculo.getPoligono().containsPonto(ponto)){
-                    return false;
-                }
-            }
-            return true;
         }
 
-        public Ponto gerarComidaAleatoria(){
-            int tentativasMaximas = 100;
-            for (int tentativas = 0; tentativas < tentativasMaximas; tentativas++) {
-                int x = rand.nextInt(largura);
-                int y = rand.nextInt(altura);
-                Ponto novaPosicao = new Ponto(x, y);
-
-                if (isPosicaoValida(novaPosicao)) {
-                    return novaPosicao;  // Retorna o ponto válido encontrado
-                }
+        for(Obstaculo obstaculo: obstaculos){
+            if(obstaculo.getPoligono().containsPonto(ponto)){
+                return false;
             }
-            return null;  // Retorna null se nenhuma posição válida foi encontrada
         }
+        return true;
+    }
 
-    public void adicionarComida()
-    {
-        Ponto posicaoValida = gerarComidaAleatoria();
+    public Ponto gerarPontoRandom(){
+        int tentativasMaximas = 100;
+        for (int tentativas = 0; tentativas < tentativasMaximas; tentativas++) {
+            int x = rand.nextInt(largura);
+            int y = rand.nextInt(altura);
+            Ponto novaPosicao = new Ponto(x, y);
+
+            if (isPosicaoValida(novaPosicao)) {
+                return novaPosicao;
+            }
+        }
+        return null;
+    }
+
+    public void adicionarComida() {
+        Ponto posicaoValida = gerarPontoRandom();
         if (posicaoValida == null) {
-            System.out.println("Não foi possível adicionar nova comida após várias tentativas.");
-            jogoAtivo = false;
-            System.out.println("GAME OVER! falta de espaço para nova comida.");
+            pontuacao.pontuacaoMaxima();
+            ganhouJogo();
         } else {
             if (tipoComida.equals("quadrado")) {
                 comida = new ComidaQuadrado(new Quadrado(posicaoValida, tamanhoComida), pontuacaoComida);
-            } else {  // "circulo"
+            } else {
                 comida = new ComidaCirculo(new Circulo(posicaoValida, tamanhoComida / 2.0), pontuacaoComida);
             }
-            System.out.println("Nova comida adicionada com sucesso em " + posicaoValida);
+
         }
-
     }
 
-    public void adicionarSnake(Snake snake) // TO DO
-    {
-
+    public void ganhouJogo(){
+        jogoAtivo = false;
+        System.out.println("Parabéns, ganhou o jogo! \nA sua pontuação foi" + pontuacao.getPontuacao());
     }
 
-
-    public void adicionarObstaculos() // TO DO
-    {
-
-    }
-
-    public void inicializaArena()
-    {
-
+    public void perdeuJogo(String mensagem){
+        jogoAtivo = false;
+        System.out.println("GAME OVER! " + mensagem + "\nSua pontuação foi: " + pontuacao.getPontuacao());
     }
 
 }
