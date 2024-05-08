@@ -76,7 +76,7 @@ public class ArenaDeJogoTest {
         Snake snake = new Snake(quadrados.getFirst());
         List<Comida> comidas = new ArrayList<>();
         List<Obstaculo> obstaculos = new ArrayList<>();
-        int pontuacaoComida = 100
+        int pontuacaoComida = 100;
         ArenaDeJogo arena = new ArenaDeJogo(100, 100, snake, comidas, obstaculos);
         arena.colisaoParede();
         Assertions.assertFalse(arena.isJogoAtivo());
