@@ -72,10 +72,11 @@ public class ArenaDeJogoTest {
     @Test
     public void intercetaParedeTest() {
         LinkedList<Quadrado> quadrados = new LinkedList<>();
-        quadrados.add(new Quadrado("0 0 1 0 1 1 0 1")); // Quadrado dentro das paredes
+        quadrados.add(new Quadrado("0 0 1 0 1 1 0 1"));
         Snake snake = new Snake(quadrados.getFirst());
         List<Comida> comidas = new ArrayList<>();
         List<Obstaculo> obstaculos = new ArrayList<>();
+        int pontuacaoComida = 100
         ArenaDeJogo arena = new ArenaDeJogo(100, 100, snake, comidas, obstaculos);
         arena.colisaoParede();
         Assertions.assertFalse(arena.isJogoAtivo());

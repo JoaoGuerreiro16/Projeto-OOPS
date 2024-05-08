@@ -33,8 +33,26 @@ public class Quadrado extends Retangulo
         }
     }
 
+    public Quadrado(Ponto centroide, double lado) {
+        super(calculaPontos(centroide, lado));
+        this.lado = lado;
+    }
+
     public double getLado() {
         return lado;
+    }
+
+    private static ArrayList<Ponto> calculaPontos(Ponto centroide, double lado) {
+        ArrayList<Ponto> pontos = new ArrayList<>();
+        double meioLado = lado / 2;
+
+        // Calculando os pontos com base no centroide e no tamanho do lado
+        pontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() - meioLado)); // Top-left
+        pontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() - meioLado)); // Top-right
+        pontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() + meioLado)); // Bottom-right
+        pontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado)); // Bottom-left
+
+        return pontos;
     }
 
     /**
