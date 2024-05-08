@@ -2,6 +2,7 @@ package Game;
 
 public class Pontuacao {
 
+    final int MAX_VALUE = Integer.MAX_VALUE;
     private int pontuacao;
 
     public Pontuacao(){
@@ -20,5 +21,10 @@ public class Pontuacao {
     public void incrementaPontuacao(int pontos){
 
         this.pontuacao += pontos;
+    }
+
+    public void pontuacaoMaxima(){
+
+        this.pontuacao = MAX_VALUE;
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class ArenaDeJogo {
+
     private int altura;
     private int largura;
     private Pontuacao pontuacao;
@@ -61,28 +62,30 @@ public class ArenaDeJogo {
     }
 
     public void atualizarJogo(){
-
         if(!jogoAtivo){
-
             return;
         }
         snake.movimentoSnake();
         colisoes();
+        if (comida.isConsumed(snake)) {
+            pontuacao.incrementaPontuacao(comida.getPontuacao());
+            snake.cresceSnake();
+            adicionarComida();
 
+        }
 
         if(!jogoAtivo){
-            System.out.println("GAME OVER! A sua pontuação foi" + pontuacao.getPontuacao());
-            System.exit(0);
+
+
         }
+
     }
     public void colisaoObstaculo(){
 
         Quadrado cabeca = snake.getSnake().getFirst();
         for(Obstaculo obstaculo: obstaculos){
                 if(cabeca.intercetaPoligono(obstaculo.getPoligono())){
-                    jogoAtivo = false;
-                    System.out.println("GAME OVER!! Colisão com obstáculo");
-                    System.exit(0);
+                    perdeuJogo("A snake colidiu com um obstáculo");
                 }
             }
         }
@@ -90,9 +93,7 @@ public class ArenaDeJogo {
      public void colisaoConsigoMesma(){
 
         if(snake.intercetaSnake()){
-            jogoAtivo = false;
-            System.out.println("GAME OVER!! Colisão consigo mesma");
-            System.exit(0);
+            perdeuJogo("A snake colidiu consigo mesma");
         }
      }
 
@@ -102,9 +103,7 @@ public class ArenaDeJogo {
         double metadeLado = cabeca.getLado() / 2;
         if(centro.getX() - metadeLado < 0 || centro.getX() + metadeLado > largura ||
                 centro.getY() - metadeLado < 0 || centro.getY() + metadeLado > altura){
-            jogoAtivo = false;
-            System.out.println("GAME OVER!! Colisão com parede");
-            System.exit(0);
+            perdeuJogo("A snake colidiu com a parede");
         }
 
         }
@@ -135,69 +134,43 @@ public class ArenaDeJogo {
             return true;
         }
 
-        public boolean gerarComidaAleatoria(){
+    public Ponto gerarPontoRandom(){
+        int tentativasMaximas = 100;
+        for (int tentativas = 0; tentativas < tentativasMaximas; tentativas++) {
+            int x = rand.nextInt(largura);
+            int y = rand.nextInt(altura);
+            Ponto novaPosicao = new Ponto(x, y);
 
-            int tentativasMaximas = 100;
-            for(int tentativas = 0; tentativas < tentativasMaximas; tentativas++){
-                int x = rand.nextInt(largura);
-                int y = rand.nextInt(altura);
-                Ponto novaPosicao = new Ponto(x, y);
-
-
-                if(isPosicaoValida(novaPosicao)){
-                    if(tipoComida.equals("quadrado")){
-
-                      comida = new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida);
-
-                    } else{
-
-                       comida = new ComidaCirculo(new Circulo(novaPosicao,(tamanhoComida / 2.0)), pontuacaoComida);
-                    }
-                    return true;
-                }
+            if (isPosicaoValida(novaPosicao)) {
+                return novaPosicao;
             }
-            return false;
         }
-
-        
-
-    public void addSnake(Snake snake) // TO DO
-    {
-
-    }
-    public void addComida() // TO DO
-    {
-
+        return null;
     }
 
-    public void addObstaculos() // TO DO
-    {
+    public void adicionarComida() {
+        Ponto posicaoValida = gerarPontoRandom();
+        if (posicaoValida == null) {
+            pontuacao.pontuacaoMaxima();
+            ganhouJogo();
+        } else {
+            if (tipoComida.equals("quadrado")) {
+                comida = new ComidaQuadrado(new Quadrado(posicaoValida, tamanhoComida), pontuacaoComida);
+            } else {
+                comida = new ComidaCirculo(new Circulo(posicaoValida, tamanhoComida / 2.0), pontuacaoComida);
+            }
 
+        }
     }
 
-    public void addObstaculo(Obstaculo obstaculo) // TO DO
-    {
-
-    }
-    public boolean intercetaComida() // TO DO
-    {
-        return false;
-
+    public void ganhouJogo(){
+            jogoAtivo = false;
+        System.out.println("Parabéns, ganhou o jogo! \nA sua pontuação foi" + pontuacao.getPontuacao());
     }
 
-    public boolean intercetaObstaculo() // TO DO
-    {
-       return false;
-    }
-
-    public boolean intercetaParede() // TO DO
-    {
-       return false;
-    }
-
-    public void interceta() // TO DO
-    {
-
+    public void perdeuJogo(String mensagem){
+        jogoAtivo = false;
+        System.out.println("GAME OVER! " + mensagem + "\nSua pontuação foi: " + pontuacao.getPontuacao());
     }
 
 }
