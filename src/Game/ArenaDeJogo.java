@@ -27,8 +27,30 @@ public class ArenaDeJogo {
         this.comida = comidas;
         this.obstaculos = obstaculos;
         this.jogoAtivo = true;
+    }
 
+    public Snake getSnake() {
+        return snake;
+    }
 
+    public void setSnake(Snake snake) {
+        this.snake = snake;
+    }
+
+    public List<Comida> getComida() {
+        return comida;
+    }
+
+    public void setComida(List<Comida> comida) {
+        this.comida = comida;
+    }
+
+    public List<Obstaculo> getObstaculos() {
+        return obstaculos;
+    }
+
+    public void setObstaculos(List<Obstaculo> obstaculos) {
+        this.obstaculos = obstaculos;
     }
 
     public boolean isJogoAtivo() {
@@ -124,31 +146,5 @@ public class ArenaDeJogo {
     {
 
     }
-
-    public Snake getSnake() {
-        return snake;
-    }
-
-    public void setSnake(Snake snake) {
-        this.snake = snake;
-    }
-
-    public List<Comida> getComida() {
-        return comida;
-    }
-
-    public void setComida(List<Comida> comida) {
-        this.comida = comida;
-    }
-
-    public List<Obstaculo> getObstaculos() {
-        return obstaculos;
-    }
-
-    public void setObstaculos(List<Obstaculo> obstaculos) {
-        this.obstaculos = obstaculos;
-    }
-
-
 
 }

@@ -27,24 +27,6 @@ public class Obstaculo{
 
     }
 
-
-    public void rotacao(int i) {
-
-        if(dinamico){
-            Ponto pontoDeRotacaoEfetivo = pontoRotacao != null ? pontoRotacao : poligono.calcularCentro();
-            poligono = poligono.rotacao(anguloRotacao, pontoDeRotacaoEfetivo);
-        }
-    }
-    @Override
-    public String toString() {
-        return "Obstaculo{" +
-                "forma:" + poligono +
-                ",é dinâmico:" + dinamico +
-                ",ângulo rotação:" + anguloRotacao +
-                ",ponto rotação:" + pontoRotacao +
-                '}';
-    }
-
     public void setPoligono(Poligono poligono) {
         this.poligono = poligono;
     }
@@ -78,4 +60,29 @@ public class Obstaculo{
     }
 
 
+
+    public void rotacao(int i) {
+
+        if(dinamico){
+            Ponto pontoDeRotacaoEfetivo = pontoRotacao != null ? pontoRotacao : poligono.calcularCentro();
+            poligono = poligono.rotacao(anguloRotacao, pontoDeRotacaoEfetivo);
+        }
+    }
+
+    public void rotacaoCentroide(int angulo, Ponto centro) {
+        if (poligono == null) {
+            throw new IllegalStateException("Polígono não definido.");
+        }
+        poligono = poligono.rotacao(angulo, centro);
+
+    }
+    @Override
+    public String toString() {
+        return "Obstaculo{" +
+                "forma:" + poligono +
+                ",é dinâmico:" + dinamico +
+                ",ângulo rotação:" + anguloRotacao +
+                ",ponto rotação:" + pontoRotacao +
+                '}';
+    }
 }

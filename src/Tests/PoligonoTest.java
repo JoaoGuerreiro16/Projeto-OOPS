@@ -99,8 +99,4 @@ class PoligonoTest {
     }
 
 
-
-
-
-
 }

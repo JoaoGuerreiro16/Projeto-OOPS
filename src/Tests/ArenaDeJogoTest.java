@@ -5,111 +5,79 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ArenaDeJogoTest {
 
     @Test
-    public void addSnakeTest()
-    {
-        ArenaDeJogo arena = new ArenaDeJogo(100, 100, "circulo");
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake s = new Snake(Quadrados);
-        arena.addSnake(s);
+    public void addSnakeTest() {
+        LinkedList<Quadrado> quadrados = new LinkedList<>();
+        quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));  // Usando string para vértices
+        Snake s = new Snake(quadrados.getFirst());
+        List<Comida> comidas = new ArrayList<>();
+        List<Obstaculo> obstaculos = new ArrayList<>();
+        ArenaDeJogo arena = new ArenaDeJogo(100, 100, s, comidas, obstaculos);
         Assertions.assertNotNull(arena.getSnake());
     }
+
     @Test
-    public void addComidaQuadradoTest()
-    {
-        ArenaDeJogo arena = new ArenaDeJogo(100, 100, "quadrado");
-        arena.addComida();
-        Assertions.assertNotNull(arena.getComidaAtual());
+    public void addComidaQuadradoTest() {
+        Snake s = new Snake(new Quadrado("0 0 1 0 1 1 0 1"));
+        List<Comida> comidas = new ArrayList<>();
+        List<Obstaculo> obstaculos = new ArrayList<>();
+        ArenaDeJogo arena = new ArenaDeJogo(100, 100, s, comidas, obstaculos);
+        Comida comida = new ComidaQuadrado(new Quadrado("10 10 11 10 11 11 10 11"), 20); // Usando string para vértices
+        arena.getComida().add(comida);
+        Assertions.assertFalse(arena.getComida().isEmpty());
     }
 
     @Test
-    public void addComidaCirculoTest()
-    {
-        ArenaDeJogo arena = new ArenaDeJogo(100, 100, "circulo");
-        arena.addComida();
-        Assertions.assertNotNull(arena.getComidaAtual());
+    public void addObstaculoTest() {
+        Snake s = new Snake(new Quadrado("0 0 1 0 1 1 0 1"));
+        List<Comida> comidas = new ArrayList<>();
+        List<Obstaculo> obstaculos = new ArrayList<>();
+        ArenaDeJogo arena = new ArenaDeJogo(100, 100, s, comidas, obstaculos);
+        Obstaculo obstaculo = new Obstaculo(new Quadrado("10 10 11 10 11 11 10 11"), false, 0, new Ponto(0, 0)); // Usando string para vértices
+        arena.getObstaculos().add(obstaculo);
+        Assertions.assertFalse(arena.getObstaculos().isEmpty());
     }
 
     @Test
-    public void addObstaculo()
-    {
-        ArenaDeJogo arena = new ArenaDeJogo(100, 100, "Quadrado");
-        arena.addObstaculos();
-        Assertions.assertNotNull(arena.getObstaculos());
+    public void intercetaObstaculoTrueTest() {
+        LinkedList<Quadrado> quadrados = new LinkedList<>();
+        quadrados.add(new Quadrado("2 2 3 2 3 3 2 3")); // Quadrado na mesma posição que o obstáculo
+        Snake snake = new Snake(quadrados.getFirst());
+        List<Comida> comidas = new ArrayList<>();
+        List<Obstaculo> obstaculos = new ArrayList<>();
+        obstaculos.add(new Obstaculo(new Quadrado("2 2 3 2 3 3 2 3"), false, 0, new Ponto(0, 0)));
+        ArenaDeJogo arena = new ArenaDeJogo(100, 100, snake, comidas, obstaculos);
+        arena.colisaoObstaculo();
+        Assertions.assertFalse(arena.isJogoAtivo());
     }
 
     @Test
-    public void intercetaObstaculoTrueTest()
-    {
-
-        ArenaDeJogo arena = new ArenaDeJogo(100, 100, "quadrado");
-
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake snake = new Snake(Quadrados);
-
-        arena.addSnake(snake);
-
-        Poligono poligono = new Poligono("2 2 3 2 3 3 2 3");
-
-        Obstaculo obstaculo = new Obstaculo(poligono);
-        arena.addObstaculo(obstaculo);
-
-        boolean interceta = arena.intercetaObstaculo();
-
-        assertTrue(interceta);
-
+    public void intercetaObstaculoFalseTest() {
+        LinkedList<Quadrado> quadrados = new LinkedList<>();
+        quadrados.add(new Quadrado("2 2 3 2 3 3 2 3")); // Quadrado longe do obstáculo
+        Snake snake = new Snake(quadrados.getFirst());
+        List<Comida> comidas = new ArrayList<>();
+        List<Obstaculo> obstaculos = new ArrayList<>();
+        obstaculos.add(new Obstaculo(new Quadrado("10 10 11 10 11 11 10 11"), false, 0, new Ponto(0, 0)));
+        ArenaDeJogo arena = new ArenaDeJogo(100, 100, snake, comidas, obstaculos);
+        arena.colisaoObstaculo();
+        Assertions.assertTrue(arena.isJogoAtivo());
     }
 
     @Test
-    public void intercetaObstaculoFalseTest()
-    {
-
-        ArenaDeJogo arena = new ArenaDeJogo(100, 100, "quadrado");
-
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake snake = new Snake(Quadrados);
-
-        arena.addSnake(snake);
-
-        Poligono poligono = new Poligono("5 5 6 5 6 6 5 6");
-
-        Obstaculo obstaculo = new Obstaculo(poligono);
-        arena.addObstaculo(obstaculo);
-
-        boolean interceta = arena.intercetaObstaculo();
-
-        assertFalse(interceta);
-
+    public void intercetaParedeTest() {
+        LinkedList<Quadrado> quadrados = new LinkedList<>();
+        quadrados.add(new Quadrado("0 0 1 0 1 1 0 1")); // Quadrado dentro das paredes
+        Snake snake = new Snake(quadrados.getFirst());
+        List<Comida> comidas = new ArrayList<>();
+        List<Obstaculo> obstaculos = new ArrayList<>();
+        ArenaDeJogo arena = new ArenaDeJogo(100, 100, snake, comidas, obstaculos);
+        arena.colisaoParede();
+        Assertions.assertFalse(arena.isJogoAtivo());
     }
-
-    @Test
-    public void intercetaParede()
-    {
-        ArenaDeJogo arena = new ArenaDeJogo(100, 100, "quadrado");
-
-        ArrayList<Quadrado> Quadrados = new ArrayList<>();
-        Quadrados.add(new Quadrado("2 2 3 2 3 3 2 3"));
-        Quadrados.add(new Quadrado("1 2 2 2 2 3 1 3"));
-        Snake snake = new Snake(Quadrados);
-
-        arena.addSnake(snake);
-
-        boolean interceta = arena.intercetaParede();
-
-        assertFalse(interceta);
-
-    }
-
-
 }
