@@ -8,10 +8,10 @@ public class Snake {
 
      private LinkedList<Quadrado> snake;
      private Direcao direcaoAtual;
-
+     private static Snake instance;
      private Random rand = new Random();
 
-     public Snake(Quadrado cabeca)
+     private Snake(Quadrado cabeca)
      {
          this.snake = new LinkedList<>();
          this.snake.add(cabeca);
@@ -19,6 +19,15 @@ public class Snake {
 
      }
 
+     public static Snake getInstance(Quadrado cabeca){
+         if(instance == null){
+             instance = new Snake(cabeca);
+         }
+         return instance;
+     }
+    public static void resetInstance() {
+        instance = null;
+    }
     public LinkedList<Quadrado> getSnake() {
         return snake;
     }

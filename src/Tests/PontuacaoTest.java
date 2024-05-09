@@ -14,7 +14,7 @@ public class PontuacaoTest {
 
     @BeforeEach
     public void setUp() {
-        pontuacao = new Pontuacao();
+        pontuacao = Pontuacao.getInstance();
     }
     @Test
     public void testGetPontuacao() {

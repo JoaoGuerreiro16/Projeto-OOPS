@@ -5,7 +5,7 @@ public abstract class Comida {
     protected Ponto pontoCentro;
     protected int pontuacao;
 
-    public Comida(Ponto ponto, int pontuacao){
+    public Comida(Ponto ponto, int pontuacao) {
 
         if (ponto == null) {
             throw new IllegalArgumentException("Ponto não pode ser null.");
@@ -33,4 +33,6 @@ public abstract class Comida {
     public abstract boolean isConsumed(Snake snake);
 
     public abstract boolean interceta(Poligono poligono);
+
 }
+

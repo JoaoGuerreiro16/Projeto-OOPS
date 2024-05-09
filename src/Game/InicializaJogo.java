@@ -20,6 +20,6 @@ public class InicializaJogo {
         int ySnake = config.getAltura() / 2;
 
         Quadrado cabecaSnake = new Quadrado(new Ponto(xSnake, ySnake), config.getTamanhoCabeca());
-        Snake snake = new Snake(cabecaSnake);
+        Snake snake = Snake.getInstance(cabecaSnake);
     }
 }
