@@ -22,8 +22,7 @@ public class InicializaJogo {
         Comida comidaInicial = criaComidaInicial(config, largura, altura, snake, obstaculos);
 
         // Criar a arena de jogo
-        ArenaDeJogo arena = new ArenaDeJogo(altura, largura, snake, comidaInicial, obstaculos,
-                                            config.getPontuacaoComida(), config.getTamanhoComida(), config.getTipoComida());
+        ArenaDeJogo arena =  ArenaDeJogo.getInstance(altura, largura, snake, comidaInicial, obstaculos,config.getPontuacaoComida(), config.getTamanhoComida(), config.getTipoComida());
 
         return arena;
     }
@@ -32,7 +31,9 @@ public class InicializaJogo {
         int xSnake = config.getLargura() / 2;
         int ySnake = config.getAltura() / 2;
         Quadrado cabecaSnake = new Quadrado(new Ponto(xSnake, ySnake), config.getTamanhoCabeca());
-        return new Snake(cabecaSnake);
+
+        Snake snake = Snake.getInstance(cabecaSnake);
+        return snake;
     }
 
     private List<Obstaculo> criaObstaculos(Configuracoes config, Snake snake, int largura, int altura) {

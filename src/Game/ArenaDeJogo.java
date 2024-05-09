@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class ArenaDeJogo {
 
+    private static ArenaDeJogo instance;
     private int altura;
     private int largura;
     private Pontuacao pontuacao;
@@ -19,11 +20,11 @@ public class ArenaDeJogo {
     private Random rand = new Random();
 
 
-    public ArenaDeJogo(int altura, int largura, Snake snake, Comida comida, List<Obstaculo> obstaculos, int pontuacaoComida, double tamanhoComida, String tipoComida) {
+    private ArenaDeJogo(int altura, int largura, Snake snake, Comida comida, List<Obstaculo> obstaculos, int pontuacaoComida, double tamanhoComida, String tipoComida) {
 
         this.altura = altura;
         this.largura = largura;
-        this.pontuacao = new Pontuacao();
+        this.pontuacao = Pontuacao.getInstance();
         this.snake = snake;
         this.comida = comida;
         this.obstaculos = obstaculos;
@@ -31,6 +32,18 @@ public class ArenaDeJogo {
         this.pontuacaoComida = pontuacaoComida;
         this.tamanhoComida = tamanhoComida;
         this.tipoComida = tipoComida;
+    }
+
+    public static ArenaDeJogo getInstance(int altura, int largura, Snake snake, Comida comida, List<Obstaculo> obstaculos, int pontuacaoComida, double tamanhoComida, String tipoComida){
+
+        if(instance == null){
+            instance = new ArenaDeJogo(altura, largura, snake, comida, obstaculos,pontuacaoComida, tamanhoComida,tipoComida);
+        }
+        return instance;
+    }
+
+    public static void resetInstance() {
+        instance = null;
     }
 
     public Snake getSnake() {

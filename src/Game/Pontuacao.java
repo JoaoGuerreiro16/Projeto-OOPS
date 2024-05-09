@@ -2,12 +2,27 @@ package Game;
 
 public class Pontuacao {
 
+
+    private static Pontuacao instance;
     final int MAX_VALUE = Integer.MAX_VALUE;
     private int pontuacao;
 
-    public Pontuacao(){
+    private Pontuacao(){
 
         this.pontuacao = 0;
+    }
+
+    public static Pontuacao getInstance(){
+
+        if (instance == null) {
+            instance = new Pontuacao();
+        }
+        return instance;
+
+    }
+
+    public static void resetInstance() {
+        instance = null;
     }
 
     public int getPontuacao() {

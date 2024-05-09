@@ -82,9 +82,7 @@ public class Ponto {
      * @param x Nova coordenada x do ponto.
      */
     public void setX(int x) {
-        if(x < 0){
-            throw new IllegalArgumentException("A coordenada X nao pode ser negativa");
-        }
+
         this.x = x;
     }
     /**
@@ -101,9 +99,7 @@ public class Ponto {
      * @param y Nova coordenada y do ponto.
      */
     public void setY(int y) {
-        if(y < 0){
-            throw new IllegalArgumentException("A coordenada Y nao pode ser negativa");
-        }
+
         this.y = y;
     }
     /**
