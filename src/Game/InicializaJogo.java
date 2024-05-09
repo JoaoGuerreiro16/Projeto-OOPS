@@ -8,7 +8,18 @@ public class InicializaJogo {
 
     public ArenaDeJogo inicializaJogo(Configuracoes config){
 
+        int largura = config.getLargura();
+        int altura = config.getAltura();
+        criaSnake(config);
 
     }
 
+    public void criaSnake(Configuracoes config){
+
+        int xSnake = config.getLargura() / 2;
+        int ySnake = config.getAltura() / 2;
+
+        Quadrado cabecaSnake = new Quadrado(new Ponto(xSnake, ySnake), config.getTamanhoCabeca());
+        Snake snake = new Snake(cabecaSnake);
+    }
 }

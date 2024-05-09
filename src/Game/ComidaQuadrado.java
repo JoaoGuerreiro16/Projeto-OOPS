@@ -25,4 +25,11 @@ public class ComidaQuadrado extends Comida{
 
         return snake.containsQuadrado(this);
     }
+
+    @Override
+    public boolean interceta(Poligono poligono){
+
+        return this.quadrado.intercetaPoligono(poligono);
+
+    }
 }

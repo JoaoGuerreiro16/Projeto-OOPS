@@ -62,4 +62,9 @@ public class Circulo {
 
     }
 
+    public Quadrado criaQuadradoProtetor(Circulo circulo){
+
+        return new Quadrado(this.centro, this.raio * 2);
+    }
+
 }

@@ -1,15 +1,15 @@
 package Game;
 
 public class Configuracoes {
-    int largura, altura, tamanhoCabeça, pontuacaoComida, numeroObstaculos, anguloRotacao;
-    double tamanhoComida;
-    String tipoComida;
-    boolean obstaculosDinamicos;
+    private int largura, altura, tamanhoCabeca, pontuacaoComida, numeroObstaculos, anguloRotacao;
+    private double tamanhoComida;
+    private String tipoComida;
+    private boolean obstaculosDinamicos;
 
-    public Configuracoes(int largura, int altura, int tamanhoCabeça, String tipoComida, double tamanhoComida, int pontuacaoComida, int numeroObstaculos, boolean obstaculosDinamicos, int anguloRotacao) {
+    public Configuracoes(int largura, int altura, int tamanhoCabeca, String tipoComida, double tamanhoComida, int pontuacaoComida, int numeroObstaculos, boolean obstaculosDinamicos, int anguloRotacao) {
         this.largura = largura;
         this.altura = altura;
-        this.tamanhoCabeça = tamanhoCabeça;
+        this.tamanhoCabeca = tamanhoCabeca;
         this.tipoComida = tipoComida;
         this.tamanhoComida = tamanhoComida;
         this.pontuacaoComida = pontuacaoComida;
@@ -26,8 +26,8 @@ public class Configuracoes {
         return altura;
     }
 
-    public int getTamanhoCabeça() {
-        return tamanhoCabeça;
+    public int getTamanhoCabeca() {
+        return tamanhoCabeca;
     }
 
     public int getPontuacaoComida() {

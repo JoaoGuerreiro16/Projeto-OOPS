@@ -22,4 +22,12 @@ public class ComidaCirculo extends Comida{
         return snake.containsCirculo(this);
     }
 
+    @Override
+    public boolean interceta(Poligono poligono){
+
+       Quadrado quadrado = this.circulo.criaQuadradoProtetor(circulo);
+       return quadrado.intercetaPoligono(poligono);
+
+    }
+
 }

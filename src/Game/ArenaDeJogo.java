@@ -117,14 +117,14 @@ public class ArenaDeJogo {
         }
 
         /** provavelmente tem bug**/
-        public boolean isPosicaoValida(Ponto ponto){
+        public boolean isPosicaoValidaPonto(Ponto ponto){
 
             if(ponto.getX() < 0 || ponto.getX() > largura || ponto.getY() < 0 || ponto.getY() > altura){
                 return false;
             }
 
             for(Quadrado parteCorpo: snake.getSnake()){
-                if(parteCorpo.containsPonto(ponto)){
+                if(parteCorpo.containsPonto(ponto) ){
                     return false;
                 }
             }
@@ -134,8 +134,27 @@ public class ArenaDeJogo {
                     return false;
                 }
             }
+
+
             return true;
         }
+
+    private boolean interceptaObstaculosOuSnake(Comida comida) {
+
+        for (Obstaculo obstaculo : obstaculos) {
+            if (comida.interceta(obstaculo.getPoligono())) {
+                return true;
+            }
+        }
+
+        for(Quadrado corpoSnake : snake.getSnake()){
+            if(comida.interceta(corpoSnake)){
+                return true;
+            }
+        }
+
+        return false;
+    }
 
 
 
@@ -147,12 +166,20 @@ public class ArenaDeJogo {
             int y = rand.nextInt(altura);
             Ponto novaPosicao = new Ponto(x, y);
 
-            if (isPosicaoValida(novaPosicao)) {
+            if (isPosicaoValidaPonto(novaPosicao)) {
                 if (tipoComida.equals("quadrado")) {
-                    comida = new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida);
-                    return true;
+                    Comida testComida = new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida);
+                    if(!interceptaObstaculosOuSnake(testComida)){
+                        comida = testComida;
+                        return true;
+                    }
+
                 } else {
-                    comida = new ComidaCirculo(new Circulo(novaPosicao, tamanhoComida / 2.0), pontuacaoComida);
+                    Comida testComida = new ComidaCirculo(new Circulo(novaPosicao, tamanhoComida / 2.0), pontuacaoComida);
+                    if(!interceptaObstaculosOuSnake(testComida)){
+                        comida = testComida;
+                        return true;
+                    }
                     return true;
                 }
             }
