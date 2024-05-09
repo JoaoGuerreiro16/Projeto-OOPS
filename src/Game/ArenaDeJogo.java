@@ -156,26 +156,28 @@ public class ArenaDeJogo {
         return false;
     }
 
-
-
     public boolean adicionarComida() {
 
         int tentativasMaximas = 100;
+        int x;
+        int y;
+        Ponto novaPosicao;
+        Comida testComida;
         for (int tentativas = 0; tentativas < tentativasMaximas; tentativas++) {
-            int x = rand.nextInt(largura);
-            int y = rand.nextInt(altura);
-            Ponto novaPosicao = new Ponto(x, y);
+             x = rand.nextInt(largura);
+             y = rand.nextInt(altura);
+             novaPosicao = new Ponto(x, y);
 
             if (isPosicaoValidaPonto(novaPosicao)) {
                 if (tipoComida.equals("quadrado")) {
-                    Comida testComida = new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida);
+                     testComida = new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida);
                     if(!interceptaObstaculosOuSnake(testComida)){
                         comida = testComida;
                         return true;
                     }
 
                 } else {
-                    Comida testComida = new ComidaCirculo(new Circulo(novaPosicao, tamanhoComida / 2.0), pontuacaoComida);
+                     testComida = new ComidaCirculo(new Circulo(novaPosicao, tamanhoComida / 2.0), pontuacaoComida);
                     if(!interceptaObstaculosOuSnake(testComida)){
                         comida = testComida;
                         return true;
@@ -188,6 +190,7 @@ public class ArenaDeJogo {
         return false;
 
     }
+
     public void atualizarObstaculos() {
         for (Obstaculo obstaculo : obstaculos) {
             if (obstaculo.isDinamico()) {
