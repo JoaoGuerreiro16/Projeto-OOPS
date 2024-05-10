@@ -1,4 +1,4 @@
-package Game;
+package Game.ModelLayer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

@@ -20,7 +20,7 @@ public class Cliente {
 
                 System.out.println("Digite o tipo de comida ('quadrado' ou 'circulo'):");
                 String tipoComida = scanner.next();
-                asser
+                assert(tipoComida.equals("quadrado") || tipoComida.equals("circulo")): "A comida só pode ser circular ou quadrada";
 
                 System.out.println("Digite a dimensão da comida (menor que a dimensão da cabeça):");
                 double tamanhoComida = scanner.nextDouble();

@@ -1,4 +1,4 @@
-package Game;
+package Game.ModelLayer;
 
 public abstract class Comida {
 

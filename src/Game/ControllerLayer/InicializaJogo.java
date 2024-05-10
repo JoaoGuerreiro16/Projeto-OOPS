@@ -1,10 +1,9 @@
-package Game;
+package Game.ControllerLayer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import Game.ControllerLayer.Configuracoes;
 import Game.ModelLayer.ArenaDeJogo;
 import Game.ModelLayer.Circulo;
 import Game.ModelLayer.Comida;
@@ -190,6 +189,6 @@ public class InicializaJogo {
 
     private boolean isDentroDosLimites(Ponto ponto, int largura, int altura) {
         return ponto.getX() >= 0 && ponto.getX() <= largura && ponto.getY() >= 0 && ponto.getY() <= altura;
-    } 
+    }
     
 }

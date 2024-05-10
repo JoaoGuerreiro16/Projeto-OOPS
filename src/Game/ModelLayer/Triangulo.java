@@ -1,5 +1,5 @@
 
-package Game;
+package Game.ModelLayer;
 import java.util.ArrayList;
 /**
  * Classe que representa um triangulo como subclasse de um poligono.
