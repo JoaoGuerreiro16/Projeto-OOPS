@@ -1,4 +1,4 @@
-package Game.ControllerLayer;
+package Game.ModelLayer;
 
 public class Pontuacao {
 

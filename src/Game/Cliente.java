@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Game.ControllerLayer.Configuracoes;
+
 public class Cliente {
         public static Configuracoes obterConfiguracoes() {
             Scanner scanner = new Scanner(System.in);

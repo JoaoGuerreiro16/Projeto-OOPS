@@ -9,15 +9,19 @@ import Game.ModelLayer.Circulo;
 import Game.ModelLayer.Comida;
 import Game.ModelLayer.ComidaCirculo;
 import Game.ModelLayer.ComidaQuadrado;
+
 import Game.ModelLayer.Obstaculo;
 import Game.ModelLayer.Poligono;
 import Game.ModelLayer.Ponto;
 import Game.ModelLayer.Quadrado;
 import Game.ModelLayer.Snake;
+import Game.ModelLayer.MovementStrategy.MovementStrategy;
+
 
 public class InicializaJogo {
 
     private static Random random = new Random();
+     private MovementStrategy movementStrategy;
 
     public ArenaDeJogo inicializaJogo(Configuracoes config) {
         int largura = config.getLargura();
@@ -43,7 +47,7 @@ public class InicializaJogo {
         int ySnake = config.getAltura() / 2;
         Quadrado cabecaSnake = new Quadrado(new Ponto(xSnake, ySnake), config.getTamanhoCabeca());
 
-        Snake snake = Snake.getInstance(cabecaSnake);
+        Snake snake = Snake.getInstance(cabecaSnake,movementStrategy);
         return snake;
     }
 
