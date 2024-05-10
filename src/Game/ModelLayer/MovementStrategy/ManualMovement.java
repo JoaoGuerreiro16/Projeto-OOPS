@@ -7,9 +7,6 @@ import Game.ModelLayer.Snake;
 public class ManualMovement implements MovementStrategy {
     private Direcao direcao;
 
-    public ManualMovement(Direcao direcao) {
-        this.direcao = direcao;
-    }
 
     @Override
     public void movimentoSnake(Snake snake) {
