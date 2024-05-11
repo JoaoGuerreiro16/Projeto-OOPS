@@ -2,6 +2,7 @@ package Game.ModelLayer;
 import java.util.LinkedList;
 import java.util.Random;
 import Game.ModelLayer.MovementStrategy.MovementStrategy;
+import Game.ModelLayer.MovementStrategy.MovimentoManual;
 
 public class Snake {
 
@@ -60,12 +61,9 @@ public class Snake {
 
     public void mudaDirecao(Direcao novaDirecao) {
 
-        if (this.direcaoAtual == Direcao.UP && novaDirecao == Direcao.DOWN) return;
-        if (this.direcaoAtual == Direcao.DOWN && novaDirecao == Direcao.UP) return;
-        if (this.direcaoAtual == Direcao.LEFT && novaDirecao == Direcao.RIGHT) return;
-        if (this.direcaoAtual == Direcao.RIGHT && novaDirecao == Direcao.LEFT) return;
-
-        this.direcaoAtual = novaDirecao;
+        if (movementStrategy instanceof MovimentoManual) {
+            ((MovimentoManual) movementStrategy).mudarDirecao(this, novaDirecao);
+        }
     }
 
      public void cresceSnake()
