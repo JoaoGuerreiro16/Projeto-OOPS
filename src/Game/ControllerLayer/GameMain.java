@@ -14,11 +14,11 @@ public class GameMain {
 
         Scanner scanner = new Scanner(System.in);
         Configuracoes config = Cliente.obterConfiguracoes();
-        System.out.println("2");
+    
         InicializaJogo inicializador = new InicializaJogo();
         
         ArenaDeJogo arena = inicializador.inicializaJogo(config);
-        System.out.println("3");
+        
         GameRasterizer rasterizer = new GameRasterizer(config.getAltura(), config.getLargura());
 
         while (arena.isJogoAtivo()) {

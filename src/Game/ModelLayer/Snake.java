@@ -86,11 +86,14 @@ public class Snake {
          Quadrado novaCauda = caudaAtual.translacao(dx, dy);
          snake.addLast(novaCauda);
      }
+     
      public boolean intercetaSnake(){
+
+        if (snake.size() < 4) return false;
 
              Quadrado cabeca = snake.getFirst();
              for (int i = 3; i < snake.size(); i++) {
-                 if (cabeca.intercetaPoligono(snake.get(i))) {
+                 if (cabeca.intercetaPoligono(snake.get(i)) || cabeca.containsQuadrado(snake.get(i))) {
                      return true;
                  }
              }
