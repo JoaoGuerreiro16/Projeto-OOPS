@@ -1,12 +1,15 @@
-package Game;
+package Game.ControllerLayer;
+
+import Game.ModelLayer.MovementStrategy.MovementStrategy;
 
 public class Configuracoes {
     private int largura, altura, tamanhoCabeca, pontuacaoComida, numeroObstaculos, anguloRotacao;
     private double tamanhoComida;
     private String tipoComida;
     private boolean obstaculosDinamicos;
+    private MovementStrategy movementStrategy;
 
-    public Configuracoes(int largura, int altura, int tamanhoCabeca, String tipoComida, double tamanhoComida, int pontuacaoComida, int numeroObstaculos, boolean obstaculosDinamicos, int anguloRotacao) {
+    public Configuracoes(int largura, int altura, int tamanhoCabeca, String tipoComida, double tamanhoComida, int pontuacaoComida, int numeroObstaculos, boolean obstaculosDinamicos, int anguloRotacao,MovementStrategy movementStrategy) {
         this.largura = largura;
         this.altura = altura;
         this.tamanhoCabeca = tamanhoCabeca;
@@ -16,6 +19,7 @@ public class Configuracoes {
         this.numeroObstaculos = numeroObstaculos;
         this.obstaculosDinamicos = obstaculosDinamicos;
         this.anguloRotacao = anguloRotacao;
+        this.movementStrategy = movementStrategy;
     }
 
     public int getLargura() {
@@ -52,5 +56,9 @@ public class Configuracoes {
 
     public boolean isObstaculosDinamicos() {
         return obstaculosDinamicos;
+    }
+
+    public MovementStrategy getMovementStrategy() {
+        return movementStrategy;
     }
 }

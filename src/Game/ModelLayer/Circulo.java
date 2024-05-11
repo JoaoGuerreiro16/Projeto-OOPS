@@ -1,4 +1,4 @@
-package Game;
+package Game.ModelLayer;
 
 public class Circulo {
     private double raio;

@@ -1,5 +1,5 @@
 
-package Game;
+package Game.ModelLayer;
 import java.util.Objects;
 
 /**

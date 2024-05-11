@@ -1,6 +1,8 @@
 
-package Game;
+package Game.ModelLayer;
 import java.util.ArrayList;
+
+import Game.ModelLayer.Circulo;
 /**
  * Classe que representa um quadrado como subclasse do retangulo e do poligono.
  *

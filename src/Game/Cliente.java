@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import Game.ControllerLayer.Configuracoes;
+import Game.ModelLayer.MovementStrategy.AutomatedMovement;
+import Game.ModelLayer.MovementStrategy.ManualMovement;
+import Game.ModelLayer.MovementStrategy.MovementStrategy;
+
 public class Cliente {
         public static Configuracoes obterConfiguracoes() {
             Scanner scanner = new Scanner(System.in);
@@ -41,9 +46,21 @@ public class Cliente {
                     System.out.println("Digite o ângulo de rotação para obstáculos dinâmicos:");
                     anguloRotacao = scanner.nextInt();
                 }
+
+                System.out.println("Escolha o tipo de movimento: 'manual' ou 'automatico'");
+            String tipoMovimento = scanner.next();
+            MovementStrategy strategy;
+            if (tipoMovimento.equalsIgnoreCase("manual")) 
+            {
+                strategy = new ManualMovement();
+            } else 
+            {
+            strategy = new AutomatedMovement();
+            }
+
             scanner.close();
 
-                return new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao);
+                return new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao,strategy);
             }
 
     public static void main(String[] args) {

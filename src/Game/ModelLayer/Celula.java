@@ -1,4 +1,4 @@
-package Game;
+package Game.ModelLayer;
 
 public class Celula {
  private EstadoCelula estado;

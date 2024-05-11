@@ -1,4 +1,4 @@
-package Game;
+package Game.ModelLayer;
 
 public class ComidaCirculo extends Comida{
     private Circulo circulo;

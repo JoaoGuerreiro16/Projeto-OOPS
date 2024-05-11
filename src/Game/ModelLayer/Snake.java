@@ -1,30 +1,33 @@
-package Game;
-
-import java.util.ArrayList;
+package Game.ModelLayer;
 import java.util.LinkedList;
 import java.util.Random;
+import Game.ModelLayer.MovementStrategy.MovementStrategy;
 
 public class Snake {
 
-     private LinkedList<Quadrado> snake;
-     private Direcao direcaoAtual;
-     private static Snake instance;
-     private Random rand = new Random();
+    private LinkedList<Quadrado> snake;
+    private Direcao direcaoAtual;
+    private static Snake instance;
+    private MovementStrategy movementStrategy;
 
-     private Snake(Quadrado cabeca)
-     {
-         this.snake = new LinkedList<>();
-         this.snake.add(cabeca);
-         this.direcaoAtual = Direcao.values()[rand.nextInt(Direcao.values().length)];
+    private Snake(Quadrado cabeca, MovementStrategy strategy) {
+        this.snake = new LinkedList<>();
+        this.snake.add(cabeca);
+        this.movementStrategy = strategy; 
+        this.direcaoAtual = Direcao.values()[new Random().nextInt(Direcao.values().length)];
+    }
 
-     }
+    public static Snake getInstance(Quadrado cabeca, MovementStrategy strategy) {
+        if (instance == null) {
+            instance = new Snake(cabeca, strategy);
+        }
+        return instance;
+    }
 
-     public static Snake getInstance(Quadrado cabeca){
-         if(instance == null){
-             instance = new Snake(cabeca);
-         }
-         return instance;
-     }
+    public void setMovementStrategy(MovementStrategy strategy) {
+        this.movementStrategy = strategy;
+    }
+
     public static void resetInstance() {
         instance = null;
     }
@@ -49,6 +52,12 @@ public class Snake {
         return "Snake: " + getSnake().toString();
     }
 
+    public void movimentoSnake() {
+        if (movementStrategy != null) {
+            movementStrategy.movimentoSnake(this);
+        }
+    }
+
     public void mudaDirecao(Direcao novaDirecao) {
 
         if (this.direcaoAtual == Direcao.UP && novaDirecao == Direcao.DOWN) return;
@@ -57,29 +66,6 @@ public class Snake {
         if (this.direcaoAtual == Direcao.RIGHT && novaDirecao == Direcao.LEFT) return;
 
         this.direcaoAtual = novaDirecao;
-    }
-
-
-    public void movimentoSnake()
-    {
-
-        Quadrado cabecaAtual = snake.getFirst();
-
-        double dx = 0, dy = 0;
-        switch (direcaoAtual) {
-            case UP:    dy = -cabecaAtual.getLado();
-            break;
-            case DOWN:  dy = cabecaAtual.getLado();
-            break;
-            case LEFT:  dx = -cabecaAtual.getLado();
-            break;
-            case RIGHT: dx = cabecaAtual.getLado();
-            break;
-        }
-
-        Quadrado novaCabeca = cabecaAtual.translacao(dx,dy);
-        snake.addFirst(novaCabeca);
-        snake.removeLast();
     }
 
      public void cresceSnake()
