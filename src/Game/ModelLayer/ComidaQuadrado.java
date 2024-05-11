@@ -32,4 +32,10 @@ public class ComidaQuadrado extends Comida{
         return this.quadrado.intercetaPoligono(poligono);
 
     }
+
+    @Override
+    public boolean containsPonto(Ponto ponto)
+    {
+        return quadrado.containsPonto(ponto);
+    }
 }

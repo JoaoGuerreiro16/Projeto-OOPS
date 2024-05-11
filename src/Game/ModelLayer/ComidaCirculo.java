@@ -30,4 +30,10 @@ public class ComidaCirculo extends Comida{
 
     }
 
+    @Override
+    public boolean containsPonto(Ponto ponto)
+    {
+        return circulo.containsPonto(ponto);
+    }
+
 }

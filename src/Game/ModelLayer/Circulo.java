@@ -67,4 +67,9 @@ public class Circulo {
         return new Quadrado(this.centro, this.raio * 2);
     }
 
+    public boolean containsPonto(Ponto ponto) {
+        double distanceSquared = Math.pow(ponto.getX() - centro.getX(), 2) + Math.pow(ponto.getY() - centro.getY(), 2);
+        return distanceSquared <= Math.pow(raio, 2);
+    }
+
 }
