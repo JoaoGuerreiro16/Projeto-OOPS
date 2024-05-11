@@ -28,6 +28,7 @@ public class GameMain {
             rasterizer.display();
 
             if (config.getMovementStrategy() instanceof MovimentoManual) {
+                System.out.println("A direção atual é " + arena.getSnake().getDirecaoAtual());
                 System.out.println("Digite a nova direção (W, A, S, D): ");
 
                 String direcao = scanner.next().toUpperCase();

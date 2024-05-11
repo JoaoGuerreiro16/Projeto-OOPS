@@ -89,7 +89,7 @@ public class Snake {
      public boolean intercetaSnake(){
 
              Quadrado cabeca = snake.getFirst();
-             for (int i = 1; i < snake.size(); i++) {
+             for (int i = 3; i < snake.size(); i++) {
                  if (cabeca.intercetaPoligono(snake.get(i))) {
                      return true;
                  }

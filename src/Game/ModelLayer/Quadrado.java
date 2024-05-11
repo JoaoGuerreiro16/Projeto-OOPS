@@ -40,7 +40,7 @@ public class Quadrado extends Retangulo
     public Quadrado(Ponto centroide, double lado) {
         
         super(calculaPontos(centroide, lado));
-        System.out.println("ui");
+
         this.lado = lado;
     }
 
@@ -52,24 +52,12 @@ public class Quadrado extends Retangulo
         System.out.println(centroide);
         System.out.println(lado);
         ArrayList<Ponto> novosPontos = new ArrayList<>();
-        double meioLado = lado / 2;
-System.out.println(centroide.getX());
-System.out.println(meioLado);
-
-double c1 = centroide.getX() - meioLado;
-double c2 = centroide.getY() - meioLado;
-System.out.println(c1);
-System.out.println(c2);
-
-Ponto p1 = new Ponto(centroide.getX() - meioLado, centroide.getY() - meioLado);
-Ponto p2 = new Ponto(centroide.getX() + meioLado, centroide.getY() - meioLado);
-Ponto p3 = new Ponto(centroide.getX() + meioLado, centroide.getY() + meioLado);
-Ponto p4 = new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado);
-        // Calculando os pontos com base no centroide e no tamanho do lado
-        novosPontos.add(p1); // Top-left
-        novosPontos.add(p2); // Top-right
-        novosPontos.add(p3); // Bottom-right
-        novosPontos.add(p4); // Bottom-left
+        double meioLado = lado / 2.0;
+        
+        novosPontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() - meioLado)); // Top-left
+        novosPontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() - meioLado)); // Top-right
+        novosPontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() + meioLado)); // Bottom-right
+        novosPontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado)); // Bottom-left
         System.out.println(novosPontos);
 
         return novosPontos;
@@ -146,7 +134,6 @@ Ponto p4 = new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado);
     @Override
     public Quadrado translacaoCentroide(double novoCentroideX, double novoCentroideY){
 
-        ArrayList<Ponto> newPontos = new ArrayList<>();
         Ponto centroidePoligono = calcularCentro();
         double deslocamentoX = novoCentroideX - centroidePoligono.getX();
         double deslocamentoY = novoCentroideY - centroidePoligono.getY();

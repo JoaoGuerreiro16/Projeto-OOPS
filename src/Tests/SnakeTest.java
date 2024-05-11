@@ -30,6 +30,7 @@ public class SnakeTest {
     public void movimentoSnakeRightCabecaTest()
     {
         Quadrado quadrado = new Quadrado("2 2 3 2 3 3 2 3");
+
         Snake s = Snake.getInstance(quadrado);
         s.setDirecaoAtual(Direcao.RIGHT);
         s.movimentoSnake();

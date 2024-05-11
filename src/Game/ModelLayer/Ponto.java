@@ -19,8 +19,8 @@ public class Ponto {
      * Construtor da classe Ponto com coordenadas do tipo double.
      * Define as coordenadas x e y do ponto.
      *
-     * @param x_db coordenada x do ponto.
-     * @param y_db coordenada y do ponto.
+     * @param x coordenada x do ponto.
+     * @param y coordenada y do ponto.
      */
     public Ponto(double x,double y)
     {
@@ -55,7 +55,7 @@ public class Ponto {
     /**
      * Define a coordenada x do ponto como double.
      *
-     * @param x_db Nova coordenada x do ponto como double.
+     * @param x Nova coordenada x do ponto como double.
      */
     public void setX(double x) {
         this.x = x;
@@ -71,7 +71,7 @@ public class Ponto {
     /**
      * Define a coordenada y do ponto como double.
      *
-     * @param y_db Nova coordenada y do ponto como double.
+     * @param y Nova coordenada y do ponto como double.
      */
     public void setY(double y) {
         this.y = y;

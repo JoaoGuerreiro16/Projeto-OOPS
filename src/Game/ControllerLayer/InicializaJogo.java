@@ -40,7 +40,7 @@ System.out.println("A");
 
         return ArenaDeJogo.getInstance(altura, largura, snake, comidaInicial, obstaculos,config.getPontuacaoComida(), config.getTamanhoComida(), config.getTipoComida());
 
-        
+
     }
 
     public Snake criaSnake(Configuracoes config) {
@@ -172,7 +172,7 @@ System.out.println("A");
 
     public boolean isDentroDaArena(Poligono poligono, int largura, int altura) {
         for (Ponto ponto : poligono.getPontos()) {
-            if (!isDentroDosLimites(ponto, largura, altura)) {
+            if (!isDentroDosLimites(ponto, largura , altura)) {
                 return false;
             }
         }
@@ -194,7 +194,7 @@ System.out.println("A");
     }
 
     public boolean isDentroDosLimites(Ponto ponto, int largura, int altura) {
-        return ponto.getX() >= 0 && ponto.getX() <= largura && ponto.getY() >= 0 && ponto.getY() <= altura;
+        return ponto.getX() >= largura/10 && ponto.getX() <= largura - (largura/10)&& ponto.getY() >= altura/10 && ponto.getY() <= altura - (altura/10);
     }
     
 }

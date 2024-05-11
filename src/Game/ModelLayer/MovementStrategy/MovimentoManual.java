@@ -1,6 +1,7 @@
 package Game.ModelLayer.MovementStrategy;
 
 import Game.ModelLayer.Direcao;
+import Game.ModelLayer.Ponto;
 import Game.ModelLayer.Quadrado;
 import Game.ModelLayer.Snake;
 
@@ -9,6 +10,7 @@ public class MovimentoManual implements MovementStrategy {
     @Override
     public void movimentoSnake(Snake snake) {
         Quadrado cabecaAtual = snake.getSnake().getFirst();
+        Ponto centroAtual = cabecaAtual.calcularCentro(); 
         double dx = 0, dy = 0;
         switch (snake.getDirecaoAtual()) {
             case UP:    dy = -cabecaAtual.getLado(); break;
@@ -17,15 +19,17 @@ public class MovimentoManual implements MovementStrategy {
             case RIGHT: dx = cabecaAtual.getLado(); break;
         }
 
-        Quadrado novaCabeca = cabecaAtual.translacao(dx, dy);
-        snake.getSnake().addFirst(novaCabeca);
-        snake.getSnake().removeLast();
+        double novoCentroideX = centroAtual.getX() + dx;
+        double novoCentroideY = centroAtual.getY() + dy;
+        Quadrado novaCabeca = cabecaAtual.translacaoCentroide(novoCentroideX, novoCentroideY);
+        snake.getSnake().addFirst(novaCabeca); // Adiciona a nova cabeça na frente
+        snake.getSnake().removeLast(); // Remove a última parte do corpo, mantendo o tamanho
     }
 
     public void mudarDirecao(Snake snake, Direcao novaDirecao) {
         if (eMudancaValida(snake.getDirecaoAtual(), novaDirecao)) {
             snake.setDirecaoAtual(novaDirecao);
-            movimentoSnake(snake);
+            
         }
     }
 

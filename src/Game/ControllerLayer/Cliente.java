@@ -38,7 +38,7 @@ public class Cliente {
 
                 System.out.println("Digite o número de obstáculos(1 a 5):");
                 int numeroObstaculos = scanner.nextInt();
-                assert (numeroObstaculos >= 1 && numeroObstaculos <= 5) : "Número de obstáculos fora do intervalo permitido (1 a 5).";
+                assert(numeroObstaculos >= 1 && numeroObstaculos <= 5) : "Número de obstáculos fora do intervalo permitido (1 a 5).";
 
                 System.out.println("Os obstáculos são dinâmicos? (sim/nao):");
                 boolean obstaculosDinamicos = scanner.next().equalsIgnoreCase("sim");
