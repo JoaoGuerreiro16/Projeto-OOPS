@@ -28,6 +28,14 @@ public class GameRasterizer {
 
         for (int i = 0; i < altura; i++) {
             for (int j = 0; j < largura; j++) {
+                grid[i][j] = new Celula(i, j);
+                grid[i][j].setEstado(EstadoCelula.EMPTY);
+            }
+        }
+
+
+        for (int i = 0; i < altura; i++) {
+            for (int j = 0; j < largura; j++) {
                 Ponto pontoAtual = new Ponto(j, i);
 
                 for (Quadrado parte : snake.getSnake()) {
@@ -38,10 +46,10 @@ public class GameRasterizer {
                         } else {
                             grid[i][j].setEstado(EstadoCelula.TAIL);
                         }
-                    
+
                 }
                 }
-                
+
                 if (comida.containsPonto(pontoAtual)) {
                     grid[i][j].setEstado(EstadoCelula.FOOD);
                 } else {
@@ -51,7 +59,7 @@ public class GameRasterizer {
                             break;
                         }
                     }
-                 
+
                 }
             }
         }
