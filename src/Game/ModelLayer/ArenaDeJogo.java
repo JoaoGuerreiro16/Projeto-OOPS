@@ -91,6 +91,7 @@ public class ArenaDeJogo {
             snake.cresceSnake();
             boolean haEspaco = adicionarComida();
             if(!haEspaco){
+                pontuacao.pontuacaoMaxima();
                 ganhouJogo();
             }
 
@@ -196,7 +197,6 @@ public class ArenaDeJogo {
                         comida = testComida;
                         return true;
                     }
-                    return true;
                 }
             }
         }
