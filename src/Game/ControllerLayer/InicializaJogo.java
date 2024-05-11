@@ -192,7 +192,7 @@ public class InicializaJogo {
     }
 
     public boolean isDentroDosLimites(Ponto ponto, int largura, int altura) {
-        return ponto.getX() >= largura/10 && ponto.getX() <= largura - (largura/10)&& ponto.getY() >= altura/10 && ponto.getY() <= altura - (altura/10);
+        return ponto.getX() >= (double) largura /10 && ponto.getX() <= largura - ((double) largura /10)&& ponto.getY() >= (double) altura /10 && ponto.getY() <= altura - ((double) altura /10);
     }
     
 }
