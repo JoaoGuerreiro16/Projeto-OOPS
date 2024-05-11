@@ -161,14 +161,23 @@ public class Quadrado extends Retangulo
     }
 
     public boolean containsCircle(Circulo circulo) {
-        double minX = pontos.get(0).getX();
-        double maxX = pontos.get(0).getX() + lado;
-        double minY = pontos.get(0).getY();
-        double maxY = pontos.get(0).getY() + lado;
-
-        return (circulo.getCentro().getX() - circulo.getRaio() >= minX) && (circulo.getCentro().getX() + circulo.getRaio() <= maxX) &&
-                (circulo.getCentro().getY() - circulo.getRaio() >= minY) && (circulo.getCentro().getY() + circulo.getRaio() <= maxY);
+        if (!containsPonto(circulo.getCentro())) {
+            return false;
+        }
+        double angleStep = Math.PI / 4;
+        for (int i = 0; i < 8; i++) {
+            double angle = i * angleStep;
+            Ponto edgePoint = new Ponto(
+                    circulo.getCentro().getX() + circulo.getRaio() * Math.cos(angle),
+                    circulo.getCentro().getY() + circulo.getRaio() * Math.sin(angle)
+            );
+            if (!containsPonto(edgePoint)) {
+                return false;
+            }
+        }
+        return true;
     }
+
 
 }
 
