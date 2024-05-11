@@ -26,16 +26,16 @@ public class InicializaJogo {
     public ArenaDeJogo inicializaJogo(Configuracoes config) {
         int largura = config.getLargura();
         int altura = config.getAltura();
-System.out.println("A");
+
         // Criar a Snake
         Snake snake = criaSnake(config);
-        System.out.println("B");
+       
         // Criar obstáculos
         List<Obstaculo> obstaculos = criaObstaculos(config, snake);
-        System.out.println("C");
+        
         // Criar comida inicial verificando a validade da posição
         Comida comidaInicial = criaComidaInicial(config, largura, altura, snake, obstaculos);
-        System.out.println("D");
+       
         // Criar a arena de jogo
 
         return ArenaDeJogo.getInstance(altura, largura, snake, comidaInicial, obstaculos,config.getPontuacaoComida(), config.getTamanhoComida(), config.getTipoComida());
@@ -45,12 +45,10 @@ System.out.println("A");
 
     public Snake criaSnake(Configuracoes config) {
         int xSnake = config.getLargura() / 2;
-        System.out.println(xSnake);
         int ySnake = config.getAltura() / 2;
-        System.out.println(ySnake);
-        System.out.println(config.getTamanhoCabeca());
+     
         Quadrado cabecaSnake = new Quadrado(new Ponto(xSnake, ySnake), config.getTamanhoCabeca());
-        System.out.println("CARALHO");
+        
 
         return Snake.getInstance(cabecaSnake, config.getMovementStrategy());
     }
