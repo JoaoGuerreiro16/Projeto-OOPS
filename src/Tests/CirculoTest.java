@@ -3,8 +3,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
-import Game.Circulo;
-import Game.Ponto;
+import Game.ModelLayer.Circulo;
+import Game.ModelLayer.Ponto;
 import org.junit.jupiter.api.Test;
 
 public class CirculoTest {

@@ -5,9 +5,9 @@ import	static	org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import	org.junit.jupiter.api.Test;
-import Game.Poligono;
-import Game.Ponto;
-import Game.Quadrado;
+import Game.ModelLayer.Poligono;
+import Game.ModelLayer.Ponto;
+import Game.ModelLayer.Quadrado;
 
 public class QuadradoTest {
     @Test

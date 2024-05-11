@@ -1,6 +1,6 @@
 package Tests;
 import org.junit.jupiter.api.Test;
-import Game.Ponto;
+import Game.ModelLayer.Ponto;
 
 import static org.junit.jupiter.api.Assertions.*;
 

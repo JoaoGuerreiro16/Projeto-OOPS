@@ -4,10 +4,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
-import Game.Poligono;
-import Game.Ponto;
-import Game.Quadrado;
-import Game.Triangulo;
+import Game.ModelLayer.Poligono;
+import Game.ModelLayer.Ponto;
+import Game.ModelLayer.Quadrado;
+import Game.ModelLayer.Triangulo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package Tests;
 
-import Game.Celula;
-import Game.EstadoCelula;
+import Game.ModelLayer.Celula;
+import Game.ModelLayer.EstadoCelula;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;

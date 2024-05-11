@@ -1,8 +1,8 @@
 package Tests;
 
-import Game.Obstaculo;
-import Game.Poligono;
-import Game.Ponto;
+import Game.ModelLayer.Obstaculo;
+import Game.ModelLayer.Poligono;
+import Game.ModelLayer.Ponto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

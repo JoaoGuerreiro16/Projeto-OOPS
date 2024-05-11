@@ -5,8 +5,8 @@ import	static	org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import	org.junit.jupiter.api.Test;
-import Game.Ponto;
-import Game.Retangulo;
+import Game.ModelLayer.Ponto;
+import Game.ModelLayer.Retangulo;
 
 public class RetanguloTest {
     @Test

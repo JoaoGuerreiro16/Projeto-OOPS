@@ -2,10 +2,12 @@ package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import Game.Direcao;
+
+import Game.ModelLayer.Direcao;
+import Game.ModelLayer.Quadrado;
+import Game.ModelLayer.Snake;
 import org.junit.jupiter.api.Test;
-import Game.Quadrado;
-import Game.Snake;
+
 
 import java.util.ArrayList;
 import java.util.LinkedList;

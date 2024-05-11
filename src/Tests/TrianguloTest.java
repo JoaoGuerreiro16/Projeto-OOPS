@@ -1,9 +1,10 @@
 package Tests;
 
 import	static	org.junit.jupiter.api.Assertions.*;
+
+import Game.ModelLayer.Ponto;
+import Game.ModelLayer.Triangulo;
 import	org.junit.jupiter.api.Test;
-import Game.Ponto;
-import Game.Triangulo;
 
 import java.util.ArrayList;
 

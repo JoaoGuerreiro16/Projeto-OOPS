@@ -1,8 +1,8 @@
 package Tests;
 
 import org.junit.jupiter.api.Test;
-import Game.Ponto;
-import Game.Reta;
+import Game.ModelLayer.Ponto;
+import Game.ModelLayer.Reta;
 
 import static org.junit.jupiter.api.Assertions.*;
 
