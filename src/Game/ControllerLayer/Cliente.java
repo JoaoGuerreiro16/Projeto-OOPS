@@ -1,13 +1,15 @@
-package Game;
+package Game.ControllerLayer;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import Game.ControllerLayer.Configuracoes;
-import Game.ModelLayer.MovementStrategy.AutomatedMovement;
-import Game.ModelLayer.MovementStrategy.ManualMovement;
+import Game.ModelLayer.MovementStrategy.MovimentoAutomatico;
+import Game.ModelLayer.MovementStrategy.MovimentoManual;
 import Game.ModelLayer.MovementStrategy.MovementStrategy;
+import Game.ModelLayer.MovementStrategy.MovimentoAutomatico;
+import Game.ModelLayer.MovementStrategy.MovimentoManual;
 
 public class Cliente {
         public static Configuracoes obterConfiguracoes() {
@@ -48,14 +50,15 @@ public class Cliente {
                 }
 
                 System.out.println("Escolha o tipo de movimento: 'manual' ou 'automatico'");
-            String tipoMovimento = scanner.next();
+                String tipoMovimento = scanner.next();
+                assert(tipoMovimento.equals("manual") || tipoMovimento.equals("automatico")) : "Só exite movimento manual ou automático";
             MovementStrategy strategy;
             if (tipoMovimento.equalsIgnoreCase("manual")) 
             {
-                strategy = new ManualMovement();
+                strategy = new MovimentoManual();
             } else 
             {
-            strategy = new AutomatedMovement();
+            strategy = new MovimentoAutomatico();
             }
 
             scanner.close();

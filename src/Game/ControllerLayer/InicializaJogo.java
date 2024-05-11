@@ -47,7 +47,7 @@ public class InicializaJogo {
         int ySnake = config.getAltura() / 2;
         Quadrado cabecaSnake = new Quadrado(new Ponto(xSnake, ySnake), config.getTamanhoCabeca());
 
-        Snake snake = Snake.getInstance(cabecaSnake,movementStrategy);
+        Snake snake = Snake.getInstance(cabecaSnake, config.getMovementStrategy());
         return snake;
     }
 
