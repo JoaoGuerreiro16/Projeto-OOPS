@@ -2,6 +2,8 @@
 package Game.ModelLayer;
 import java.util.ArrayList;
 
+import javax.xml.transform.Source;
+
 import Game.ModelLayer.Circulo;
 /**
  * Classe que representa um quadrado como subclasse do retangulo e do poligono.
@@ -36,7 +38,9 @@ public class Quadrado extends Retangulo
     }
 
     public Quadrado(Ponto centroide, double lado) {
+        
         super(calculaPontos(centroide, lado));
+        System.out.println("ui");
         this.lado = lado;
     }
 
@@ -45,16 +49,30 @@ public class Quadrado extends Retangulo
     }
 
     private static ArrayList<Ponto> calculaPontos(Ponto centroide, double lado) {
-        ArrayList<Ponto> pontos = new ArrayList<>();
+        System.out.println(centroide);
+        System.out.println(lado);
+        ArrayList<Ponto> novosPontos = new ArrayList<>();
         double meioLado = lado / 2;
+System.out.println(centroide.getX());
+System.out.println(meioLado);
 
+double c1 = centroide.getX() - meioLado;
+double c2 = centroide.getY() - meioLado;
+System.out.println(c1);
+System.out.println(c2);
+
+Ponto p1 = new Ponto(centroide.getX() - meioLado, centroide.getY() - meioLado);
+Ponto p2 = new Ponto(centroide.getX() + meioLado, centroide.getY() - meioLado);
+Ponto p3 = new Ponto(centroide.getX() + meioLado, centroide.getY() + meioLado);
+Ponto p4 = new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado);
         // Calculando os pontos com base no centroide e no tamanho do lado
-        pontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() - meioLado)); // Top-left
-        pontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() - meioLado)); // Top-right
-        pontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() + meioLado)); // Bottom-right
-        pontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado)); // Bottom-left
+        novosPontos.add(p1); // Top-left
+        novosPontos.add(p2); // Top-right
+        novosPontos.add(p3); // Bottom-right
+        novosPontos.add(p4); // Bottom-left
+        System.out.println(novosPontos);
 
-        return pontos;
+        return novosPontos;
     }
 
     /**

@@ -1,7 +1,7 @@
 package Game.ModelLayer;
 
 public enum EstadoCelula {
-    EMPTY("E"),
+    EMPTY("."),
     FOOD("F"),
     HEAD("H"),
     TAIL("T"),

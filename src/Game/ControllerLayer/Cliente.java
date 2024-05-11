@@ -40,7 +40,7 @@ public class Cliente {
                 int numeroObstaculos = scanner.nextInt();
                 assert (numeroObstaculos >= 1 && numeroObstaculos <= 5) : "Número de obstáculos fora do intervalo permitido (1 a 5).";
 
-                System.out.println("Os obstáculos são dinâmicos? (sim/não):");
+                System.out.println("Os obstáculos são dinâmicos? (sim/nao):");
                 boolean obstaculosDinamicos = scanner.next().equalsIgnoreCase("sim");
 
                 int anguloRotacao = 0;
@@ -61,8 +61,8 @@ public class Cliente {
             strategy = new MovimentoAutomatico();
             }
 
-            scanner.close();
-
+           
+                 System.out.println("1");
                 return new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao,strategy);
             }
 
