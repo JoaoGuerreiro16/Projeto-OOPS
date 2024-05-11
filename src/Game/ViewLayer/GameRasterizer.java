@@ -13,19 +13,19 @@ public class GameRasterizer {
         this.altura = altura;
         this.largura = largura;
         this.grid = new Celula[altura][largura];
-        initGrid();
+
     }
 
-    private void initGrid() {
+
+    public void fillDisplay(Snake snake, Comida comida, List<Obstaculo> obstaculos) {
         for (int i = 0; i < altura; i++) {
             for (int j = 0; j < largura; j++) {
                 grid[i][j] = new Celula(i, j);
                 grid[i][j].setEstado(EstadoCelula.EMPTY);
             }
         }
-    }
 
-    public void fillDisplay(Snake snake, Comida comida, List<Obstaculo> obstaculos) {
+
         for (int i = 0; i < altura; i++) {
             for (int j = 0; j < largura; j++) {
                 grid[i][j] = new Celula(i, j);

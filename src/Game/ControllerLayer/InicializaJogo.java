@@ -37,9 +37,10 @@ System.out.println("A");
         Comida comidaInicial = criaComidaInicial(config, largura, altura, snake, obstaculos);
         System.out.println("D");
         // Criar a arena de jogo
-        ArenaDeJogo arena =  ArenaDeJogo.getInstance(altura, largura, snake, comidaInicial, obstaculos,config.getPontuacaoComida(), config.getTamanhoComida(), config.getTipoComida());
-        System.out.println("E");
-        return arena;
+
+        return ArenaDeJogo.getInstance(altura, largura, snake, comidaInicial, obstaculos,config.getPontuacaoComida(), config.getTamanhoComida(), config.getTipoComida());
+
+        
     }
 
     public Snake criaSnake(Configuracoes config) {
@@ -51,8 +52,7 @@ System.out.println("A");
         Quadrado cabecaSnake = new Quadrado(new Ponto(xSnake, ySnake), config.getTamanhoCabeca());
         System.out.println("CARALHO");
 
-        Snake snake = Snake.getInstance(cabecaSnake, config.getMovementStrategy());
-        return snake;
+        return Snake.getInstance(cabecaSnake, config.getMovementStrategy());
     }
 
     public List<Obstaculo> criaObstaculos(Configuracoes config,Snake snake) {
