@@ -26,32 +26,36 @@ public class InicializaJogo {
     public ArenaDeJogo inicializaJogo(Configuracoes config) {
         int largura = config.getLargura();
         int altura = config.getAltura();
-
+System.out.println("A");
         // Criar a Snake
         Snake snake = criaSnake(config);
-
+        System.out.println("B");
         // Criar obstáculos
         List<Obstaculo> obstaculos = criaObstaculos(config, snake, largura, altura);
-
+        System.out.println("C");
         // Criar comida inicial verificando a validade da posição
         Comida comidaInicial = criaComidaInicial(config, largura, altura, snake, obstaculos);
-
+        System.out.println("D");
         // Criar a arena de jogo
         ArenaDeJogo arena =  ArenaDeJogo.getInstance(altura, largura, snake, comidaInicial, obstaculos,config.getPontuacaoComida(), config.getTamanhoComida(), config.getTipoComida());
-
+        System.out.println("E");
         return arena;
     }
 
-    private Snake criaSnake(Configuracoes config) {
+    public Snake criaSnake(Configuracoes config) {
         int xSnake = config.getLargura() / 2;
+        System.out.println(xSnake);
         int ySnake = config.getAltura() / 2;
+        System.out.println(ySnake);
+        System.out.println(config.getTamanhoCabeca());
         Quadrado cabecaSnake = new Quadrado(new Ponto(xSnake, ySnake), config.getTamanhoCabeca());
+        System.out.println("CARALHO");
 
         Snake snake = Snake.getInstance(cabecaSnake, config.getMovementStrategy());
         return snake;
     }
 
-    private List<Obstaculo> criaObstaculos(Configuracoes config, Snake snake, int largura, int altura) {
+    public List<Obstaculo> criaObstaculos(Configuracoes config, Snake snake, int largura, int altura) {
         List<Obstaculo> obstaculos = new ArrayList<>();
         int tentativasMax = 100; // Número de tentativas para colocar um obstáculo sem sobreposição
 
@@ -68,7 +72,7 @@ public class InicializaJogo {
         return obstaculos;
     }
 
-    private Poligono gerarPoligonoAleatorio(Configuracoes config) {
+    public Poligono gerarPoligonoAleatorio(Configuracoes config) {
         int numVertices = random.nextInt(3) + 3; // Triângulo a pentágono
         ArrayList<Ponto> pontos = new ArrayList<>();
         int centerX = random.nextInt(config.getLargura());
@@ -84,7 +88,7 @@ public class InicializaJogo {
         return new Poligono(pontos);
     }
 
-    private boolean isPosicaoValidaParaObstaculos(Poligono poligono, List<Obstaculo> obstaculos, Configuracoes config, Snake snake, int largura, int altura) {
+    public boolean isPosicaoValidaParaObstaculos(Poligono poligono, List<Obstaculo> obstaculos, Configuracoes config, Snake snake, int largura, int altura) {
         if (!isDentroDaArena(poligono, largura, altura)) {
             return false;
         }
@@ -104,7 +108,7 @@ public class InicializaJogo {
         return true;
     }
 
-    private Comida criaComidaInicial(Configuracoes config, int largura, int altura, Snake snake, List<Obstaculo> obstaculos) {
+    public Comida criaComidaInicial(Configuracoes config, int largura, int altura, Snake snake, List<Obstaculo> obstaculos) {
         int tentativasMax = 100;
         Comida comida;
         int x;
@@ -131,7 +135,7 @@ public class InicializaJogo {
         throw new RuntimeException("Não foi possível inicializar a comida em uma posição válida.");
     }
 
-    private boolean isPosicaoValidaParaComida(Comida comida, Snake snake, List<Obstaculo> obstaculos, int largura, int altura) {
+    public boolean isPosicaoValidaParaComida(Comida comida, Snake snake, List<Obstaculo> obstaculos, int largura, int altura) {
         if (!isDentroDaArena(comida, largura, altura)) {
             return false;
         }
@@ -150,7 +154,7 @@ public class InicializaJogo {
         return true;
     }
 
-    private boolean isDentroDaArena(Object object, int largura, int altura) {
+    public boolean isDentroDaArena(Object object, int largura, int altura) {
         if (object instanceof Poligono) {
             return isDentroDaArena((Poligono)object, largura, altura);
         } else if (object instanceof Quadrado) {
@@ -168,7 +172,7 @@ public class InicializaJogo {
         return false;
     }
 
-    private boolean isDentroDaArena(Poligono poligono, int largura, int altura) {
+    public boolean isDentroDaArena(Poligono poligono, int largura, int altura) {
         for (Ponto ponto : poligono.getPontos()) {
             if (!isDentroDosLimites(ponto, largura, altura)) {
                 return false;
@@ -177,7 +181,7 @@ public class InicializaJogo {
         return true;
     }
 
-    private boolean isDentroDaArena(Quadrado quadrado, int largura, int altura) {
+    public boolean isDentroDaArena(Quadrado quadrado, int largura, int altura) {
         for (Ponto ponto : quadrado.getPontos()) {
             if (!isDentroDosLimites(ponto, largura, altura)) {
                 return false;
@@ -186,12 +190,12 @@ public class InicializaJogo {
         return true;
     }
 
-    private boolean isDentroDaArena(Circulo circulo, int largura, int altura) {
+    public boolean isDentroDaArena(Circulo circulo, int largura, int altura) {
         Quadrado quadradoProtetor = circulo.criaQuadradoProtetor(circulo);
         return isDentroDaArena(quadradoProtetor, largura, altura);
     }
 
-    private boolean isDentroDosLimites(Ponto ponto, int largura, int altura) {
+    public boolean isDentroDosLimites(Ponto ponto, int largura, int altura) {
         return ponto.getX() >= 0 && ponto.getX() <= largura && ponto.getY() >= 0 && ponto.getY() <= altura;
     }
     

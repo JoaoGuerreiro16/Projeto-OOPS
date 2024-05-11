@@ -13,8 +13,7 @@ import java.util.Objects;
  *
  */
 public class Ponto {
-    private int x,y;
-    private double x_db,y_db;
+    private double x,y;
 
     /**
      * Construtor da classe Ponto com coordenadas do tipo double.
@@ -23,38 +22,14 @@ public class Ponto {
      * @param x_db coordenada x do ponto.
      * @param y_db coordenada y do ponto.
      */
-    public Ponto(double x_db,double y_db)
+    public Ponto(double x,double y)
     {
-        check(x,y);
-        setX_db(x_db);
-        setY_db(y_db);
-    }
-
-    /**
-     * Construtor da classe Ponto.
-     * Define as coordenadas x e y do ponto.
-     *
-     * @param x coordenada x do ponto.
-     * @param y coordenada y do ponto.
-     */
-    public Ponto(int x, int y){
-
-        check(x,y);
+       
         setX(x);
         setY(y);
     }
-    /**
-     * Método privado para verificar se as coordenadas são iguais e substituir, se necessário.
-     *
-     * @param x Coordenada x do ponto.
-     * @param y Coordenada y do ponto.
-     */
-    private void check(double x, double y)
-    {
-        if(Math.abs(x-y) < Math.pow(10, -9))
-            x = y;
-    }
 
+ 
     /**
      * Calcula a distância entre este ponto e outro ponto dado.
      *
@@ -67,72 +42,39 @@ public class Ponto {
 
         return Math.sqrt(dx*dx + dy*dy);
     }
-    /**
-     * Obtém a coordenada x do ponto.
-     *
-     * @return Coordenada x do ponto.
-     */
-    public int getX() {
-        return x;
-    }
-
-    /**
-     * Define a coordenada x do ponto.
-     *
-     * @param x Nova coordenada x do ponto.
-     */
-    public void setX(int x) {
-
-        this.x = x;
-    }
-    /**
-     * Obtém a coordenada y do ponto.
-     *
-     * @return Coordenada y do ponto.
-     */
-    public int getY() {
-        return y;
-    }
-    /**
-     * Define a coordenada y do ponto.
-     *
-     * @param y Nova coordenada y do ponto.
-     */
-    public void setY(int y) {
-
-        this.y = y;
-    }
+    
+   
     /**
      * Obtém a coordenada x do ponto como double.
      *
      * @return Coordenada x do ponto como double.
      */
-    public double getX_db() {
-        return x_db;
+    public double getX() {
+        return x;
     }
     /**
      * Define a coordenada x do ponto como double.
      *
      * @param x_db Nova coordenada x do ponto como double.
      */
-    public void setX_db(double x_db) {
-        this.x_db = x_db;
+    public void setX(double x) {
+        this.x = x;
     }
     /**
      * Obtém a coordenada y do ponto como double.
      *
      * @return Coordenada y do ponto como double.
      */
-    public double getY_db() {
-        return y_db;
+    public double getY() {
+        return y;
     }
     /**
      * Define a coordenada y do ponto como double.
      *
      * @param y_db Nova coordenada y do ponto como double.
      */
-    public void setY_db(double y_db) {
-        this.y_db = y_db;
+    public void setY(double y) {
+        this.y = y;
     }
     /**
      * Verifica se este ponto é igual a outro objeto.
@@ -176,8 +118,8 @@ public class Ponto {
     public Ponto rotacaoPonto(int anguloGraus, Ponto centroide) {
         double angleRadians = Math.toRadians(anguloGraus);
 
-        int x = (int) Math.round((centroide.getX_db() + ((getX() - centroide.getX_db()) * Math.cos(angleRadians) - (getY() - centroide.getY_db()) * Math.sin(angleRadians))));
-        int y = (int) Math.round((centroide.getY_db() + (((getX() - centroide.getX_db()) * Math.sin(angleRadians) + (getY() - centroide.getY_db()) * Math.cos(angleRadians)))));
+        int x = (int) Math.round((centroide.getX() + ((getX() - centroide.getX()) * Math.cos(angleRadians) - (getY() - centroide.getY()) * Math.sin(angleRadians))));
+        int y = (int) Math.round((centroide.getY() + (((getX() - centroide.getX()) * Math.sin(angleRadians) + (getY() - centroide.getY()) * Math.cos(angleRadians)))));
 
         return new Ponto(x, y);
     }
