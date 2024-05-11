@@ -30,7 +30,7 @@ public class GameMain {
             if (config.getMovementStrategy() instanceof MovimentoManual) {
                 System.out.println("Digite a nova direção (W, A, S, D): ");
 
-                String direcao = scanner.nextLine().toUpperCase();
+                String direcao = scanner.next().toUpperCase();
                 switch (direcao) {
                     case "W":
                         ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.UP);
@@ -47,5 +47,6 @@ public class GameMain {
                 }
             }
         }
+        scanner.close();
     }
 }

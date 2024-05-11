@@ -31,7 +31,7 @@ System.out.println("A");
         Snake snake = criaSnake(config);
         System.out.println("B");
         // Criar obstáculos
-        List<Obstaculo> obstaculos = criaObstaculos(config, snake, largura, altura);
+        List<Obstaculo> obstaculos = criaObstaculos(config, snake);
         System.out.println("C");
         // Criar comida inicial verificando a validade da posição
         Comida comidaInicial = criaComidaInicial(config, largura, altura, snake, obstaculos);
@@ -55,7 +55,7 @@ System.out.println("A");
         return snake;
     }
 
-    public List<Obstaculo> criaObstaculos(Configuracoes config, Snake snake, int largura, int altura) {
+    public List<Obstaculo> criaObstaculos(Configuracoes config,Snake snake) {
         List<Obstaculo> obstaculos = new ArrayList<>();
         int tentativasMax = 100; // Número de tentativas para colocar um obstáculo sem sobreposição
 
@@ -63,7 +63,7 @@ System.out.println("A");
             boolean obstaculoAdicionado = false;
             for (int tentativa = 0; tentativa < tentativasMax && !obstaculoAdicionado; tentativa++) {
                 Poligono poligono = gerarPoligonoAleatorio(config);
-                if (isPosicaoValidaParaObstaculos(poligono, obstaculos, config, snake, largura, altura)) {
+                if (isPosicaoValidaParaObstaculos(poligono, obstaculos, config,snake)) {
                     obstaculos.add(new Obstaculo(poligono, config.isObstaculosDinamicos(), config.getAnguloRotacao(), poligono.calcularCentro()));
                     obstaculoAdicionado = true;
                 }
@@ -77,7 +77,7 @@ System.out.println("A");
         ArrayList<Ponto> pontos = new ArrayList<>();
         int centerX = random.nextInt(config.getLargura());
         int centerY = random.nextInt(config.getAltura());
-        int raio = random.nextInt(15) + 5; // Tamanho aleatório do polígono
+        int raio = random.nextInt(5) + 2; // Tamanho aleatório do polígono
 
         for (int i = 0; i < numVertices; i++) {
             double angulo = 2 * Math.PI * i / numVertices;
@@ -88,8 +88,8 @@ System.out.println("A");
         return new Poligono(pontos);
     }
 
-    public boolean isPosicaoValidaParaObstaculos(Poligono poligono, List<Obstaculo> obstaculos, Configuracoes config, Snake snake, int largura, int altura) {
-        if (!isDentroDaArena(poligono, largura, altura)) {
+    public boolean isPosicaoValidaParaObstaculos(Poligono poligono, List<Obstaculo> obstaculos, Configuracoes config,Snake snake) {
+        if (!isDentroDaArena(poligono, config.getLargura(), config.getAltura())) {
             return false;
         }
 
@@ -99,10 +99,8 @@ System.out.println("A");
             }
         }
 
-        for (Quadrado parte : snake.getSnake()) {
-            if (poligono.intercetaPoligono(parte)) {
-                return false;
-            }
+        if (poligono.intercetaPoligono(snake.getSnake().getFirst())) {
+            return false;
         }
 
         return true;
