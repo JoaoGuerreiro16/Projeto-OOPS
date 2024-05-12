@@ -25,7 +25,7 @@ public class ComidaCirculo extends Comida{
     @Override
     public boolean interceta(Poligono poligono){
 
-       Quadrado quadrado = this.circulo.criaQuadradoProtetor(circulo);
+       Quadrado quadrado = this.circulo.criaQuadradoProtetor();
        return quadrado.intercetaPoligono(poligono);
 
     }

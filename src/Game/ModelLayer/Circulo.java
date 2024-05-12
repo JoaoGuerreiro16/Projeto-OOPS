@@ -57,7 +57,7 @@ public class Circulo {
     }
 
 
-    public Quadrado criaQuadradoProtetor(Circulo circulo){
+    public Quadrado criaQuadradoProtetor(){
 
         return new Quadrado(this.centro, this.raio * 2);
     }

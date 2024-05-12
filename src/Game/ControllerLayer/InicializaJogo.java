@@ -88,12 +88,12 @@ public class InicializaJogo {
         }
 
         for (Obstaculo obst : obstaculos) {
-            if (poligono.intercetaPoligono(obst.getPoligono())) {
+            if (poligono.contains(obst.getPoligono())) {
                 return false;
             }
         }
 
-        if (poligono.intercetaPoligono(snake.getSnake().getFirst())) {
+        if (poligono.contains(snake.getSnake().getFirst())) {
             return false;
         }
 
@@ -102,52 +102,83 @@ public class InicializaJogo {
 
     public Comida criaComidaInicial(Configuracoes config, int largura, int altura, Snake snake, List<Obstaculo> obstaculos) {
         int tentativasMax = 100;
-        Comida comida;
-        int x;
-        int y;
-        String tipoComida;
-        Ponto posicao;
-        for (int tentativas = 0; tentativas < tentativasMax; tentativas++) {
-             x = random.nextInt(largura);
-             y = random.nextInt(altura);
-             posicao = new Ponto(x, y);
-             tipoComida = config.getTipoComida();
-            
-            if(tipoComida.equals("quadrado")){
-               comida = new ComidaQuadrado(new Quadrado(posicao, config.getTamanhoComida()), config.getPontuacaoComida()); 
-            } else{
-               
-               comida = new ComidaCirculo(new Circulo(posicao, config.getTamanhoComida() / 2.0), config.getPontuacaoComida());
-             
-            }
-        
-           
-            if (isPosicaoValidaParaComida(comida, snake, obstaculos, largura, altura)) {
-                return comida;
+        Comida comida = null;
+
+        for (int tentativas = 0; tentativas < tentativasMax && comida == null; tentativas++) {
+            int x = random.nextInt(largura);
+            int y = random.nextInt(altura);
+            Ponto posicao = new Ponto(x, y);
+            String tipoComida = config.getTipoComida();
+
+            if (tipoComida.equals("quadrado")) {
+                ComidaQuadrado comidaPotencial = new ComidaQuadrado(new Quadrado(posicao, config.getTamanhoComida()), config.getPontuacaoComida());
+                if (isPosicaoValidaParaComidaQuadrada(comidaPotencial, snake, obstaculos, largura, altura)) {
+                    comida = comidaPotencial;
+                }
+            } else {
+                ComidaCirculo comidaPotencial = new ComidaCirculo(new Circulo(posicao, config.getTamanhoComida() / 2.0), config.getPontuacaoComida());
+                if (isPosicaoValidaParaComidaCirculo(comidaPotencial, snake, obstaculos, largura, altura)) {
+                    comida = comidaPotencial;
+                }
             }
         }
-        throw new RuntimeException("Não foi possível inicializar a comida em uma posição válida.");
+
+        if (comida == null) {
+            throw new RuntimeException("Não foi possível inicializar a comida em uma posição válida após " + tentativasMax + " tentativas.");
+        }
+
+        return comida;
     }
 
-    public boolean isPosicaoValidaParaComida(Comida comida, Snake snake, List<Obstaculo> obstaculos, int largura, int altura) {
+
+
+
+
+
+
+
+    public boolean isPosicaoValidaParaComidaQuadrada(ComidaQuadrado comida, Snake snake, List<Obstaculo> obstaculos, int largura, int altura) {
         if (!isDentroDaArena(comida, largura, altura)) {
             return false;
         }
 
 
         for (Quadrado parte : snake.getSnake()) {
-            if (comida.interceta(parte)) {
+            if (comida.getQuadrado().contains(parte)) {
                 return false;
             }
         }
 
         for (Obstaculo obst : obstaculos) {
-            if (comida.interceta(obst.getPoligono())) {
+            if (comida.getQuadrado().contains(obst.getPoligono())) {
                 return false;
             }
         }
         return true;
     }
+    public boolean isPosicaoValidaParaComidaCirculo(ComidaCirculo comida, Snake snake, List<Obstaculo> obstaculos, int largura, int altura) {
+       Quadrado quadradoProtetor = comida.getCirculo().criaQuadradoProtetor();
+
+        if (!isDentroDaArena(comida, largura, altura)) {
+            return false;
+        }
+
+
+        for (Quadrado parte : snake.getSnake()) {
+            if (quadradoProtetor.contains(parte)) {
+                return false;
+            }
+        }
+
+        for (Obstaculo obst : obstaculos) {
+            if (quadradoProtetor.contains(obst.getPoligono())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 
     public boolean isDentroDaArena(Object object, int largura, int altura) {
         if (object instanceof Poligono) {
@@ -184,7 +215,7 @@ public class InicializaJogo {
     }
 
     public boolean isDentroDaArena(Circulo circulo, int largura, int altura) {
-        Quadrado quadradoProtetor = circulo.criaQuadradoProtetor(circulo);
+        Quadrado quadradoProtetor = circulo.criaQuadradoProtetor();
         return isDentroDaArena(quadradoProtetor, largura, altura);
     }
 

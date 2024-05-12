@@ -160,36 +160,5 @@ public boolean containsPonto(Ponto ponto) {
 
 
 
-public boolean containsQuadrado(Quadrado quadrado) {
-    boolean allPointsContained = true;  
-
-    for (Ponto ponto : quadrado.getPontos()) {
-        if (!this.containsPonto(ponto)) {
-            allPointsContained = false;
-            break; 
-        }
-    }
-    return (allPointsContained || (allPointsContained && this.intercetaPoligono(quadrado)));
-}
-
-    public boolean containsCircle(Circulo circulo) {
-        if (!containsPonto(circulo.getCentro())) {
-            return false;
-        }
-        double angleStep = Math.PI / 8;
-        for (int i = 0; i < 8; i++) {
-            double angle = i * angleStep;
-            Ponto edgePoint = new Ponto(
-                    circulo.getCentro().getX() + circulo.getRaio() * Math.cos(angle),
-                    circulo.getCentro().getY() + circulo.getRaio() * Math.sin(angle)
-            );
-            if (!containsPonto(edgePoint)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-
 }
 

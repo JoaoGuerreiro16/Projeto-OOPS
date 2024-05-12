@@ -93,7 +93,7 @@ public class Snake {
 
         Quadrado cabeca = snake.getFirst();
              for (int i = 3; i < snake.size(); i++) {
-                 if (cabeca.intercetaPoligono(snake.get(i)) || cabeca.containsQuadrado(snake.get(i))) {
+                 if (cabeca.intercetaPoligono(snake.get(i)) || cabeca.contains(snake.get(i))) {
                      return true;
                  }
              }
@@ -111,7 +111,7 @@ public class Snake {
 
         boolean result = false;
          for (Quadrado partes : snake) {
-           if (partes.containsQuadrado(comida.getQuadrado()))
+           if (partes.contains(comida.getQuadrado()))
            return true;
          }
 
@@ -121,8 +121,9 @@ public class Snake {
 
     public boolean containsCirculo(ComidaCirculo comida){
         boolean result = false;
+        Circulo circulo = comida.getCirculo();
         for (Quadrado partes : snake) {
-            if (partes.containsCircle(comida.getCirculo()))
+            if (partes.contains(comida.getCirculo().criaQuadradoProtetor()))
             return true;
           };
 
