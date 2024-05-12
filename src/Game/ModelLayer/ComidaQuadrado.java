@@ -23,7 +23,8 @@ public class ComidaQuadrado extends Comida{
     @Override
     public boolean isConsumed(Snake snake) {
 
-        return snake.containsQuadrado(this);
+
+        return (snake.containsQuadrado(this));
     }
 
     @Override
@@ -38,4 +39,6 @@ public class ComidaQuadrado extends Comida{
     {
         return quadrado.containsPonto(ponto);
     }
+
+
 }

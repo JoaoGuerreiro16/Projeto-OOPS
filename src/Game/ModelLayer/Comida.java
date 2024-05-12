@@ -31,7 +31,8 @@ public abstract class Comida {
     }
 
     public abstract boolean containsPonto(Ponto ponto);
-
+    
+    
     public abstract boolean isConsumed(Snake snake);
 
     public abstract boolean interceta(Poligono poligono);
