@@ -45,7 +45,7 @@ public class Cliente {
 
                 System.out.println("Digite o número de obstáculos(1 a 5):");
                 int numeroObstaculos = scanner.nextInt();
-                if(numeroObstaculos <= 1 || numeroObstaculos >= 5){
+                if(numeroObstaculos < 1 || numeroObstaculos > 5){
                     throw new IllegalArgumentException("A arena so tem entre 1 a 5 obstáculos");
                 }
 

@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * Classe que representa um triangulo como subclasse de um poligono.
  *
  *
- * @author Tomás Luz
+ * @author Tomás Luz & Joao Guerreiro
  *
  * @version 1.0 01/04/2024
  *
@@ -111,7 +111,6 @@ public class Triangulo extends Poligono
     @Override
     public Triangulo translacaoCentroide(double novoCentroideX, double novoCentroideY){
 
-        ArrayList<Ponto> newPontos = new ArrayList<>();
         Ponto centroidePoligono = calcularCentro();
         double deslocamentoX = novoCentroideX - centroidePoligono.getX();
         double deslocamentoY = novoCentroideY - centroidePoligono.getY();
@@ -119,6 +118,16 @@ public class Triangulo extends Poligono
         return translacao(deslocamentoX, deslocamentoY);
 
     }
+    /**
+ * Verifica se um ponto específico está dentro de um triângulo formado por três pontos.
+ * Esta verificação é feita utilizando a área do triângulo. Se a soma das áreas dos três
+ * triângulos menores formados entre o ponto de teste e os vértices do triângulo é igual à área
+ * total do triângulo, então o ponto está dentro do triângulo.
+ *
+ * @param p O ponto a ser verificado.
+ * @return true se o ponto p estiver dentro do triângulo, false caso contrário.
+ */
+
     @Override
     public boolean containsPonto(Ponto p) {
         Ponto p0 = pontos.get(0);

@@ -9,7 +9,7 @@ import Game.ModelLayer.Circulo;
  * Classe que representa um quadrado como subclasse do retangulo e do poligono.
  *
  *
- * @author Tomás Luz
+ * @author Tomás Luz & Joao Guerreiro
  *
  * @version 1.0 01/04/2024
  *
@@ -47,6 +47,21 @@ public class Quadrado extends Retangulo
     public double getLado() {
         return lado;
     }
+
+    /**
+ * Calcula e retorna os vértices de um quadrado com base em seu ponto central e o comprimento do lado.
+ *
+ * Este método gera uma lista de pontos que representam os quatro cantos de um quadrado.
+ * O quadrado é definido de tal maneira que o ponto passado como argumento seja o seu centro geométrico.
+ * Isso é alcançado deslocando-se metade do comprimento do lado do quadrado para fora do centro em todas as quatro direções
+ * (para cima, para baixo, para esquerda, para a direita), formando assim um quadrado centrado no ponto dado.
+ *
+ * @param centroide O ponto que serve como centro do quadrado.
+ * @param lado O comprimento do lado do quadrado.
+ * @return ArrayList<Ponto> Lista de pontos representando os quatro cantos do quadrado.
+ *         Os pontos são adicionados na seguinte ordem: superior esquerdo, superior direito, 
+ *         inferior direito e inferior esquerdo.
+ */
 
     private static ArrayList<Ponto> calculaPontos(Ponto centroide, double lado) {
         ArrayList<Ponto> novosPontos = new ArrayList<>();
@@ -141,6 +156,14 @@ public class Quadrado extends Retangulo
 
     }
 
+
+    /**
+ * Verifica se um ponto específico está contido dentro dos limites definidos pelo polígono.
+ *
+ * @param ponto O ponto a ser verificado.
+ * @return true se o ponto estiver dentro dos limites do polígono, false caso contrário.
+ */
+
     @Override
 public boolean containsPonto(Ponto ponto) {
     double minX;
@@ -158,7 +181,12 @@ public boolean containsPonto(Ponto ponto) {
            (ponto.getY() >= minY && ponto.getY() <= maxY);
 }
 
-
+/**
+ * Verifica se todos os pontos de um quadrado estão contidos dentro de um polígono.
+ *
+ * @param quadrado O quadrado cujos pontos serão verificados.
+ * @return true se todos os pontos do quadrado estão contidos no polígono ou se o quadrado intercepta o polígono, false caso contrário.
+ */
 
 public boolean containsQuadrado(Quadrado quadrado) {
     boolean allPointsContained = true;  
@@ -171,6 +199,12 @@ public boolean containsQuadrado(Quadrado quadrado) {
     }
     return (allPointsContained || (allPointsContained && this.intercetaPoligono(quadrado)));
 }
+/**
+ * Verifica se um círculo está completamente contido dentro do polígono.
+ *
+ * @param circulo O círculo a ser verificado.
+ * @return true se todos os pontos-chave do círculo estiverem contidos dentro do polígono, false caso contrário.
+ */
 
     public boolean containsCircle(Circulo circulo) {
         if (!containsPonto(circulo.getCentro())) {

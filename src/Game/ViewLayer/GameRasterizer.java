@@ -4,6 +4,15 @@ import java.util.List;
 
 import Game.ModelLayer.*;
 
+
+/**
+ * Classe responsável por rasterizar o estado do jogo em uma matriz de células, onde cada célula
+ * representa um estado visual do jogo, como parte da cobra, comida ou obstáculos.
+ * Esta classe é fundamental para converter o modelo lógico do jogo em uma representação visual que pode ser exibida.
+ * @author Tomas Luz & Joao Guerreiro
+ * @version 1.0
+ */
+
 public class GameRasterizer {
     private Celula[][] grid;
     private int altura;
@@ -23,6 +32,13 @@ public class GameRasterizer {
 
     private int largura;
 
+
+    /**
+     * Construtor da classe GameRasterizer.
+     * Inicializa a matriz de células com a altura e largura especificadas.
+     * @param altura Altura da grade.
+     * @param largura Largura da grade.
+     */
     public GameRasterizer(int altura, int largura) {
         this.altura = altura;
         this.largura = largura;
@@ -30,6 +46,14 @@ public class GameRasterizer {
 
     }
 
+
+    /**
+     * Preenche a grade de exibição baseada nos estados do jogo, como a posição da cobra,
+     * localização da comida e posicionamento dos obstáculos.
+     * @param snake A cobra do jogo.
+     * @param comida A comida no jogo.
+     * @param obstaculos Lista de obstáculos presentes no jogo.
+     */
 
     public void fillDisplay(Snake snake, Comida comida, List<Obstaculo> obstaculos) {
         for (int i = 0; i < altura; i++) {

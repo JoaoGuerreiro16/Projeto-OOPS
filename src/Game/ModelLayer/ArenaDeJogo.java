@@ -5,6 +5,14 @@ import java.util.Random;
 
 import Game.ModelLayer.Pontuacao;
 
+/**
+ * Classe que gerencia o ambiente de jogo, incluindo a configuração do jogo,
+ * estado do jogo, e progressão do jogo através de interações do jogador e eventos automáticos.
+ *
+ * @author Tomás Luz e Joao Guerreiro
+ * @version 1.0
+ */
+
 public class ArenaDeJogo {
 
     private static ArenaDeJogo instance;
@@ -20,6 +28,18 @@ public class ArenaDeJogo {
     private boolean jogoAtivo;
     private Random rand = new Random();
 
+   /**
+     * Construtor privado para a classe ArenaDeJogo para garantir o uso do padrão Singleton.
+     *
+     * @param altura Altura da arena.
+     * @param largura Largura da arena.
+     * @param snake Referência à cobra no jogo.
+     * @param comida Comida inicial na arena.
+     * @param obstaculos Lista inicial de obstáculos na arena.
+     * @param pontuacaoComida Valor de pontuação para cada comida consumida.
+     * @param tamanhoComida Tamanho da comida colocada na arena.
+     * @param tipoComida Tipo da comida.
+     */
 
     private ArenaDeJogo(int altura, int largura, Snake snake, Comida comida, List<Obstaculo> obstaculos, int pontuacaoComida, double tamanhoComida, String tipoComida) {
 
@@ -34,6 +54,12 @@ public class ArenaDeJogo {
         this.tamanhoComida = tamanhoComida;
         this.tipoComida = tipoComida;
     }
+
+    /**
+     * Método estático para obter a instância única da classe ArenaDeJogo.
+     *
+     * @return A única instância de ArenaDeJogo.
+     */
 
     public static ArenaDeJogo getInstance(int altura, int largura, Snake snake, Comida comida, List<Obstaculo> obstaculos, int pontuacaoComida, double tamanhoComida, String tipoComida){
 
@@ -76,6 +102,11 @@ public class ArenaDeJogo {
         return jogoAtivo;
     }
 
+    /**
+ * Atualiza o estado do jogo em cada ciclo do loop principal. Este método gerencia o movimento da cobra,
+ * verifica colisões, consome comida e adiciona nova comida se necessário.
+ */
+    
     public void atualizarJogo(){
         if(!jogoAtivo){
             return;
@@ -98,6 +129,12 @@ public class ArenaDeJogo {
         }
 
     }
+
+    /**
+ * Verifica se a cabeça da cobra colidiu com algum dos obstáculos presentes na arena.
+ * Esta função é chamada a cada atualização do jogo para garantir que as colisões com obstáculos sejam tratadas imediatamente.
+ */
+
     public void colisaoObstaculo(){
 
         Quadrado cabeca = snake.getSnake().getFirst();
@@ -108,12 +145,24 @@ public class ArenaDeJogo {
             }
         }
 
+        /**
+ * Verifica se a cobra colidiu consigo mesma.
+ * Este método é chamado a cada atualização do jogo para garantir que a auto-colisão seja tratada imediatamente.
+ * A auto-colisão ocorre quando a cabeça da cobra intercepta qualquer parte de seu próprio corpo.
+ */
+
      public void colisaoConsigoMesma(){
 
         if(snake.intercetaSnake()){
             perdeuJogo("A snake colidiu consigo mesma");
         }
      }
+
+     /**
+ * Verifica se a cabeça da cobra colidiu com as paredes da arena.
+ * Este método é utilizado para garantir que as colisões com as bordas da arena sejam tratadas imediatamente,
+ * prevenindo que a cobra "escape" do espaço de jogo definido.
+ */
 
         public void colisaoParede(){
         Quadrado cabeca = snake.getSnake().getFirst();
@@ -125,13 +174,26 @@ public class ArenaDeJogo {
         }
 
         }
+
+        /**
+ * Agrupa as verificações de todas as possíveis colisões: consigo mesma, com obstáculos e com as paredes da arena.
+ * Este método é chamado em cada ciclo de atualização do jogo para verificar todas as colisões possíveis.
+ */
+
         public void colisoes(){
         colisaoConsigoMesma();
         colisaoObstaculo();
         colisaoParede();
         }
 
-        /** provavelmente tem bug**/
+        /**
+     * Verifica se um determinado ponto é uma posição válida para adicionar comida, considerando
+     * a proximidade com a borda da arena, obstáculos e a cobra.
+     *
+     * @param ponto O ponto a ser verificado.
+     * @return true se o ponto é válido para colocar comida, false caso contrário.
+     */
+
         public boolean isPosicaoValidaPonto(Ponto ponto){
 
             if(ponto.getX() < (double) largura /10 || ponto.getX() > largura - ((double) largura /10)|| ponto.getY() < (double) altura /10 || ponto.getY() > altura - (altura/10)){
@@ -154,6 +216,14 @@ public class ArenaDeJogo {
             return true;
         }
 
+        /**
+     * Verifica se a comida colide com qualquer obstáculo ou parte da cobra.
+     *
+     * @param comida A comida a ser verificada.
+     * @return true se a comida interceta algum obstáculo ou a cobra, false caso contrário.
+     */
+
+
     public boolean interceptaObstaculosOuSnake(Comida comida) {
 
         for (Obstaculo obstaculo : obstaculos) {
@@ -170,6 +240,12 @@ public class ArenaDeJogo {
 
         return false;
     }
+
+    /**
+     * Tenta adicionar uma nova comida à arena verificando se a posição escolhida é válida.
+     *
+     * @return true se a comida foi adicionada com sucesso, false se não foi possível adicionar após várias tentativas.
+     */
 
     public boolean adicionarComida() {
 
@@ -205,6 +281,10 @@ public class ArenaDeJogo {
 
     }
 
+    /**
+     * Atualiza a posição dos obstáculos dinâmicos, aplicando rotação conforme definido.
+     */
+
     public void atualizarObstaculos() {
         for (Obstaculo obstaculo : obstaculos) {
             if (obstaculo.isDinamico()) {
@@ -212,6 +292,7 @@ public class ArenaDeJogo {
             }
         }
     }
+
 
     public void ganhouJogo(){
             jogoAtivo = false;

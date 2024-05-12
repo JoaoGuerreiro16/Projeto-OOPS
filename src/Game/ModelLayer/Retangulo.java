@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Classe que representa um retângulo como subclasse de um poligono.
  *
- * @author Tomás Luz
+ * @author Tomás Luz & Joao Guerreiro
  *
  * @version 1.0 01/04/2024
  *
@@ -162,6 +162,20 @@ public class Retangulo extends Poligono {
         return translacao(deslocamentoX, deslocamentoY);
 
     }
+
+    /**
+ * Verifica se um ponto está contido dentro dos limites definidos pelos vértices de um polígono.
+ * O método itera sobre cada vértice do polígono para determinar os valores mínimos e máximos
+ * para as coordenadas x e y, que representam os limites do polígono.
+ *
+ * @param p O ponto a ser verificado.
+ * @return true se o ponto estiver dentro dos limites do polígono, false caso contrário.
+ * 
+ * Este método percorre todos os vértices do polígono, atualizando os valores mínimos e máximos
+ * para x e y com base nos valores dos vértices. Uma vez determinados os valores mínimos e máximos,
+ * o método verifica se as coordenadas x e y do ponto fornecido estão entre os valores mínimos e máximos,
+ * o que indicaria que o ponto está dentro dos limites do polígono.
+ */
 
     @Override
     public boolean containsPonto(Ponto p) {

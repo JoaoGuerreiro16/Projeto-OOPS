@@ -8,7 +8,7 @@ import java.util.Objects;
  * o perímetro do polígono, fazer verificações das características que formam um polígono
  *
  *
- * @author Tomás Luz
+ * @author Tomás Luz & Joao Guerreiro
  *
  * @version 1.2 27/02/2024
  *
@@ -198,6 +198,17 @@ public class Poligono {
         }
         return false;
     }
+
+    /**
+ * Calcula o ponto central (centroide) de um conjunto de pontos.
+ *
+ * Esta função computa as médias das coordenadas x e y de uma lista de pontos,
+ * resultando no centro geométrico desses pontos. É comumente usada para determinar
+ * o ponto central de figuras geométricas planas definidas por múltiplos pontos.
+ *
+ * @return Ponto que representa o centroide do conjunto de pontos.
+ */
+
     public Ponto calcularCentro() {
         double centroX = 0;
         double centroY = 0;
@@ -263,6 +274,18 @@ public class Poligono {
         return translacao(deslocamentoX, deslocamentoY);
 
     }
+
+    /**
+ * Determina se um ponto específico está dentro do polígono definido pela lista de pontos.
+ *
+ * Este método emprega o algoritmo do raio (ou teste de cruzamento de linha), que verifica
+ * se um ponto está dentro de um polígono contando quantas vezes um raio, partindo do ponto,
+ * cruza os lados do polígono. Se o número de cruzamentos for ímpar, o ponto está dentro; se for par,
+ * está fora.
+ *
+ * @param p O ponto a ser testado.
+ * @return true se o ponto estiver dentro do polígono, false caso contrário.
+ */
 
     public boolean containsPonto(Ponto p) {
         boolean result = false;

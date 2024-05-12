@@ -10,7 +10,21 @@ import Game.ViewLayer.UI;
 
 import java.util.Scanner;
 
+/**
+ * Classe responsável pela execução principal do jogo, controlando o fluxo de jogo,
+ * entrada de usuário e atualização dos estados de jogo.
+ *
+ * @author Tomás Luz & Joao Guerreiro
+ * @version 1.0 05/04/2024
+ */
+
 public class GameMain {
+
+    /**
+     * Inicia e executa o loop principal do jogo utilizando as configurações fornecidas.
+     *
+     * @param config Configurações do jogo, incluindo parâmetros como altura e largura da arena, estratégia de movimento, etc.
+     */
 
     public void executaJogo(Configuracoes config)
     {
