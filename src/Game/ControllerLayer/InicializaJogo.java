@@ -239,8 +239,6 @@ public class InicializaJogo {
     public boolean isDentroDaArena(Object object, int largura, int altura) {
         if (object instanceof Poligono) {
             return isDentroDaArena((Poligono)object, largura, altura);
-        } else if (object instanceof Quadrado) {
-            return isDentroDaArena((Quadrado)object, largura, altura);
         } else if (object instanceof Circulo) {
             return isDentroDaArena((Circulo)object, largura, altura);
         } else if (object instanceof Comida) {

@@ -72,9 +72,6 @@ public class Cliente {
             {
             strategy = new MovimentoAutomatico();
             }
-            
-                System.out.println("Escolha o tipo de UI: 'textual' ou 'grafica'");
-
 
                 System.out.println("Escolha o tipo de UI: 'textual' ou 'grafica' (apenas a UI textual se encontra disponivel de momento)");
 
