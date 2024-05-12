@@ -36,13 +36,13 @@ class PontoTest {
     }
 
     @Test
-    public void testRotate() {
+    public void testRotacao() {
         assertEquals("(1,4)",new Ponto(3,3).rotacaoPonto(45, new Ponto(1.0,1.0)).toString());
         assertEquals("(2,5)",new Ponto(1,2).rotacaoPonto(90, new Ponto(0.0,4.0)).toString());
     }
 
     @Test
-    public void testTranslate() {
+    public void testTranslacao() {
         assertEquals("(4,5)",new Ponto(3,3).translacaoPonto(1,2).toString());
         assertEquals("(3,4)",new Ponto(1,2).translacaoPonto(2,2).toString());
     }

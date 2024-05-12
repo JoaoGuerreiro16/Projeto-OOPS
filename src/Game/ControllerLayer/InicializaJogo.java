@@ -75,7 +75,7 @@ public class InicializaJogo {
         ArrayList<Ponto> pontos = new ArrayList<>();
         int centerX = random.nextInt(config.getLargura());
         int centerY = random.nextInt(config.getAltura());
-        int raio = random.nextInt(5) + 2; // Tamanho aleatório do polígono
+        int raio = random.nextInt(3) + 2; // Tamanho aleatório do polígono
 
         for (int i = 0; i < numVertices; i++) {
             double angulo = 2 * Math.PI * i / numVertices;

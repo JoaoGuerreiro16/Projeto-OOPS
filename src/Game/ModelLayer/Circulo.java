@@ -56,15 +56,10 @@ public class Circulo {
         return new Circulo(novoCentro,raio);
     }
 
-    public void interceta(Poligono poligono){
-
-        Ponto centro = poligono.calcularCentro();
-
-    }
 
     public Quadrado criaQuadradoProtetor(Circulo circulo){
 
-        return new Quadrado(this.centro, this.raio * 2);
+        return new Quadrado(this.centro,(int) this.raio * 2);
     }
 
     public boolean containsPonto(Ponto ponto) {

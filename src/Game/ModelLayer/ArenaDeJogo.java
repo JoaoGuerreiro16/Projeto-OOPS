@@ -134,7 +134,7 @@ public class ArenaDeJogo {
         /** provavelmente tem bug**/
         public boolean isPosicaoValidaPonto(Ponto ponto){
 
-            if(ponto.getX() < (double) largura /10 || ponto.getX() > largura - ((double) largura /10)|| ponto.getY() < (double) altura /10 || ponto.getY() > altura - ((double) altura /10)){
+            if(ponto.getX() < (double) largura /10 || ponto.getX() > largura - ((double) largura /10)|| ponto.getY() < (double) altura /10 || ponto.getY() > altura - (altura/10)){
                 return false;
             }
 

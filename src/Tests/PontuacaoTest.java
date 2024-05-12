@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 public class PontuacaoTest {
 
@@ -45,4 +46,10 @@ public class PontuacaoTest {
         pontuacao.incrementaPontuacao(30);
         assertEquals(60, pontuacao.getPontuacao());
     }
+    @Test
+    public void testPontuacaoMaxima() {
+        pontuacao.pontuacaoMaxima();
+        assertEquals(Integer.MAX_VALUE, pontuacao.getPontuacao());
+    }
+
 }

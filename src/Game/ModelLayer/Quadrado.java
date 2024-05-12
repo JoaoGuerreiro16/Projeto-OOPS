@@ -49,19 +49,17 @@ public class Quadrado extends Retangulo
     }
 
     private static ArrayList<Ponto> calculaPontos(Ponto centroide, double lado) {
-        System.out.println(centroide);
-        System.out.println(lado);
         ArrayList<Ponto> novosPontos = new ArrayList<>();
         double meioLado = lado / 2.0;
-        
+
         novosPontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() - meioLado)); // Top-left
         novosPontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() - meioLado)); // Top-right
         novosPontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() + meioLado)); // Bottom-right
         novosPontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado)); // Bottom-left
-        System.out.println(novosPontos);
 
         return novosPontos;
     }
+
 
     /**
      * Retorna uma representação em forma de string do quadrado.
@@ -83,7 +81,7 @@ public class Quadrado extends Retangulo
         String [] parts = input.split(" ");
 
         if(parts.length-1 % 2 == 0)
-            System.exit(0);
+            throw new IllegalArgumentException("Entrada deve ter pares de coordenadas.");
         ArrayList<Ponto> pontos = new ArrayList<>();
         for(int i = 0; i < parts.length; i+=2){
             pontos.add(new Ponto(Integer.parseInt(parts[i]),Integer.parseInt(parts[i+1])));

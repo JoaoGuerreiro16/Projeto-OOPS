@@ -36,7 +36,7 @@ public class TrianguloTest
     }
 
     @Test
-    public void testRotation() {
+    public void testRotacao() {
         String input = "1 1 3 1 2 4";
         Triangulo t = new Triangulo(input);
 
@@ -44,14 +44,14 @@ public class TrianguloTest
     }
 
     @Test
-    public void testTranslate() {
+    public void testTranslacao() {
         String input1 = "2 1 4 1 3 4";
         assertEquals("Triangulo: [(2,1), (4,1), (3,4)]", new Triangulo(input1).translacao(0,0).toString());
         String input2 = "5 5 8 5 8 7";
         assertEquals("Triangulo: [(8,12), (11,12), (11,14)]", new Triangulo(input2).translacao(3,7).toString());
     }
     @Test
-    public void testTranslateCentroide() {
+    public void testTranslacaoCentroide() {
         String input1 = "2 1 4 1 4 3";
         assertEquals("Triangulo: [(6,1), (8,1), (8,3)]", new Triangulo(input1).translacaoCentroide(7,1).toString());
         assertEquals("Triangulo: [(2,4), (4,4), (4,6)]", new Triangulo(input1).translacaoCentroide(3,4).toString());
