@@ -86,12 +86,15 @@ public class Cliente {
                ui = new GraphicUI();
             }
                 return new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao,strategy,ui);
+                
             }
+
 
             
            
     public static void main(String[] args) {
         Configuracoes config = obterConfiguracoes();
+        
         GameMain main = new GameMain();
         main.executaJogo(config);
     }

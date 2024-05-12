@@ -21,11 +21,11 @@ public class GameMain {
         InicializaJogo inicializador = new InicializaJogo();
 
         ArenaDeJogo arena = inicializador.inicializaJogo(config);
+     
 
          UI ui = config.getUi();
 
         GameRasterizer rasterizer = new GameRasterizer(config.getAltura(), config.getLargura());
-
 
 
         while (arena.isJogoAtivo()) {
