@@ -73,9 +73,9 @@ public class QuadradoTest {
         Quadrado interceta = new Quadrado("8 8 11 8 11 11 8 11");
         Quadrado fora = new Quadrado("12 12 17 12 17 17 12 17");
 
-        assertTrue(base.containsQuadrado(dentro));
-        assertFalse(base.containsQuadrado(interceta));
-        assertFalse(base.containsQuadrado(fora) );
+        assertTrue(base.contains(dentro));
+        assertFalse(base.contains(interceta));
+        assertFalse(base.contains(fora) );
     }
 
     @Test
@@ -85,9 +85,9 @@ public class QuadradoTest {
         Circulo interceta = new Circulo(new Ponto(5, 5), 7);
         Circulo fora = new Circulo(new Ponto(20, 20), 5);
 
-        assertTrue(quadrado.containsCircle(dentro));
-        assertFalse(quadrado.containsCircle(interceta));
-        assertFalse(quadrado.containsCircle(fora));
+        assertTrue(quadrado.contains(dentro.criaQuadradoProtetor()));
+        assertFalse(quadrado.contains(interceta.criaQuadradoProtetor()));
+        assertFalse(quadrado.contains(fora.criaQuadradoProtetor()));
     }
 
 }

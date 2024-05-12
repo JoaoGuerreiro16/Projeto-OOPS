@@ -115,4 +115,29 @@ public class SegmentoReta {
     {
         return ponto1.dist(ponto2);
     }
+
+    public boolean contemPonto(Ponto p) {
+
+        double produtoVetorial = (p.getY() - ponto1.getY()) * (ponto2.getX() - ponto1.getX()) -
+                (p.getX() - ponto1.getX()) * (ponto2.getY() - ponto1.getY());
+
+        if (Math.abs(produtoVetorial) > 0.00001) {
+            return false;
+        }
+
+
+        double produtoEscalar = (p.getX() - ponto1.getX()) * (ponto2.getX() - ponto1.getX()) +
+                (p.getY() - ponto1.getY()) * (ponto2.getY() - ponto1.getY());
+        if (produtoEscalar < 0) {
+            return false;
+        }
+
+        double comprimentoQuadradoBA = (ponto2.getX() - ponto1.getX()) * (ponto2.getX() - ponto1.getX()) +
+                (ponto2.getY() - ponto1.getY()) * (ponto2.getY() - ponto1.getY());
+        if (produtoEscalar > comprimentoQuadradoBA) {
+            return false;
+        }
+
+        return true;
+    }
 }

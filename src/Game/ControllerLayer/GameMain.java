@@ -33,9 +33,9 @@ public class GameMain {
         InicializaJogo inicializador = new InicializaJogo();
 
         ArenaDeJogo arena = inicializador.inicializaJogo(config);
-     
 
-         UI ui = config.getUi();
+
+        UI ui = config.getUi();
 
         GameRasterizer rasterizer = new GameRasterizer(config.getAltura(), config.getLargura());
 
@@ -73,7 +73,7 @@ public class GameMain {
                             ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.RIGHT);
                             break;
                     }
-            }
+                }
 
             }
 
@@ -84,6 +84,6 @@ public class GameMain {
         scanner.close();
     }
 
-    }
+}
 
 

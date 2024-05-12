@@ -275,6 +275,7 @@ public class Poligono {
 
     }
 
+
     /**
  * Determina se um ponto específico está dentro do polígono definido pela lista de pontos.
  *
@@ -286,18 +287,52 @@ public class Poligono {
  * @param p O ponto a ser testado.
  * @return true se o ponto estiver dentro do polígono, false caso contrário.
  */
-
-    public boolean containsPonto(Ponto p) {
-        boolean result = false;
+    public boolean containsPonto(Ponto ponto){
+        boolean inside = false;
         int n = pontos.size();
         for (int i = 0, j = n - 1; i < n; j = i++) {
-            if ((pontos.get(i).getY() > p.getY()) != (pontos.get(j).getY() > p.getY()) &&
-                    (p.getX() < (pontos.get(j).getX() - pontos.get(i).getX()) * (p.getY() - pontos.get(i).getY()) / (pontos.get(j).getY()-pontos.get(i).getY()) + pontos.get(i).getX())) {
-                result = !result;
+
+            if ((pontos.get(i).getY() > ponto.getY()) != (pontos.get(j).getY() > ponto.getY()) &&
+                    (ponto.getX() < (pontos.get(j).getX() - pontos.get(i).getX()) * (ponto.getY() - pontos.get(i).getY()) /
+                            (pontos.get(j).getY() - pontos.get(i).getY()) + pontos.get(i).getX())) {
+                inside = !inside;
             }
         }
-        return result;
+
+        return inside;
+
     }
+
+    public boolean contemOuTocaPonto(Ponto ponto) {
+
+        for (SegmentoReta segmento : lista_segmentos) {
+            if (segmento.contemPonto(ponto)) {
+                return true;
+            }
+        }
+
+        if(this.containsPonto(ponto)){
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean contains(Poligono poligono){
+        ArrayList<Ponto> pontosPoligono = poligono.getPontos();
+
+        for(Ponto ponto : pontosPoligono){
+            if(!contemOuTocaPonto(ponto)){
+                return false;
+            }
+        }
+        if(this.intercetaPoligono(poligono)){
+            return false;
+        }
+
+        return true;
+    }
+
 
 
 

@@ -68,14 +68,13 @@ public class GerenciadorPontuacao {
      * Este método carrega as pontuações, ordena-as e exibe as 10 melhores no console.
      * Cada pontuação é numerada de acordo com sua posição no ranking.
      */
-    
     public static void mostrarRanking() {
         List<Integer> pontuacoes = carregarPontuacoes();
         System.out.println("Top pontuações:");
         int rank = 1;
         for (int pontuacao : pontuacoes) {
             System.out.println(rank++ + ". " + pontuacao);
-            if (rank > 10) break; 
+            if (rank > 10) break;
         }
     }
 }
