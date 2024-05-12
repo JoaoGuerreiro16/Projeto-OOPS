@@ -2,6 +2,7 @@ package Game.ControllerLayer;
 
 import Game.ModelLayer.ArenaDeJogo;
 import Game.ModelLayer.Direcao;
+import Game.ModelLayer.GerenciadorPontuacao;
 import Game.ModelLayer.Pontuacao;
 import Game.ModelLayer.MovementStrategy.MovimentoManual;
 import Game.ViewLayer.GameRasterizer;
@@ -22,6 +23,8 @@ public class GameMain {
          UI ui = config.getUi();
         
         GameRasterizer rasterizer = new GameRasterizer(config.getAltura(), config.getLargura());
+
+
 
         while (arena.isJogoAtivo()) {
             arena.atualizarJogo();
@@ -50,7 +53,11 @@ public class GameMain {
                         break;
                 }
             }
+           
+            
         }
+        GerenciadorPontuacao.salvarPontuacao(Pontuacao.getInstance().getPontuacao());
+        GerenciadorPontuacao.mostrarRanking();
         scanner.close();
     }
 

@@ -57,7 +57,6 @@ public class Quadrado extends Retangulo
         novosPontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() + meioLado)); // Bottom-right
         novosPontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado)); // Bottom-left
 
-        System.out.println(novosPontos);
 
         return novosPontos;
     }
@@ -155,8 +154,8 @@ public boolean containsPonto(Ponto ponto) {
     minY = pontos.get(0).getY();
     maxY = pontos.get(0).getY() + lado;
     
-    return (ponto.getX() >= minX && ponto.getX() < maxX) &&
-           (ponto.getY() >= minY && ponto.getY() < maxY);
+    return (ponto.getX() >= minX && ponto.getX() <= maxX) &&
+           (ponto.getY() >= minY && ponto.getY() <= maxY);
 }
 
 

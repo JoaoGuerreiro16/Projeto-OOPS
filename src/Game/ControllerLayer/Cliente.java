@@ -66,7 +66,7 @@ public class Cliente {
            
 
 
-                System.out.println("Escolha o tipo de UI: 'textual' ou 'grafica'");
+                System.out.println("Escolha o tipo de UI: 'textual' ou 'grafica' (apenas a UI textual se encontra disponivel de momento)");
                 String tipoUI = scanner.next();
                 assert(tipoUI.equals("textual") || tipoMovimento.equals("grafica")) : "Só exite movimento manual ou automático";
             UI ui;
