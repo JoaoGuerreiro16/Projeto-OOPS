@@ -23,9 +23,9 @@ class PontoTest {
 
     @Test
     public void testToString() {
-        assertEquals("(2,2)", new Ponto(2,2).toString());
-        assertEquals("(3,2)", new Ponto (3,2).toString());
-        assertEquals("(4,4)", new Ponto(4,4).toString());
+        assertEquals("(2.0,2.0)", new Ponto(2,2).toString());
+        assertEquals("(3.0,2.0)", new Ponto (3,2).toString());
+        assertEquals("(4.0,4.0)", new Ponto(4,4).toString());
     }
 
     @Test
@@ -37,14 +37,14 @@ class PontoTest {
 
     @Test
     public void testRotacao() {
-        assertEquals("(1,4)",new Ponto(3,3).rotacaoPonto(45, new Ponto(1.0,1.0)).toString());
-        assertEquals("(2,5)",new Ponto(1,2).rotacaoPonto(90, new Ponto(0.0,4.0)).toString());
+        assertEquals("(1.0,4.0)",new Ponto(3,3).rotacaoPonto(45, new Ponto(1.0,1.0)).toString());
+        assertEquals("(2.0,5.0)",new Ponto(1,2).rotacaoPonto(90, new Ponto(0.0,4.0)).toString());
     }
 
     @Test
     public void testTranslacao() {
-        assertEquals("(4,5)",new Ponto(3,3).translacaoPonto(1,2).toString());
-        assertEquals("(3,4)",new Ponto(1,2).translacaoPonto(2,2).toString());
+        assertEquals("(4.0,5.0)",new Ponto(3,3).translacaoPonto(1,2).toString());
+        assertEquals("(3.0,4.0)",new Ponto(1,2).translacaoPonto(2,2).toString());
     }
 
 

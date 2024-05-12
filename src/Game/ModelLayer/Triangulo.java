@@ -26,8 +26,7 @@ public class Triangulo extends Poligono
         super(pontos);
         if(getPontos().size() != 3)
         {
-            System.out.println("Triangulo:vi");
-            System.exit(0);
+            throw new IllegalArgumentException("O triangulo é constituído por três pontos");
         }
     }
     /**

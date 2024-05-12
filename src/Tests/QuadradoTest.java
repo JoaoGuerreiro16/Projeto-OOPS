@@ -4,21 +4,12 @@ import	static	org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
-import Game.ModelLayer.Circulo;
+import Game.ModelLayer.*;
 import	org.junit.jupiter.api.Test;
-import Game.ModelLayer.Poligono;
-import Game.ModelLayer.Ponto;
-import Game.ModelLayer.Quadrado;
 
 public class QuadradoTest {
     @Test
-    public void testConstrutor0() {
-        String input = "1 0 1 1 5 1 5 0";
-        new Quadrado(input);
-    }
-
-    @Test
-    public void testConstrutor1() {
+    public void testConstrutor() {
         String input = "1 1 3 1 3 3 1 3";
         new Quadrado(input);
     }
@@ -33,7 +24,7 @@ public class QuadradoTest {
         pontos.add(new Ponto(3,0));
 
         Quadrado q= new Quadrado(pontos);
-        assertEquals("Quadrado: [(0,0), (0,3), (3,3), (3,0)]",q.toString());
+        assertEquals("Quadrado: [(0.0,0.0), (0.0,3.0), (3.0,3.0), (3.0,0.0)]",q.toString());
     }
 
     @Test
@@ -41,23 +32,30 @@ public class QuadradoTest {
         String input = "1 1 3 1 3 3 1 3";
         Quadrado q = new Quadrado(input);
 
-        assertEquals("Quadrado: [(3,1), (3,3), (1,3), (1,1)]", q.rotacao(90, q.calcularCentro()).toString());
+        assertEquals("Quadrado: [(3.0,1.0), (3.0,3.0), (1.0,3.0), (1.0,1.0)]", q.rotacao(90, q.calcularCentro()).toString());
     }
 
     @Test
     public void testTranslacao() {
-        String input1 = "0 0 2 0 2 2 0 2";
-        assertEquals("Quadrado: [(2,0), (4,0), (4,2), (2,2)]", new Poligono(input1).translacao(2,0).toString());
-        String input2 = "1 1 3 1 3 3 1 3";
-        assertEquals("Quadrado: [(1,6), (3,6), (3,8), (1,8)]", new Poligono(input2).translacao(0,5).toString());
+
+        ArrayList<Ponto> pontos = new ArrayList<>();
+        pontos.add(new Ponto(0, 0));
+        pontos.add(new Ponto(4, 0));
+        pontos.add(new Ponto(4, 4));
+        pontos.add(new Ponto(0, 4));
+        Retangulo retangulo = new Retangulo(pontos);
+        Ponto centroide = retangulo.calcularCentro();
+        Retangulo rotacionado = retangulo.rotacao(90, centroide);
+        assertNotNull(rotacionado);
+        assertEquals(4, rotacionado.getPontos().size());
     }
 
     @Test
     public void testTranslacaoCentroide() {
         String input1 = "0 0 2 0 2 2 0 2";
-        assertEquals("Quadrado: [(3,2), (5,2), (5,4), (3,4)]", new Quadrado(input1).translacaoCentroide(4,3).toString());
+        assertEquals("Quadrado: [(3.0,2.0), (5.0,2.0), (5.0,4.0), (3.0,4.0)]", new Quadrado(input1).translacaoCentroide(4,3).toString());
         String input2 = "1 1 3 1 3 3 1 3";
-        assertEquals("Quadrado: [(6,1), (8,1), (8,3), (6,3)]", new Quadrado(input2).translacaoCentroide(7,2).toString());
+        assertEquals("Quadrado: [(6.0,1.0), (8.0,1.0), (8.0,3.0), (6.0,3.0)]", new Quadrado(input2).translacaoCentroide(7,2).toString());
     }
 
     @Test

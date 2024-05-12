@@ -43,31 +43,31 @@ public class ArenaDeJogo {
         return instance;
     }
 
+    public static ArenaDeJogo getInstance() {return instance;}
+    public int getAltura() {return altura;}
+    public int getLargura() {return largura;}
+    public Pontuacao getPontuacao() {return pontuacao;}
+    public int getPontuacaoComida() {return pontuacaoComida;}
+    public String getTipoComida() {return tipoComida;}
+    public double getTamanhoComida() {return tamanhoComida;}
     public static void resetInstance() {
         instance = null;
     }
-
     public Snake getSnake() {
         return snake;
     }
-
-
     public void setSnake(Snake snake) {
         this.snake = snake;
     }
-
     public Comida getComida() {
         return comida;
     }
-
     public void setComida(Comida comida) {
         this.comida = comida;
     }
-
     public List<Obstaculo> getObstaculos() {
         return obstaculos;
     }
-
     public void setObstaculos(List<Obstaculo> obstaculos) {
         this.obstaculos = obstaculos;
     }
@@ -154,7 +154,7 @@ public class ArenaDeJogo {
             return true;
         }
 
-    private boolean interceptaObstaculosOuSnake(Comida comida) {
+    public boolean interceptaObstaculosOuSnake(Comida comida) {
 
         for (Obstaculo obstaculo : obstaculos) {
             if (comida.interceta(obstaculo.getPoligono())) {

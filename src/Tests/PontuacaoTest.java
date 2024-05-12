@@ -20,36 +20,43 @@ public class PontuacaoTest {
     }
     @Test
     public void testGetPontuacao() {
-
+        setUp();
         assertEquals(0, pontuacao.getPontuacao());
+        Pontuacao.resetInstance();
     }
 
     @Test
     public void testSetPontuacao() {
-
+        setUp();
         pontuacao.setPontuacao(100);
         assertEquals(100, pontuacao.getPontuacao());
+        Pontuacao.resetInstance();
     }
 
     @Test
     public void testIncrementaPontuacao() {
-
+        setUp();
         pontuacao.incrementaPontuacao(50);
         assertEquals(50, pontuacao.getPontuacao());
+        Pontuacao.resetInstance();
     }
 
     @Test
     public void testIncrementaPontuacaoVariasVezes() {
-
+        setUp();
         pontuacao.incrementaPontuacao(10);
         pontuacao.incrementaPontuacao(20);
         pontuacao.incrementaPontuacao(30);
         assertEquals(60, pontuacao.getPontuacao());
+        Pontuacao.resetInstance();
     }
     @Test
     public void testPontuacaoMaxima() {
+        setUp();
         pontuacao.pontuacaoMaxima();
         assertEquals(Integer.MAX_VALUE, pontuacao.getPontuacao());
+        Pontuacao.resetInstance();
+
     }
 
 }
