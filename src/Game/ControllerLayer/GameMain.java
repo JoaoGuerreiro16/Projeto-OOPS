@@ -2,6 +2,7 @@ package Game.ControllerLayer;
 
 import Game.ModelLayer.ArenaDeJogo;
 import Game.ModelLayer.Direcao;
+import Game.ModelLayer.Pontuacao;
 import Game.ModelLayer.MovementStrategy.MovimentoManual;
 import Game.ViewLayer.GameRasterizer;
 
@@ -28,6 +29,7 @@ public class GameMain {
             rasterizer.display();
 
             if (config.getMovementStrategy() instanceof MovimentoManual) {
+                System.out.println("Pontuacao: " + Pontuacao.getInstance().getPontuacao());
                 System.out.println("A direção atual é " + arena.getSnake().getDirecaoAtual());
                 System.out.println("Digite a nova direção (W, A, S, D): ");
 

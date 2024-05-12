@@ -60,9 +60,6 @@ public class Cliente {
             {
             strategy = new MovimentoAutomatico();
             }
-
-           
-                 System.out.println("1");
                 return new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao,strategy);
             }
 
