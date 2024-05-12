@@ -41,5 +41,6 @@ public class Pontuacao {
     public void pontuacaoMaxima(){
 
         this.pontuacao = MAX_VALUE;
+
     }
 }

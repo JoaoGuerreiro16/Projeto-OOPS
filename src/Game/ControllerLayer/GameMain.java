@@ -12,16 +12,18 @@ import java.util.Scanner;
 
 public class GameMain {
 
+
+
     public void executaJogo(Configuracoes config)
     {
         Scanner scanner = new Scanner(System.in);
-    
+
         InicializaJogo inicializador = new InicializaJogo();
-        
+
         ArenaDeJogo arena = inicializador.inicializaJogo(config);
 
          UI ui = config.getUi();
-        
+
         GameRasterizer rasterizer = new GameRasterizer(config.getAltura(), config.getLargura());
 
 
@@ -31,30 +33,39 @@ public class GameMain {
 
             rasterizer.fillDisplay(arena.getSnake(), arena.getComida(), arena.getObstaculos());
             ui.display(rasterizer);
-
-            if (config.getMovementStrategy() instanceof MovimentoManual) {
-                System.out.println("/n");
-                System.out.println("Dir H: " + arena.getSnake().getDirecaoAtual() + "     Pontos: " + arena.getPontuacao().getPontuacao());
-                System.out.println("Digite a nova direção (W, A, S, D): ");
-
-                String direcao = scanner.next().toUpperCase();
-                switch (direcao) {
-                    case "W":
-                        ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.UP);
-                        break;
-                    case "S":
-                        ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.DOWN);
-                        break;
-                    case "A":
-                        ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.LEFT);
-                        break;
-                    case "D":
-                        ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.RIGHT);
-                        break;
+            if(!arena.isJogoAtivo()){
+                if(arena.verificarSeGanhou()){
+                    System.out.println("Parabéns, ganhou o jogo! \nA sua pontuação foi máxima:" + arena.getPontuacao().getPontuacao());
+                } else {
+                    System.out.println("GAME OVER!!\nA sua pontuação foi:" + arena.getPontuacao().getPontuacao());
                 }
+            } else{
+
+                if (config.getMovementStrategy() instanceof MovimentoManual) {
+                    System.out.println();
+                    System.out.println("Dir H: " + arena.getSnake().getDirecaoAtual() + "     Pontos: " + arena.getPontuacao().getPontuacao());
+                    System.out.println("Digite a nova direção (W, A, S, D): ");
+
+                    String direcao = scanner.next().toUpperCase();
+                    switch (direcao) {
+                        case "W":
+                            ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.UP);
+                            break;
+                        case "S":
+                            ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.DOWN);
+                            break;
+                        case "A":
+                            ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.LEFT);
+                            break;
+                        case "D":
+                            ((MovimentoManual) config.getMovementStrategy()).mudarDirecao(arena.getSnake(), Direcao.RIGHT);
+                            break;
+                    }
             }
-           
-            
+
+            }
+
+
         }
         GerenciadorPontuacao.salvarPontuacao(Pontuacao.getInstance().getPontuacao());
         GerenciadorPontuacao.mostrarRanking();

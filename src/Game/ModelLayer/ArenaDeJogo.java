@@ -92,7 +92,7 @@ public class ArenaDeJogo {
             boolean haEspaco = adicionarComida();
             if(!haEspaco){
                 pontuacao.pontuacaoMaxima();
-                ganhouJogo();
+                finalizaJogo();
             }
 
         }
@@ -103,7 +103,7 @@ public class ArenaDeJogo {
         Quadrado cabeca = snake.getSnake().getFirst();
         for(Obstaculo obstaculo: obstaculos){
                 if(cabeca.intercetaPoligono(obstaculo.getPoligono())){
-                    perdeuJogo("A snake colidiu com um obstáculo");
+                    finalizaJogo();
                 }
             }
         }
@@ -111,7 +111,7 @@ public class ArenaDeJogo {
      public void colisaoConsigoMesma(){
 
         if(snake.intercetaSnake()){
-            perdeuJogo("A snake colidiu consigo mesma");
+            finalizaJogo();
         }
      }
 
@@ -121,7 +121,7 @@ public class ArenaDeJogo {
         double metadeLado = cabeca.getLado() / 2;
         if(centro.getX() - metadeLado < 0 || centro.getX() + metadeLado > largura ||
                 centro.getY() - metadeLado < 0 || centro.getY() + metadeLado > altura){
-            perdeuJogo("A snake colidiu com a parede");
+                finalizaJogo();
         }
 
         }
@@ -213,14 +213,13 @@ public class ArenaDeJogo {
         }
     }
 
-    public void ganhouJogo(){
-            jogoAtivo = false;
-        System.out.println("Parabéns, ganhou o jogo! \nA sua pontuação foi máxima:" + pontuacao.getPontuacao());
+    public void finalizaJogo() {
+        jogoAtivo = false;
     }
 
-    public void perdeuJogo(String mensagem){
-        jogoAtivo = false;
-        System.out.println("GAME OVER! " + mensagem + "\nSua pontuação foi: " + pontuacao.getPontuacao());
+    public boolean verificarSeGanhou() {
+        return pontuacao.getPontuacao() == Integer.MAX_VALUE;
     }
+
 
 }
