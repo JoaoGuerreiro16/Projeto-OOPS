@@ -2,22 +2,24 @@ package Game.ControllerLayer;
 
 import Game.ModelLayer.ArenaDeJogo;
 import Game.ModelLayer.Direcao;
+import Game.ModelLayer.Pontuacao;
 import Game.ModelLayer.MovementStrategy.MovimentoManual;
 import Game.ViewLayer.GameRasterizer;
+import Game.ViewLayer.UI;
 
 import java.util.Scanner;
 
 public class GameMain {
 
-
-    public static void main(String[] args) {
-
+    public void executaJogo(Configuracoes config)
+    {
         Scanner scanner = new Scanner(System.in);
-        Configuracoes config = Cliente.obterConfiguracoes();
     
         InicializaJogo inicializador = new InicializaJogo();
         
         ArenaDeJogo arena = inicializador.inicializaJogo(config);
+
+         UI ui = config.getUi();
         
         GameRasterizer rasterizer = new GameRasterizer(config.getAltura(), config.getLargura());
 
@@ -25,9 +27,10 @@ public class GameMain {
             arena.atualizarJogo();
 
             rasterizer.fillDisplay(arena.getSnake(), arena.getComida(), arena.getObstaculos());
-            rasterizer.display();
+            ui.display(rasterizer);
 
             if (config.getMovementStrategy() instanceof MovimentoManual) {
+                System.out.println("Pontuacao: " + Pontuacao.getInstance().getPontuacao());
                 System.out.println("A direção atual é " + arena.getSnake().getDirecaoAtual());
                 System.out.println("Digite a nova direção (W, A, S, D): ");
 
@@ -50,4 +53,7 @@ public class GameMain {
         }
         scanner.close();
     }
-}
+
+    }
+
+

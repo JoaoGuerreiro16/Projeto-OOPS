@@ -7,6 +7,20 @@ import Game.ModelLayer.*;
 public class GameRasterizer {
     private Celula[][] grid;
     private int altura;
+    public Celula[][] getGrid() {
+        return grid;
+    }
+
+
+    public int getAltura() {
+        return altura;
+    }
+
+
+    public int getLargura() {
+        return largura;
+    }
+
     private int largura;
 
     public GameRasterizer(int altura, int largura) {
@@ -18,14 +32,6 @@ public class GameRasterizer {
 
 
     public void fillDisplay(Snake snake, Comida comida, List<Obstaculo> obstaculos) {
-        for (int i = 0; i < altura; i++) {
-            for (int j = 0; j < largura; j++) {
-                grid[i][j] = new Celula(i, j);
-                grid[i][j].setEstado(EstadoCelula.EMPTY);
-            }
-        }
-
-
         for (int i = 0; i < altura; i++) {
             for (int j = 0; j < largura; j++) {
                 grid[i][j] = new Celula(i, j);
@@ -62,15 +68,6 @@ public class GameRasterizer {
 
                 }
             }
-        }
-    }
-
-    public void display() {
-        for (int i = 0; i < altura; i++) {
-            for (int j = 0; j < largura; j++) {
-                System.out.print(grid[i][j].getEstado().symbol() + " ");
-            }
-            System.out.println();
         }
     }
 }

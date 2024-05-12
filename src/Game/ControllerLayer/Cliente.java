@@ -7,6 +7,9 @@ import java.util.Scanner;
 import Game.ControllerLayer.Configuracoes;
 import Game.ModelLayer.MovementStrategy.MovimentoAutomatico;
 import Game.ModelLayer.MovementStrategy.MovimentoManual;
+import Game.ViewLayer.GraphicUI;
+import Game.ViewLayer.TextUI;
+import Game.ViewLayer.UI;
 import Game.ModelLayer.MovementStrategy.MovementStrategy;
 import Game.ModelLayer.MovementStrategy.MovimentoAutomatico;
 import Game.ModelLayer.MovementStrategy.MovimentoManual;
@@ -60,15 +63,29 @@ public class Cliente {
             {
             strategy = new MovimentoAutomatico();
             }
-
            
-                 System.out.println("1");
-                return new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao,strategy);
+
+
+                System.out.println("Escolha o tipo de UI: 'textual' ou 'grafica'");
+                String tipoUI = scanner.next();
+                assert(tipoUI.equals("textual") || tipoMovimento.equals("grafica")) : "Só exite movimento manual ou automático";
+            UI ui;
+            if (tipoUI.equalsIgnoreCase("textual")) 
+            {
+                ui = new TextUI();
+            } else 
+            {
+               ui = new GraphicUI();
+            }
+                return new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao,strategy,ui);
             }
 
+            
+           
     public static void main(String[] args) {
         Configuracoes config = obterConfiguracoes();
-        System.out.println("Configurações do jogo coletadas com sucesso!");
+        GameMain main = new GameMain();
+        main.executaJogo(config);
     }
 
 }

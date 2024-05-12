@@ -1,6 +1,7 @@
 package Game.ControllerLayer;
 
 import Game.ModelLayer.MovementStrategy.MovementStrategy;
+import Game.ViewLayer.UI;
 
 public class Configuracoes {
     private int largura, altura, tamanhoCabeca, pontuacaoComida, numeroObstaculos, anguloRotacao;
@@ -8,8 +9,9 @@ public class Configuracoes {
     private String tipoComida;
     private boolean obstaculosDinamicos;
     private MovementStrategy movementStrategy;
+    private UI ui;
 
-    public Configuracoes(int largura, int altura, int tamanhoCabeca, String tipoComida, double tamanhoComida, int pontuacaoComida, int numeroObstaculos, boolean obstaculosDinamicos, int anguloRotacao,MovementStrategy movementStrategy) {
+    public Configuracoes(int largura, int altura, int tamanhoCabeca, String tipoComida, double tamanhoComida, int pontuacaoComida, int numeroObstaculos, boolean obstaculosDinamicos, int anguloRotacao,MovementStrategy movementStrategy,UI ui) {
         this.largura = largura;
         this.altura = altura;
         this.tamanhoCabeca = tamanhoCabeca;
@@ -20,6 +22,11 @@ public class Configuracoes {
         this.obstaculosDinamicos = obstaculosDinamicos;
         this.anguloRotacao = anguloRotacao;
         this.movementStrategy = movementStrategy;
+        this.ui = ui;
+    }
+
+    public UI getUi() {
+        return ui;
     }
 
     public int getLargura() {

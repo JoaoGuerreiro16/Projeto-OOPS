@@ -109,16 +109,24 @@ public class Snake {
 
     public boolean containsQuadrado(ComidaQuadrado comida){
 
-         Quadrado cabeca = snake.getFirst();
+        boolean result = false;
+         for (Quadrado partes : snake) {
+           if (partes.containsQuadrado(comida.getQuadrado()))
+           return true;
+         }
 
-        return cabeca.containsQuadrado(comida.getQuadrado());
+         return result;
+
     }
 
     public boolean containsCirculo(ComidaCirculo comida){
+        boolean result = false;
+        for (Quadrado partes : snake) {
+            if (partes.containsCircle(comida.getCirculo()))
+            return true;
+          };
 
-         Quadrado cabeca = snake.getFirst();
-
-        return cabeca.containsCircle(comida.getCirculo());
+        return result;
     }
 
 }

@@ -57,6 +57,8 @@ public class Quadrado extends Retangulo
         novosPontos.add(new Ponto(centroide.getX() + meioLado, centroide.getY() + meioLado)); // Bottom-right
         novosPontos.add(new Ponto(centroide.getX() - meioLado, centroide.getY() + meioLado)); // Bottom-left
 
+        System.out.println(novosPontos);
+
         return novosPontos;
     }
 
@@ -139,30 +141,43 @@ public class Quadrado extends Retangulo
         return translacao(deslocamentoX, deslocamentoY);
 
     }
-@Override
-    public boolean containsPonto(Ponto ponto) {
-        double minX = pontos.get(0).getX();
-        double maxX = pontos.get(0).getX() + lado;
-        double minY = pontos.get(0).getY();
-        double maxY = pontos.get(0).getY() + lado;
-        return (ponto.getX() >= minX && ponto.getX() <= maxX) &&
-                (ponto.getY() >= minY && ponto.getY() <= maxY);
-    }
 
-    public boolean containsQuadrado(Quadrado quadrado) {
-        for (Ponto ponto : quadrado.getPontos()) {
-            if (!this.containsPonto(ponto)) {
-                return false;
-            }
+    @Override
+public boolean containsPonto(Ponto ponto) {
+    double minX;
+    double maxX;
+    double minY;
+    double maxY; 
+    
+    
+    minX = pontos.get(0).getX();
+    maxX = pontos.get(0).getX() + lado;
+    minY = pontos.get(0).getY();
+    maxY = pontos.get(0).getY() + lado;
+    
+    return (ponto.getX() >= minX && ponto.getX() < maxX) &&
+           (ponto.getY() >= minY && ponto.getY() < maxY);
+}
+
+
+
+public boolean containsQuadrado(Quadrado quadrado) {
+    boolean allPointsContained = true;  
+
+    for (Ponto ponto : quadrado.getPontos()) {
+        if (!this.containsPonto(ponto)) {
+            allPointsContained = false;
+            break; 
         }
-        return true;
     }
+    return (allPointsContained || (allPointsContained && this.intercetaPoligono(quadrado)));
+}
 
     public boolean containsCircle(Circulo circulo) {
         if (!containsPonto(circulo.getCentro())) {
             return false;
         }
-        double angleStep = Math.PI / 4;
+        double angleStep = Math.PI / 8;
         for (int i = 0; i < 8; i++) {
             double angle = i * angleStep;
             Ponto edgePoint = new Ponto(
