@@ -59,7 +59,7 @@ public class Circulo {
 
     public Quadrado criaQuadradoProtetor(Circulo circulo){
 
-        return new Quadrado(this.centro,(int) this.raio * 2);
+        return new Quadrado(this.centro, this.raio * 2);
     }
 
     public boolean containsPonto(Ponto ponto) {

@@ -27,16 +27,12 @@ public class InicializaJogo {
         int largura = config.getLargura();
         int altura = config.getAltura();
 
-        // Criar a Snake
         Snake snake = criaSnake(config);
        
-        // Criar obstáculos
         List<Obstaculo> obstaculos = criaObstaculos(config, snake);
-        
-        // Criar comida inicial verificando a validade da posição
+
         Comida comidaInicial = criaComidaInicial(config, largura, altura, snake, obstaculos);
-       
-        // Criar a arena de jogo
+    
 
         return ArenaDeJogo.getInstance(altura, largura, snake, comidaInicial, obstaculos,config.getPontuacaoComida(), config.getTamanhoComida(), config.getTipoComida());
 
@@ -55,7 +51,7 @@ public class InicializaJogo {
 
     public List<Obstaculo> criaObstaculos(Configuracoes config,Snake snake) {
         List<Obstaculo> obstaculos = new ArrayList<>();
-        int tentativasMax = 100; // Número de tentativas para colocar um obstáculo sem sobreposição
+        int tentativasMax = 100; 
 
         for (int i = 0; i < config.getNumeroObstaculos(); i++) {
             boolean obstaculoAdicionado = false;
@@ -120,10 +116,12 @@ public class InicializaJogo {
             if(tipoComida.equals("quadrado")){
                comida = new ComidaQuadrado(new Quadrado(posicao, config.getTamanhoComida()), config.getPontuacaoComida()); 
             } else{
+               
                comida = new ComidaCirculo(new Circulo(posicao, config.getTamanhoComida() / 2.0), config.getPontuacaoComida());
+             
             }
         
-
+           
             if (isPosicaoValidaParaComida(comida, snake, obstaculos, largura, altura)) {
                 return comida;
             }
@@ -135,6 +133,7 @@ public class InicializaJogo {
         if (!isDentroDaArena(comida, largura, altura)) {
             return false;
         }
+
 
         for (Quadrado parte : snake.getSnake()) {
             if (comida.interceta(parte)) {

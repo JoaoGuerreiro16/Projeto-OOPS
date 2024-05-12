@@ -17,13 +17,12 @@ public class GameMain {
         Scanner scanner = new Scanner(System.in);
     
         InicializaJogo inicializador = new InicializaJogo();
-        
         ArenaDeJogo arena = inicializador.inicializaJogo(config);
+     
 
          UI ui = config.getUi();
         
         GameRasterizer rasterizer = new GameRasterizer(config.getAltura(), config.getLargura());
-
 
 
         while (arena.isJogoAtivo()) {
