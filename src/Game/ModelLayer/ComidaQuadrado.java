@@ -40,5 +40,4 @@ public class ComidaQuadrado extends Comida{
         return quadrado.containsPonto(ponto);
     }
 
-
 }

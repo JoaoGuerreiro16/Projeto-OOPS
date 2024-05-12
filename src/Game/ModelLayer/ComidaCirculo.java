@@ -36,5 +36,4 @@ public class ComidaCirculo extends Comida{
         return circulo.containsPonto(ponto);
     }
 
-
 }

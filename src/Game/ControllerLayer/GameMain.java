@@ -30,8 +30,8 @@ public class GameMain {
             ui.display(rasterizer);
 
             if (config.getMovementStrategy() instanceof MovimentoManual) {
-                System.out.println("Pontuacao: " + Pontuacao.getInstance().getPontuacao());
-                System.out.println("A direção atual é " + arena.getSnake().getDirecaoAtual());
+                System.out.println("/n");
+                System.out.println("Dir H: " + arena.getSnake().getDirecaoAtual() + "     Pontos: " + arena.getPontuacao().getPontuacao());
                 System.out.println("Digite a nova direção (W, A, S, D): ");
 
                 String direcao = scanner.next().toUpperCase();

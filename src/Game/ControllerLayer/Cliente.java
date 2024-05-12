@@ -30,18 +30,24 @@ public class Cliente {
 
                 System.out.println("Digite o tipo de comida ('quadrado' ou 'circulo'):");
                 String tipoComida = scanner.next();
-                assert(tipoComida.equals("quadrado") || tipoComida.equals("circulo")): "A comida só pode ser circular ou quadrada";
+                if(!tipoComida.equals("quadrado") && !tipoComida.equals("circulo")){
+                    throw new IllegalArgumentException("A comida só pode ser quadrada ou circular");
+            }
 
                 System.out.println("Digite a dimensão da comida (menor que a dimensão da cabeça):");
                 double tamanhoComida = scanner.nextDouble();
-                assert(tamanhoComida >= tamanhoCabeca) : "A comida tem de ser menor que a cabeça";
+                if(tamanhoComida >= tamanhoCabeca){
+                    throw new IllegalArgumentException("Comida tem de ser mais pequena que a cabeça da snake");
+                }
 
                 System.out.println("Digite a pontuação por comida:");
                 int pontuacaoComida = scanner.nextInt();
 
                 System.out.println("Digite o número de obstáculos(1 a 5):");
                 int numeroObstaculos = scanner.nextInt();
-                assert(numeroObstaculos >= 1 && numeroObstaculos <= 5) : "Número de obstáculos fora do intervalo permitido (1 a 5).";
+                if(numeroObstaculos <= 1 || numeroObstaculos >= 5){
+                    throw new IllegalArgumentException("A arena so tem entre 1 a 5 obstáculos");
+                }
 
                 System.out.println("Os obstáculos são dinâmicos? (sim/nao):");
                 boolean obstaculosDinamicos = scanner.next().equalsIgnoreCase("sim");
@@ -54,26 +60,27 @@ public class Cliente {
 
                 System.out.println("Escolha o tipo de movimento: 'manual' ou 'automatico'");
                 String tipoMovimento = scanner.next();
-                assert(tipoMovimento.equals("manual") || tipoMovimento.equals("automatico")) : "Só exite movimento manual ou automático";
+                if(!tipoMovimento.equals("manual") && !tipoMovimento.equals("automatico")){
+                    throw new IllegalArgumentException("O movimento só pode ser manual ou automático");
+            }
+
             MovementStrategy strategy;
-            if (tipoMovimento.equalsIgnoreCase("manual")) 
+            if (tipoMovimento.equalsIgnoreCase("manual"))
             {
                 strategy = new MovimentoManual();
-            } else 
+            } else
             {
             strategy = new MovimentoAutomatico();
             }
-           
-
-
+            
                 System.out.println("Escolha o tipo de UI: 'textual' ou 'grafica'");
                 String tipoUI = scanner.next();
                 assert(tipoUI.equals("textual") || tipoMovimento.equals("grafica")) : "Só exite movimento manual ou automático";
             UI ui;
-            if (tipoUI.equalsIgnoreCase("textual")) 
+            if (tipoUI.equalsIgnoreCase("textual"))
             {
                 ui = new TextUI();
-            } else 
+            } else
             {
                ui = new GraphicUI();
             }
