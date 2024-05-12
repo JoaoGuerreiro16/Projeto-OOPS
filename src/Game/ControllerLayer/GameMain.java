@@ -11,11 +11,9 @@ import java.util.Scanner;
 
 public class GameMain {
 
-
-    public static void main(String[] args) {
-
+    public void executaJogo(Configuracoes config)
+    {
         Scanner scanner = new Scanner(System.in);
-        Configuracoes config = Cliente.obterConfiguracoes();
     
         InicializaJogo inicializador = new InicializaJogo();
         
@@ -55,4 +53,7 @@ public class GameMain {
         }
         scanner.close();
     }
-}
+
+    }
+
+

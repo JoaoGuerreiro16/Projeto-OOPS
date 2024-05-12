@@ -84,7 +84,8 @@ public class Cliente {
            
     public static void main(String[] args) {
         Configuracoes config = obterConfiguracoes();
-        System.out.println("Configurações do jogo coletadas com sucesso!");
+        GameMain main = new GameMain();
+        main.executaJogo(config);
     }
 
 }
