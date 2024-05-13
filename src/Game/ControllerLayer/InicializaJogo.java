@@ -108,16 +108,16 @@ public class InicializaJogo {
      */
 
     public Poligono gerarPoligonoAleatorio(Configuracoes config) {
-        int numVertices = random.nextInt(3) + 3; 
+        double numVertices = random.nextInt(3) + 3; 
         ArrayList<Ponto> pontos = new ArrayList<>();
-        int centerX = random.nextInt(config.getLargura());
-        int centerY = random.nextInt(config.getAltura());
-        int raio = random.nextInt(3) + 1; 
+        double centerX = random.nextInt(config.getLargura());
+        double centerY = random.nextInt(config.getAltura());
+        double raio = random.nextInt(3) + 2; 
 
         for (int i = 0; i < numVertices; i++) {
             double angulo = 2 * Math.PI * i / numVertices;
-            int x = centerX + (int) (raio * Math.cos(angulo));
-            int y = centerY + (int) (raio * Math.sin(angulo));
+            double x = centerX + (raio * Math.cos(angulo));
+            double y = centerY + (raio * Math.sin(angulo));
             pontos.add(new Ponto(x, y));
         }
         return new Poligono(pontos);

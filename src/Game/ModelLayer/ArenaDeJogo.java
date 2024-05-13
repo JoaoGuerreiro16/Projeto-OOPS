@@ -137,11 +137,12 @@ public class ArenaDeJogo {
 
     public void colisaoObstaculo(){
 
-        Quadrado cabeca = snake.getSnake().getFirst();
         for(Obstaculo obstaculo: obstaculos){
-                if(cabeca.intercetaPoligono(obstaculo.getPoligono())){
+            for (Quadrado parte : snake.getSnake()) {
+                if(parte.intercetaPoligono(obstaculo.getPoligono())){
                     finalizaJogo();
-                }
+                } 
+            }
             }
         }
 

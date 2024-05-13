@@ -15,7 +15,7 @@ import java.util.Scanner;
  * entrada de usuário e atualização dos estados de jogo.
  *
  * @author Tomás Luz & Joao Guerreiro
- * @version 1.0 05/04/2024
+ * @version 1.0 
  */
 
 public class GameMain {

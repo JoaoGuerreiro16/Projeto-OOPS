@@ -1,4 +1,4 @@
-package Game.ModelLayer;
+package Game.ViewLayer;
 
 /**
  * Classe que representa uma célula no grid do jogo.
