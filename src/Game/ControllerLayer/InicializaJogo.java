@@ -1,10 +1,8 @@
 package Game.ControllerLayer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 import Game.ModelLayer.ArenaDeJogo;
 import Game.ModelLayer.Circulo;
 import Game.ModelLayer.Comida;
@@ -113,37 +111,38 @@ public class InicializaJogo {
     }
 
     /**
-     * Cria uma lista de pontos que define uma forma de Tetris baseada em um índice.
-     *
-     * @param centro O ponto central para a criação da forma.
-     * @param tipoForma Índice que determina qual forma de Tetris será criada.
-     * @return Lista de pontos que definem a forma de Tetris.
-     */
-    private ArrayList<Ponto> createShape(Ponto centro, int tipoForma) {
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        switch (tipoForma) {
-            case 0:
-                pontos.add(new Ponto(centro.getX() - 1, centro.getY()));
-                pontos.add(new Ponto(centro.getX(), centro.getY()));
-                pontos.add(new Ponto(centro.getX() + 1, centro.getY()));
-                pontos.add(new Ponto(centro.getX(), centro.getY() + 1));
-                break;
-            case 1:
-                pontos.add(new Ponto(centro.getX(), centro.getY()));
-                pontos.add(new Ponto(centro.getX(), centro.getY() + 1));
-                pontos.add(new Ponto(centro.getX(), centro.getY() + 2));
-                pontos.add(new Ponto(centro.getX() + 1, centro.getY() + 2));
-                break;
-        
-            default:
-                pontos.add(new Ponto(centro.getX() - 1, centro.getY()));
-                pontos.add(new Ponto(centro.getX(), centro.getY()));
-                pontos.add(new Ponto(centro.getX() + 1, centro.getY()));
-                pontos.add(new Ponto(centro.getX() - 1, centro.getY() + 1));
-                break; 
-        }
-        return pontos;
+ * Cria uma lista de pontos que define uma forma de Tetris baseada em um índice.
+ *
+ * @param centro O ponto central para a criação da forma.
+ * @param tipoForma Índice que determina qual forma de Tetris será criada.
+ * @return Lista de pontos que definem a forma de Tetris.
+ */
+private ArrayList<Ponto> createShape(Ponto centro, int tipoForma) {
+    int scale = 2; 
+    ArrayList<Ponto> pontos = new ArrayList<>();
+    switch (tipoForma) {
+        case 0:  
+            pontos.add(new Ponto(centro.getX() - 1 * scale, centro.getY()));
+            pontos.add(new Ponto(centro.getX(), centro.getY()));
+            pontos.add(new Ponto(centro.getX() + 1 * scale, centro.getY()));
+            pontos.add(new Ponto(centro.getX(), centro.getY() + 1 * scale));
+            break;
+        case 1:  
+            pontos.add(new Ponto(centro.getX(), centro.getY()));
+            pontos.add(new Ponto(centro.getX(), centro.getY() + 1 * scale));
+            pontos.add(new Ponto(centro.getX(), centro.getY() + 2 * scale));
+            pontos.add(new Ponto(centro.getX() + 1 * scale, centro.getY() + 2 * scale));
+            break;
+        default:  
+            pontos.add(new Ponto(centro.getX() - 1 * scale, centro.getY()));
+            pontos.add(new Ponto(centro.getX(), centro.getY()));
+            pontos.add(new Ponto(centro.getX() + 1 * scale, centro.getY()));
+            pontos.add(new Ponto(centro.getX() - 1 * scale, centro.getY() + 1 * scale));
+            break; 
     }
+    return pontos;
+}
+
     
     
     /**
