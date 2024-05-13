@@ -1,6 +1,7 @@
 package Game.ControllerLayer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -85,7 +86,7 @@ public class InicializaJogo {
         for (int i = 0; i < config.getNumeroObstaculos(); i++) {
             boolean obstaculoAdicionado = false;
             for (int tentativa = 0; tentativa < tentativasMax && !obstaculoAdicionado; tentativa++) {
-                Poligono poligono = gerarPoligonoAleatorio(config);
+                Poligono poligono = gerarPoligono(config);
                 if (isPosicaoValidaParaObstaculos(poligono, obstaculos, config,snake)) {
                     obstaculos.add(new Obstaculo(poligono, config.isObstaculosDinamicos(), config.getAnguloRotacao(), poligono.calcularCentro()));
                     obstaculoAdicionado = true;
@@ -96,28 +97,55 @@ public class InicializaJogo {
     }
 
     /**
-     * Gera um polígono aleatório para uso como obstáculo dentro da arena.
+     * Gera um polígono que representa uma peça de Tetris posicionada aleatoriamente na arena.
      *
      * @param config Configurações do jogo que incluem a largura e altura da arena.
-     * @return Um polígono aleatório.
+     * @return Um polígono representando uma peça de Tetris.
      */
+    public Poligono gerarPoligono(Configuracoes config) {
+        int tipoForma = random.nextInt(5); 
+        int centerX = random.nextInt(config.getLargura());
+        int centerY = random.nextInt(config.getAltura());
+        Ponto centro = new Ponto(centerX, centerY);
 
-    public Poligono gerarPoligonoAleatorio(Configuracoes config) {
-        double numVertices = random.nextInt(3) + 3; 
-        ArrayList<Ponto> pontos = new ArrayList<>();
-        double centerX = random.nextInt(config.getLargura());
-        double centerY = random.nextInt(config.getAltura());
-        double raio = random.nextInt(3) + 2; 
-
-        for (int i = 0; i < numVertices; i++) {
-            double angulo = 2 * Math.PI * i / numVertices;
-            double x = centerX + (raio * Math.cos(angulo));
-            double y = centerY + (raio * Math.sin(angulo));
-            pontos.add(new Ponto(x, y));
-        }
+        ArrayList<Ponto> pontos = createShape(centro, tipoForma);
         return new Poligono(pontos);
     }
 
+    /**
+     * Cria uma lista de pontos que define uma forma de Tetris baseada em um índice.
+     *
+     * @param centro O ponto central para a criação da forma.
+     * @param tipoForma Índice que determina qual forma de Tetris será criada.
+     * @return Lista de pontos que definem a forma de Tetris.
+     */
+    private ArrayList<Ponto> createShape(Ponto centro, int tipoForma) {
+        ArrayList<Ponto> pontos = new ArrayList<>();
+        switch (tipoForma) {
+            case 0:
+                pontos.add(new Ponto(centro.getX() - 1, centro.getY()));
+                pontos.add(new Ponto(centro.getX(), centro.getY()));
+                pontos.add(new Ponto(centro.getX() + 1, centro.getY()));
+                pontos.add(new Ponto(centro.getX(), centro.getY() + 1));
+                break;
+            case 1:
+                pontos.add(new Ponto(centro.getX(), centro.getY()));
+                pontos.add(new Ponto(centro.getX(), centro.getY() + 1));
+                pontos.add(new Ponto(centro.getX(), centro.getY() + 2));
+                pontos.add(new Ponto(centro.getX() + 1, centro.getY() + 2));
+                break;
+        
+            default:
+                pontos.add(new Ponto(centro.getX() - 1, centro.getY()));
+                pontos.add(new Ponto(centro.getX(), centro.getY()));
+                pontos.add(new Ponto(centro.getX() + 1, centro.getY()));
+                pontos.add(new Ponto(centro.getX() - 1, centro.getY() + 1));
+                break; 
+        }
+        return pontos;
+    }
+    
+    
     /**
      * Verifica se a posição do polígono é válida para ser adicionada como obstáculo na arena.
      *

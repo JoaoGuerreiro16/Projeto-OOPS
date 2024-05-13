@@ -90,7 +90,6 @@ public class Cliente {
         
         GameMain main = new GameMain();
         main.executaJogo(config);
-        
     }
 
 }

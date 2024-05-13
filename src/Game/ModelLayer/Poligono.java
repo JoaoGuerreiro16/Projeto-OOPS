@@ -35,7 +35,6 @@ public class Poligono {
             System.out.println("Poligono:vi");
             throw new IllegalArgumentException();
         }
-        retas(pontos);
         segmentos(pontos);
         this.pontos = pontos;
 
