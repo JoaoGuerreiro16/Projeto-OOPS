@@ -13,7 +13,7 @@ import Game.ModelLayer.*;
  * @version 1.0
  */
 
-public class GameRasterizer {
+public class RasterizadordeJogo {
     private Celula[][] grid;
     private int altura;
     public Celula[][] getGrid() {
@@ -34,12 +34,12 @@ public class GameRasterizer {
 
 
     /**
-     * Construtor da classe GameRasterizer.
+     * Construtor da classe RasterizadordeJogo.
      * Inicializa a matriz de células com a altura e largura especificadas.
      * @param altura Altura da grade.
      * @param largura Largura da grade.
      */
-    public GameRasterizer(int altura, int largura) {
+    public RasterizadordeJogo(int altura, int largura) {
         this.altura = altura;
         this.largura = largura;
         this.grid = new Celula[altura][largura];

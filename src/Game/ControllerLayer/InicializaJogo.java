@@ -95,7 +95,7 @@ public class InicializaJogo {
     }
 
     /**
-     * Gera um polígono que representa uma peça de Tetris posicionada aleatoriamente na arena.
+     * Gera um polígono que representa uma poligono Tetris posicionado aleatoriamente na arena.
      *
      * @param config Configurações do jogo que incluem a largura e altura da arena.
      * @return Um polígono representando uma peça de Tetris.
@@ -111,11 +111,11 @@ public class InicializaJogo {
     }
 
     /**
- * Cria uma lista de pontos que define uma forma de Tetris baseada em um índice.
+ * Cria uma lista de pontos que define uma forma baseada em um índice.
  *
  * @param centro O ponto central para a criação da forma.
- * @param tipoForma Índice que determina qual forma de Tetris será criada.
- * @return Lista de pontos que definem a forma de Tetris.
+ * @param tipoForma Índice que determina qual forma será criada.
+ * @return Lista de pontos que definem a forma.
  */
 private ArrayList<Ponto> createShape(Ponto centro, int tipoForma) {
     int scale = 2; 

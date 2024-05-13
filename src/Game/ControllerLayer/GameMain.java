@@ -5,7 +5,7 @@ import Game.ModelLayer.Direcao;
 import Game.ModelLayer.GerenciadorPontuacao;
 import Game.ModelLayer.Pontuacao;
 import Game.ModelLayer.MovementStrategy.MovimentoManual;
-import Game.ViewLayer.GameRasterizer;
+import Game.ViewLayer.RasterizadordeJogo;
 import Game.ViewLayer.UI;
 
 import java.util.Scanner;
@@ -37,7 +37,7 @@ public class GameMain {
 
         UI ui = config.getUi();
 
-        GameRasterizer rasterizer = new GameRasterizer(config.getAltura(), config.getLargura());
+        RasterizadordeJogo rasterizer = new RasterizadordeJogo(config.getAltura(), config.getLargura());
 
 
         while (arena.isJogoAtivo()) {
