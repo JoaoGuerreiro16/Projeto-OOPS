@@ -1,7 +1,5 @@
 package Game.ModelLayer;
 
-import java.util.ArrayList;
-
 /**
  * Classe que representa um obstáculo dentro do jogo.
  * Um obstáculo é definido por um polígono que pode ser estático ou dinâmico,

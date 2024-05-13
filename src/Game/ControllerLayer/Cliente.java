@@ -1,18 +1,11 @@
 package Game.ControllerLayer;
-import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-
-import Game.ControllerLayer.Configuracoes;
 import Game.ModelLayer.MovementStrategy.MovimentoAutomatico;
 import Game.ModelLayer.MovementStrategy.MovimentoManual;
 import Game.ViewLayer.GraphicUI;
 import Game.ViewLayer.TextUI;
 import Game.ViewLayer.UI;
 import Game.ModelLayer.MovementStrategy.MovementStrategy;
-import Game.ModelLayer.MovementStrategy.MovimentoAutomatico;
-import Game.ModelLayer.MovementStrategy.MovimentoManual;
 
 public class Cliente {
         public static Configuracoes obterConfiguracoes() {
@@ -97,6 +90,7 @@ public class Cliente {
         
         GameMain main = new GameMain();
         main.executaJogo(config);
+        
     }
 
 }

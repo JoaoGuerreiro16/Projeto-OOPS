@@ -180,7 +180,6 @@ public class Snake {
  */
     public boolean containsCirculo(ComidaCirculo comida){
         boolean result = false;
-        Circulo circulo = comida.getCirculo();
         for (Quadrado partes : snake) {
             if (partes.contains(comida.getCirculo().criaQuadradoProtetor()))
             return true;

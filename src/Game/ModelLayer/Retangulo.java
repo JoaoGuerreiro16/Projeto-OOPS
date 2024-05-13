@@ -153,8 +153,6 @@ public class Retangulo extends Poligono {
      */
     @Override
     public Retangulo translacaoCentroide(double novoCentroideX, double novoCentroideY){
-
-        ArrayList<Ponto> newPontos = new ArrayList<>();
         Ponto centroidePoligono = calcularCentro();
         double deslocamentoX = novoCentroideX - centroidePoligono.getX();
         double deslocamentoY = novoCentroideY - centroidePoligono.getY();

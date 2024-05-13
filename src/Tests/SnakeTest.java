@@ -1,19 +1,12 @@
 package Tests;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-
 import Game.ModelLayer.Direcao;
-import Game.ModelLayer.MovementStrategy.MovimentoAutomatico;
 import Game.ModelLayer.MovementStrategy.MovimentoManual;
 import Game.ModelLayer.Ponto;
 import Game.ModelLayer.Quadrado;
 import Game.ModelLayer.Snake;
 import org.junit.jupiter.api.Test;
-
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class SnakeTest {
 
@@ -82,7 +75,6 @@ public class SnakeTest {
         Snake s = Snake.getInstance(cabeca, new MovimentoManual());
         s.setDirecaoAtual(Direcao.RIGHT);
         s.cresceSnake();
-        Quadrado segundoSegmento = new Quadrado("2 2 3 2 3 3 2 3");
         assertEquals("Snake: [Quadrado: [(3.0,2.0), (4.0,2.0), (4.0,3.0), (3.0,3.0)], Quadrado: [(2.0,2.0), (3.0,2.0), (3.0,3.0), (2.0,3.0)]]", s.toString());
         Snake.resetInstance();
     }

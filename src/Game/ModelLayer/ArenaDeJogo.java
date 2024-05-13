@@ -1,9 +1,6 @@
 package Game.ModelLayer;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import Game.ModelLayer.Pontuacao;
 
 /**
  * Classe que gerencia o ambiente de jogo, incluindo a configuração do jogo,

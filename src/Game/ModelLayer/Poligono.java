@@ -265,8 +265,6 @@ public class Poligono {
      * @return Novo polígono resultante da translação do centroide para a nova posição.
      */
     public Poligono translacaoCentroide(double novoCentroideX, double novoCentroideY){
-
-        ArrayList<Ponto> newPontos = new ArrayList<>();
         Ponto centroidePoligono = calcularCentro();
         double deslocamentoX = novoCentroideX - centroidePoligono.getX();
         double deslocamentoY = novoCentroideY - centroidePoligono.getY();

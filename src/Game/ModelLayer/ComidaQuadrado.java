@@ -1,7 +1,5 @@
 package Game.ModelLayer;
 
-import java.util.ArrayList;
-
 /**
  * Classe ComidaQuadrado que representa um tipo específico de comida no formato de quadrado.
  * Estende a classe abstrata Comida, fornecendo implementações específicas para comidas quadradas.

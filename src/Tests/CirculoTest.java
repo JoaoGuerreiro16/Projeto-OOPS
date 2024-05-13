@@ -2,10 +2,8 @@ package Tests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
-
 import Game.ModelLayer.Circulo;
 import Game.ModelLayer.Ponto;
-import Game.ModelLayer.Quadrado;
 import org.junit.jupiter.api.Test;
 
 public class CirculoTest {

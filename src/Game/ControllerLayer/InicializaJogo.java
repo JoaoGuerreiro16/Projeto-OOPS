@@ -9,13 +9,11 @@ import Game.ModelLayer.Circulo;
 import Game.ModelLayer.Comida;
 import Game.ModelLayer.ComidaCirculo;
 import Game.ModelLayer.ComidaQuadrado;
-
 import Game.ModelLayer.Obstaculo;
 import Game.ModelLayer.Poligono;
 import Game.ModelLayer.Ponto;
 import Game.ModelLayer.Quadrado;
 import Game.ModelLayer.Snake;
-import Game.ModelLayer.MovementStrategy.MovementStrategy;
 
 /**
  * Classe responsável por inicializar e configurar o ambiente de jogo,
@@ -28,10 +26,7 @@ import Game.ModelLayer.MovementStrategy.MovementStrategy;
 
 public class InicializaJogo {
 
-    private static Random random = new Random();
-     private MovementStrategy movementStrategy;
-
-     
+    private static Random random = new Random();  
 /**
      * Inicializa o jogo criando os componentes principais como a arena, a cobra,
      * obstáculos, e a comida inicial.

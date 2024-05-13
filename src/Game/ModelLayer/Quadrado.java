@@ -2,9 +2,6 @@
 package Game.ModelLayer;
 import java.util.ArrayList;
 
-import javax.xml.transform.Source;
-
-import Game.ModelLayer.Circulo;
 /**
  * Classe que representa um quadrado como subclasse do retangulo e do poligono.
  *
