@@ -5,6 +5,12 @@ import Game.ModelLayer.Ponto;
 import Game.ModelLayer.Quadrado;
 import Game.ModelLayer.Snake;
 
+/**
+ * Classe que implementa a estratégia de movimento manual para a cobra no jogo.
+ * Permite que a direção do movimento da cobra seja controlada pelo usuário através de comandos.
+ * @author Joao Guerreiro & Tomas Luz
+ */
+
 public class MovimentoManual implements MovementStrategy {
 
     @Override
@@ -22,8 +28,8 @@ public class MovimentoManual implements MovementStrategy {
         double novoCentroideX = centroAtual.getX() + dx;
         double novoCentroideY = centroAtual.getY() + dy;
         Quadrado novaCabeca = cabecaAtual.translacaoCentroide(novoCentroideX, novoCentroideY);
-        snake.getSnake().addFirst(novaCabeca); // Adiciona a nova cabeça na frente
-        snake.getSnake().removeLast(); // Remove a última parte do corpo, mantendo o tamanho
+        snake.getSnake().addFirst(novaCabeca); 
+        snake.getSnake().removeLast(); 
     }
 
     public void mudarDirecao(Snake snake, Direcao novaDirecao) {

@@ -52,12 +52,14 @@ public class GerenciadorPontuacao {
         try (BufferedReader reader = new BufferedReader(new FileReader(ARQUIVO_PONTUACOES))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                pontuacoes.add(Integer.parseInt(line.trim()));
+                if (line.trim().matches("\\d+")) {
+                    pontuacoes.add(Integer.parseInt(line.trim()));
+                }
             }
         } catch (IOException e) {
-            System.out.println("Erro ao ler pontuações do arquivo.");
+            e.printStackTrace();
         }
-        Collections.sort(pontuacoes, Collections.reverseOrder());
+        pontuacoes.sort(Collections.reverseOrder());
         return pontuacoes;
     }
 

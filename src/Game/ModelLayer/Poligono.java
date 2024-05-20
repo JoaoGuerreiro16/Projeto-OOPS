@@ -180,7 +180,7 @@ public class Poligono {
     }
     /**
      * Calcula o centro geométrico do polígono considerando coordenadas inteiras.
-     *
+     * @param p poligono
      * @return Ponto representando o centro do polígono com coordenadas inteiras.
      */
 
@@ -281,7 +281,7 @@ public class Poligono {
  * cruza os lados do polígono. Se o número de cruzamentos for ímpar, o ponto está dentro; se for par,
  * está fora.
  *
- * @param p O ponto a ser testado.
+ * @param ponto O ponto a ser testado.
  * @return true se o ponto estiver dentro do polígono, false caso contrário.
  */
     public boolean containsPonto(Ponto ponto){

@@ -106,38 +106,38 @@ public class InicializaJogo {
         int centerY = random.nextInt(config.getAltura());
         Ponto centro = new Ponto(centerX, centerY);
 
-        ArrayList<Ponto> pontos = createShape(centro, tipoForma);
+        ArrayList<Ponto> pontos = criaForma(centro, tipoForma);
         return new Poligono(pontos);
     }
 
     /**
  * Cria uma lista de pontos que define uma forma baseada em um índice.
  *
- * @param centro O ponto central para a criação da forma.
- * @param tipoForma Índice que determina qual forma será criada.
+ * @param centro O ponto central para a criacao da forma.
+ * @param tipoForma indice que determina qual forma sera criada.
  * @return Lista de pontos que definem a forma.
  */
-private ArrayList<Ponto> createShape(Ponto centro, int tipoForma) {
-    int scale = 2; 
+private ArrayList<Ponto> criaForma(Ponto centro, int tipoForma) {
+    int scale = 10; 
     ArrayList<Ponto> pontos = new ArrayList<>();
     switch (tipoForma) {
         case 0:  
-            pontos.add(new Ponto(centro.getX() - 1 * scale, centro.getY()));
+            pontos.add(new Ponto(centro.getX() -  scale, centro.getY()));
             pontos.add(new Ponto(centro.getX(), centro.getY()));
-            pontos.add(new Ponto(centro.getX() + 1 * scale, centro.getY()));
-            pontos.add(new Ponto(centro.getX(), centro.getY() + 1 * scale));
+            pontos.add(new Ponto(centro.getX() +  scale, centro.getY()));
+            pontos.add(new Ponto(centro.getX(), centro.getY() +  scale));
             break;
         case 1:  
             pontos.add(new Ponto(centro.getX(), centro.getY()));
-            pontos.add(new Ponto(centro.getX(), centro.getY() + 1 * scale));
+            pontos.add(new Ponto(centro.getX(), centro.getY() +  scale));
             pontos.add(new Ponto(centro.getX(), centro.getY() + 2 * scale));
-            pontos.add(new Ponto(centro.getX() + 1 * scale, centro.getY() + 2 * scale));
+            pontos.add(new Ponto(centro.getX() +  scale, centro.getY() + 2 * scale));
             break;
         default:  
-            pontos.add(new Ponto(centro.getX() - 1 * scale, centro.getY()));
+            pontos.add(new Ponto(centro.getX() -  scale, centro.getY()));
             pontos.add(new Ponto(centro.getX(), centro.getY()));
-            pontos.add(new Ponto(centro.getX() + 1 * scale, centro.getY()));
-            pontos.add(new Ponto(centro.getX() - 1 * scale, centro.getY() + 1 * scale));
+            pontos.add(new Ponto(centro.getX() +  scale, centro.getY()));
+            pontos.add(new Ponto(centro.getX() -  scale, centro.getY() +  scale));
             break; 
     }
     return pontos;
