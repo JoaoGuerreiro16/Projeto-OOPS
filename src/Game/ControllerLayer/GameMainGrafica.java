@@ -48,7 +48,7 @@ public class GameMainGrafica {
 
         while (arena.isJogoAtivo()) {
             try {
-                Thread.sleep(100); // Pausa para controlar a velocidade da cobra
+                Thread.sleep(500); // Pausa para controlar a velocidade da cobra
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

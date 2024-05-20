@@ -78,17 +78,17 @@ public class Cliente {
             config = new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao, strategy, ui);
 
         } else {
-            int largura = 800;
-            int altura = 800;
-            int tamanhoCabeca = 40;
+            int largura = 1000;
+            int altura = 1000;
+            int tamanhoCabeca = 50;
             String tipoComida = "quadrado";
-            double tamanhoComida = 10.0;
+            double tamanhoComida = 25.0;
             int pontuacaoComida = 10;
             int numeroObstaculos = 3;
-            boolean obstaculosDinamicos = true;
+            boolean obstaculosDinamicos = false;
             int anguloRotacao = 45;
 
-            MovementStrategy strategy = new MovimentoAutomatico();
+            MovementStrategy strategy = new MovimentoManual();
             ui = new GraphicUI();
             config = new Configuracoes(largura, altura, tamanhoCabeca, tipoComida, tamanhoComida, pontuacaoComida, numeroObstaculos, obstaculosDinamicos, anguloRotacao, strategy, ui);
         }

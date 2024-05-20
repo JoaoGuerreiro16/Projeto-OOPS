@@ -79,13 +79,14 @@ public class InicializaJogo {
 
     public List<Obstaculo> criaObstaculos(Configuracoes config,Snake snake) {
         List<Obstaculo> obstaculos = new ArrayList<>();
-        int tentativasMax = 100; 
-
+        int tentativasMax = 10000; 
         for (int i = 0; i < config.getNumeroObstaculos(); i++) {
             boolean obstaculoAdicionado = false;
             for (int tentativa = 0; tentativa < tentativasMax && !obstaculoAdicionado; tentativa++) {
-                Poligono poligono = gerarPoligono(config);
-                if (isPosicaoValidaParaObstaculos(poligono, obstaculos, config,snake)) {
+                Poligono poligono = gerarPoligono(config,snake);
+        boolean reacheableSnake = (poligono.getPontos().get(0).getX() % snake.getSnake().getFirst().getLado() == 0) && (poligono.getPontos().get(0).getY()  % snake.getSnake().getFirst().getLado() == 0);
+
+                if (isPosicaoValidaParaObstaculos(poligono, obstaculos, config,snake) && reacheableSnake) {
                     obstaculos.add(new Obstaculo(poligono, config.isObstaculosDinamicos(), config.getAnguloRotacao(), poligono.calcularCentro()));
                     obstaculoAdicionado = true;
                 }
@@ -100,11 +101,13 @@ public class InicializaJogo {
      * @param config Configurações do jogo que incluem a largura e altura da arena.
      * @return Um polígono representando uma peça de Tetris.
      */
-    public Poligono gerarPoligono(Configuracoes config) {
-        int tipoForma = random.nextInt(5); 
-        int centerX = random.nextInt(config.getLargura());
-        int centerY = random.nextInt(config.getAltura());
-        Ponto centro = new Ponto(centerX, centerY);
+    public Poligono gerarPoligono(Configuracoes config,Snake snake) {
+        int tipoForma = random.nextInt(8); 
+        int centerx = (int) (Math.random() * (config.getLargura() - config.getTamanhoComida()));
+        int centery = (int) (Math.random() * (config.getAltura() - config.getTamanhoComida()));
+        
+
+        Ponto centro = new Ponto(centerx, centery);
 
         ArrayList<Ponto> pontos = criaForma(centro, tipoForma);
         return new Poligono(pontos);
@@ -170,6 +173,7 @@ private ArrayList<Ponto> criaForma(Ponto centro, int tipoForma) {
             return false;
         }
 
+
         return true;
     }
 
@@ -189,23 +193,24 @@ private ArrayList<Ponto> criaForma(Ponto centro, int tipoForma) {
  */
 
     public Comida criaComidaInicial(Configuracoes config, int largura, int altura, Snake snake, List<Obstaculo> obstaculos) {
-        int tentativasMax = 100;
+        int tentativasMax = 10000;
         Comida comida = null;
 
         for (int tentativas = 0; tentativas < tentativasMax && comida == null; tentativas++) {
-            int x = random.nextInt(largura);
-            int y = random.nextInt(altura);
+            int x = (int) (Math.random() * (largura - config.getTamanhoComida()));
+            int y = (int) (Math.random() * (altura - config.getTamanhoComida()));
             Ponto posicao = new Ponto(x, y);
             String tipoComida = config.getTipoComida();
+            boolean reacheableSnake = (x % snake.getSnake().getFirst().getLado() == 0) && (y % snake.getSnake().getFirst().getLado() == 0);
 
             if (tipoComida.equals("quadrado")) {
                 ComidaQuadrado comidaPotencial = new ComidaQuadrado(new Quadrado(posicao, config.getTamanhoComida()), config.getPontuacaoComida());
-                if (isPosicaoValidaParaComidaQuadrada(comidaPotencial, snake, obstaculos, largura, altura)) {
+                if (isPosicaoValidaParaComidaQuadrada(comidaPotencial, snake, obstaculos, largura, altura) && reacheableSnake) {
                     comida = comidaPotencial;
                 }
             } else {
                 ComidaCirculo comidaPotencial = new ComidaCirculo(new Circulo(posicao, config.getTamanhoComida() / 2.0), config.getPontuacaoComida());
-                if (isPosicaoValidaParaComidaCirculo(comidaPotencial, snake, obstaculos, largura, altura)) {
+                if (isPosicaoValidaParaComidaCirculo(comidaPotencial, snake, obstaculos, largura, altura) && reacheableSnake) {
                     comida = comidaPotencial;
                 }
             }

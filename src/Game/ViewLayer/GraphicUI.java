@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import Game.ModelLayer.ArenaDeJogo;
 import Game.ModelLayer.Comida;
 import Game.ModelLayer.ComidaCirculo;
@@ -17,12 +21,16 @@ public class GraphicUI extends JFrame implements UI {
     private GamePanel gamePanel;
     private Timer timer;
     private ArenaDeJogo arena;
+    private Color backgroundColor = new Color(0, 0, 0); // Preto como fundo
+
 
     public GraphicUI() {
         setTitle("Snake Game");
-        setSize(800, 800);
+        setSize(1000, 1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
+
+        
 
         gamePanel = new GamePanel();
         add(gamePanel);
@@ -52,6 +60,12 @@ public class GraphicUI extends JFrame implements UI {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
+
+            
+                g.setColor(backgroundColor);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            
+
             if (arena != null) {
                 draw(g);
             }
@@ -59,11 +73,21 @@ public class GraphicUI extends JFrame implements UI {
 
         private void draw(Graphics g) {
             // Desenhar a cobra
-            g.setColor(Color.GREEN);
-            for (Quadrado parte : arena.getSnake().getSnake()) {
+            Color corpoCor = new Color(0, 100, 0); // Verde escuro
+            Color cabecaCor = new Color(144, 238, 144); // Verde claro
+
+            for (int i = 0; i < arena.getSnake().getSnake().size(); i++) {
+                Quadrado parte = arena.getSnake().getSnake().get(i);
                 int x = (int) parte.getPontos().get(0).getX();
                 int y = (int) parte.getPontos().get(0).getY();
                 int lado = (int) parte.getLado();
+
+                if (i == 0) { // Cabeça da cobra
+                    g.setColor(cabecaCor);
+                } else { // Corpo da cobra
+                    g.setColor(corpoCor);
+                }
+
                 g.fillRect(x, y, lado, lado);
             }
 
@@ -86,7 +110,7 @@ public class GraphicUI extends JFrame implements UI {
             }
 
             // Desenhar os obstáculos
-            g.setColor(Color.GRAY);
+            g.setColor(Color.YELLOW);
             for (Obstaculo obstaculo : arena.getObstaculos()) {
                 Poligono poligono = obstaculo.getPoligono();
                 int[] xPoints = poligono.getPontos().stream().mapToInt(p -> (int) p.getX()).toArray();

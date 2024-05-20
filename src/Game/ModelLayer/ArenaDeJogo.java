@@ -1,6 +1,9 @@
 package Game.ModelLayer;
+import java.io.ObjectInputFilter.Config;
 import java.util.List;
 import java.util.Random;
+
+import Game.ControllerLayer.Configuracoes;
 
 /**
  * Classe que gerencia o ambiente de jogo, incluindo a configuração do jogo,
@@ -24,6 +27,7 @@ public class ArenaDeJogo {
     private List<Obstaculo> obstaculos;
     private boolean jogoAtivo;
     private Random rand = new Random();
+    
 
    /**
      * Construtor privado para a classe ArenaDeJogo para garantir o uso do padrão Singleton.
@@ -247,17 +251,20 @@ public class ArenaDeJogo {
 
     public boolean adicionarComida() {
 
-        int tentativasMaximas = 100;
+        int tentativasMaximas = 10000;
         int x;
         int y;
         Ponto novaPosicao;
         Comida testComida;
+      
+        
         for (int tentativas = 0; tentativas < tentativasMaximas; tentativas++) {
-             x = rand.nextInt(largura);
-             y = rand.nextInt(altura);
+            x = (int) (Math.random() * (largura - tamanhoComida));
+            y = (int) (Math.random() * (altura - tamanhoComida));
+             boolean reacheableSnake = (x % snake.getSnake().getFirst().getLado() == 0) && (y % snake.getSnake().getFirst().getLado() == 0);
              novaPosicao = new Ponto(x, y);
 
-            if (isPosicaoValidaPonto(novaPosicao)) {
+            if (isPosicaoValidaPonto(novaPosicao) && reacheableSnake) {
                 if (tipoComida.equals("quadrado")) {
                      testComida = new ComidaQuadrado(new Quadrado(novaPosicao, tamanhoComida), pontuacaoComida);
                     if(!interceptaObstaculosOuSnake(testComida)){
